@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>380</y>
+      <x>510</x>
+      <y>370</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>380</y>
+      <x>950</x>
+      <y>370</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -26,8 +26,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>370</y>
+      <x>600</x>
+      <y>360</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -39,43 +39,46 @@ nickname, password</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>420</y>
+      <x>510</x>
+      <y>410</y>
       <w>100</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Plane list</panel_attributes>
+    <panel_attributes>
+Plane list</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>420</y>
+      <x>950</x>
+      <y>410</y>
       <w>100</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Plane</panel_attributes>
+    <panel_attributes>Plane
+
+Tag</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>410</y>
+      <x>600</x>
+      <y>420</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 /plane
-Plane objects</panel_attributes>
+Plane objects, Tag objects</panel_attributes>
     <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>340</y>
+      <x>510</x>
+      <y>330</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -85,8 +88,8 @@ Plane objects</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>340</y>
+      <x>950</x>
+      <y>330</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -96,8 +99,8 @@ Plane objects</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>330</y>
+      <x>600</x>
+      <y>320</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -109,8 +112,8 @@ nickname, password, captcha</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>460</y>
+      <x>510</x>
+      <y>480</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -121,8 +124,8 @@ Reply</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>460</y>
+      <x>950</x>
+      <y>480</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -134,8 +137,8 @@ Tag</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>470</y>
+      <x>600</x>
+      <y>490</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -147,8 +150,8 @@ Plane object, Photo object, Tag object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>530</y>
+      <x>510</x>
+      <y>550</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -158,8 +161,8 @@ Plane object, Photo object, Tag object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>530</y>
+      <x>950</x>
+      <y>550</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -169,8 +172,8 @@ Plane object, Photo object, Tag object</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>520</y>
+      <x>600</x>
+      <y>540</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -182,8 +185,8 @@ reply content</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>570</y>
+      <x>510</x>
+      <y>590</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -194,8 +197,8 @@ Write</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>570</y>
+      <x>950</x>
+      <y>590</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -207,8 +210,8 @@ Tag</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>580</y>
+      <x>600</x>
+      <y>600</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -220,8 +223,8 @@ content, photo, tags</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>640</y>
+      <x>510</x>
+      <y>660</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -231,8 +234,8 @@ content, photo, tags</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>640</y>
+      <x>950</x>
+      <y>660</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -242,8 +245,8 @@ content, photo, tags</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>630</y>
+      <x>600</x>
+      <y>650</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -255,8 +258,8 @@ Photo objects</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>680</y>
+      <x>510</x>
+      <y>700</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -267,21 +270,21 @@ Photo post</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>680</y>
+      <x>950</x>
+      <y>700</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>Photo
 
-Tags</panel_attributes>
+Tag</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>690</y>
+      <x>600</x>
+      <y>710</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -293,8 +296,8 @@ photo, tags</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>750</y>
+      <x>510</x>
+      <y>770</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -305,21 +308,21 @@ Photo detail</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>750</y>
+      <x>950</x>
+      <y>770</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>Photo
 
-Tags</panel_attributes>
+Tag</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>760</y>
+      <x>600</x>
+      <y>780</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
@@ -331,78 +334,84 @@ Photo object, Tag object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>820</y>
+      <x>510</x>
+      <y>840</y>
       <w>100</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Inbox</panel_attributes>
+    <panel_attributes>
+Inbox</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>820</y>
+      <x>950</x>
+      <y>840</y>
       <w>100</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Reply</panel_attributes>
+    <panel_attributes>Reply
+
+Tag</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>810</y>
-      <w>370</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-/user/:id
-Reply objects</panel_attributes>
-    <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>80</x>
-      <y>860</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Reply detail</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>520</x>
-      <y>860</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Reply</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>170</x>
+      <x>600</x>
       <y>850</y>
       <w>370</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-/reply/:id
-Reply object</panel_attributes>
+/user/:id
+Reply objects, Tag objects</panel_attributes>
     <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>270</y>
+      <x>510</x>
+      <y>910</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+Reply detail</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>910</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Reply
+
+Tag</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>920</y>
+      <w>370</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+/reply/:id
+Reply object, Tag object</panel_attributes>
+    <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>260</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -412,8 +421,8 @@ Reply object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>270</y>
+      <x>650</x>
+      <y>260</y>
       <w>260</w>
       <h>30</h>
     </coordinates>
@@ -423,8 +432,8 @@ Reply object</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>270</y>
+      <x>950</x>
+      <y>260</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
