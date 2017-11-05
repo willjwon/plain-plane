@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>1</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>471</x>
+      <y>417</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Main page
+
+{innerclass
+	Sign in
+
+
+
+
+
+
+innerclass}
+
+{innerclass
+	About us
+
+
+
+
+	
+innerclass}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>561</x>
+      <y>417</y>
+      <w>11</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Side bar
+
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>471</x>
+      <y>454</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Plane list page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>435</x>
+      <y>454</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Write page
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>507</x>
+      <y>454</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Photo list page
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>435</x>
+      <y>417</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Sign up page
+--
+
+nickname
+password
+
+capcha
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>478</x>
+      <y>428</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+sign up</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>562</x>
+      <y>421</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+write
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>428</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+sign in</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>562</x>
+      <y>425</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+planes
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>562</x>
+      <y>429</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+gallery
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>477</y>
+      <w>9</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+change sky
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>454</x>
+      <y>477</y>
+      <w>9</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+fold
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>437</x>
+      <y>461</y>
+      <w>26</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lw=2
+halign=left
+fontsize=12
+content
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>437</x>
+      <y>471</y>
+      <w>26</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lw=2
+halign=left
+fontsize=12
+#tags
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>458</y>
+      <w>28</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>halign=left
+Everywhere / Near me</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>431</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+sign up
+group=8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>474</x>
+      <y>462</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 9
+--
+#love</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>474</x>
+      <y>470</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 2
+--
+#exam</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>483</x>
+      <y>462</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 3
+--
+#study</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>483</x>
+      <y>470</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 14
+--
+#friend</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>491</x>
+      <y>462</y>
+      <w>8</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 1
+--
+#emotion</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>492</x>
+      <y>470</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 7
+--
+#project</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>471</x>
+      <y>486</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Reply page
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>436</x>
+      <y>459</y>
+      <w>28</w>
+      <h>22</h>
+    </coordinates>
+    <panel_attributes>halign=left
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>489</y>
+      <w>28</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>halign=left
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>489</x>
+      <y>510</y>
+      <w>9</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+refold
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>473</x>
+      <y>490</y>
+      <w>26</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>halign=left
+fontsize=12
+content
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>473</x>
+      <y>500</y>
+      <w>26</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>halign=left
+fontsize=12
+#tags
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>473</x>
+      <y>504</y>
+      <w>26</w>
+      <h>5</h>
+    </coordinates>
+    <panel_attributes>lw=2
+halign=left
+fontsize=12
+reply
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>509</x>
+      <y>461</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>518</x>
+      <y>461</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>527</x>
+      <y>461</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>509</x>
+      <y>468</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>518</x>
+      <y>468</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>527</x>
+      <y>468</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>509</x>
+      <y>475</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>518</x>
+      <y>475</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>527</x>
+      <y>475</y>
+      <w>8</w>
+      <h>6</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>562</x>
+      <y>433</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+my plane
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>509</x>
+      <y>457</y>
+      <w>17</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+sort by color / tag / date
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>507</x>
+      <y>486</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Photo detail page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>491</y>
+      <w>24</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>valign=center
+fontsize=12
+photo</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>508</y>
+      <w>24</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>halign=left
+fontsize=12
+#tags</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>457</y>
+      <w>7</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+post
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>464</x>
+      <y>427</y>
+      <w>16</w>
+      <h>4</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>461</x>
+      <y>431</y>
+      <w>12</w>
+      <h>4</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>430</y>
+      <w>3</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>476</x>
+      <y>472</y>
+      <w>3</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>476</y>
+      <w>11</w>
+      <h>4</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>480</y>
+      <w>3</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>479</y>
+      <w>9</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+post
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>542</x>
+      <y>454</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>Photo post page
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>545</x>
+      <y>458</y>
+      <w>24</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lw=2
+valign=center
+fontsize=12
+photo preview
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>545</x>
+      <y>475</y>
+      <w>24</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lw=2
+halign=left
+fontsize=12
+#tags
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>550</x>
+      <y>479</y>
+      <w>9</w>
+      <h>3</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+upload
+group=9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>534</x>
+      <y>456</y>
+      <w>10</w>
+      <h>4</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>536</x>
+      <y>480</y>
+      <w>30</w>
+      <h>7</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;50.0;280.0;50.0;280.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>507</x>
+      <y>417</y>
+      <w>30</w>
+      <h>29</h>
+    </coordinates>
+    <panel_attributes>My page
+
+{innerclass
+	Inbox
+
+
+
+
+
+
+innerclass}
+
+{innerclass
+	Archive
+
+
+
+
+
+	
+innerclass}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>527</x>
+      <y>423</y>
+      <w>8</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 11
+--
+#emotion</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>519</x>
+      <y>423</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 8
+--
+#study</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>510</x>
+      <y>423</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 4
+--
+#love</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>510</x>
+      <y>436</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 10
+--
+#exam</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLInterface</id>
+    <coordinates>
+      <x>519</x>
+      <y>436</y>
+      <w>6</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>fontsize=12
+Plane 12
+--
+#grade</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>449</x>
+      <y>421</y>
+      <w>115</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;330.0;10.0;270.0;980.0;270.0;980.0;10.0;1130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>484</x>
+      <y>425</y>
+      <w>80</w>
+      <h>31</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;250.0;670.0;250.0;670.0;10.0;780.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>429</y>
+      <w>44</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;230.0;360.0;230.0;360.0;10.0;420.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>536</x>
+      <y>433</y>
+      <w>28</w>
+      <h>4</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>492</x>
+      <y>482</y>
+      <w>3</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;280.0</additional_attributes>
+  </element>
+</diagram>
