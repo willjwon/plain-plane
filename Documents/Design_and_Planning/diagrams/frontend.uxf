@@ -7,15 +7,14 @@
       <x>612</x>
       <y>99</y>
       <w>162</w>
-      <h>90</h>
+      <h>81</h>
     </coordinates>
     <panel_attributes>plane
 --
 icon: image
 plane_tag: text
 --
-+ ngOnInit
-+ onClickPlane</panel_attributes>
++ ngOnInit</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -60,7 +59,7 @@ fold: button
       <x>216</x>
       <y>243</y>
       <w>189</w>
-      <h>108</h>
+      <h>135</h>
     </coordinates>
     <panel_attributes>plane_list
 --
@@ -69,14 +68,16 @@ near_me: button
 plane: Plane
 --
 + ngOnInit
-+ onClickPlane</panel_attributes>
++ onClickPlane
++ onClickEverywhereButton
++ onClickNearMeButton</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>216</x>
-      <y>360</y>
+      <y>387</y>
       <w>189</w>
       <h>117</h>
     </coordinates>
@@ -156,7 +157,7 @@ close_button: butto
     <id>UMLClass</id>
     <coordinates>
       <x>216</x>
-      <y>486</y>
+      <y>513</y>
       <w>189</w>
       <h>117</h>
     </coordinates>
@@ -175,7 +176,7 @@ close_button: button
     <id>UMLClass</id>
     <coordinates>
       <x>612</x>
-      <y>198</y>
+      <y>189</y>
       <w>162</w>
       <h>189</h>
     </coordinates>
@@ -332,6 +333,43 @@ captcha: g-captcha
 + make_new_reply
 + get_reply_by_id
 + get_reply_by_user_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>477</y>
+      <w>189</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>change_sky
+--
+photo_preview: image
+upload: button
+change: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickChangeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>549</y>
+      <w>180</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>about_us
+--
+information: text
+--
++ ngOnInit
++ onClickBackButton</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

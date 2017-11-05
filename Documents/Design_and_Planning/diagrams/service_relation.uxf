@@ -42,8 +42,8 @@ fold: button
     <coordinates>
       <x>630</x>
       <y>490</y>
-      <w>105</w>
-      <h>60</h>
+      <w>110</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>plane_list
 --
@@ -52,7 +52,9 @@ near_me: button
 plane: Plane
 --
 + ngOnInit
-+ onClickPlane</panel_attributes>
++ onClickPlane
++ onClickEverywhereButton
++ onClickNearMeButton</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -98,8 +100,8 @@ photo: image
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>625</x>
-      <y>65</y>
+      <x>560</x>
+      <y>15</y>
       <w>100</w>
       <h>90</h>
     </coordinates>
@@ -434,14 +436,14 @@ get_photos_by_id</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>150</y>
-      <w>75</w>
-      <h>50</h>
+      <x>580</x>
+      <y>100</y>
+      <w>100</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 upload_new_photo</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>180.0;180.0;180.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -468,5 +470,38 @@ get_photos_containig_tag</panel_attributes>
     <panel_attributes>lt=&lt;&lt;&lt;-
 get_photo_by_id</panel_attributes>
     <additional_attributes>180.0;160.0;80.0;160.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>675</x>
+      <y>15</y>
+      <w>105</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>change_sky
+--
+photo_preview: image
+upload: button
+change: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickChangeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>100</y>
+      <w>85</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+upload_new_photo</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;70.0;150.0;70.0;150.0;10.0</additional_attributes>
   </element>
 </diagram>
