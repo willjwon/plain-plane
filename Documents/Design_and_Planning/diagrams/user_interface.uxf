@@ -42,8 +42,7 @@ group=14</panel_attributes>
       <h>203</h>
     </coordinates>
     <panel_attributes>Side bar
-
-group=5</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -93,7 +92,7 @@ group=6</panel_attributes>
     <panel_attributes>Sign up page
 --
 
-nickname
+username
 
 password
 
@@ -126,8 +125,7 @@ group=14</panel_attributes>
     <panel_attributes>lt=.
 valign=center
 fontsize=12
-write
-group=5</panel_attributes>
+write</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -156,8 +154,7 @@ group=14</panel_attributes>
     <panel_attributes>lt=.
 valign=center
 fontsize=12
-planes
-group=5</panel_attributes>
+planes</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -171,8 +168,7 @@ group=5</panel_attributes>
     <panel_attributes>lt=.
 valign=center
 fontsize=12
-gallery
-group=5</panel_attributes>
+gallery</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -586,8 +582,7 @@ group=6</panel_attributes>
     <panel_attributes>lt=.
 valign=center
 fontsize=12
-my plane
-group=5</panel_attributes>
+my plane</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1238,5 +1233,32 @@ close</panel_attributes>
 bg=green
 </panel_attributes>
     <additional_attributes>40.0;10.0;80.0;10.0;80.0;720.0;10.0;720.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>945</x>
+      <y>140</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.
+valign=center
+fontsize=12
+sign out</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>140</y>
+      <w>455</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+bg=green
+</panel_attributes>
+    <additional_attributes>10.0;20.0;630.0;20.0</additional_attributes>
   </element>
 </diagram>
