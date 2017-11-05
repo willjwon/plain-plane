@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>220</y>
+      <w>150</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>User
+--
+_id_
+username
+password
+level
+count_today_write
+count_today_reply
+total_likes
+--
+initialize_today_write
+initialize_today_reply
+decrease_today_write
+decrease_today_reply
+increase_likes
+decrease_likes
+set_level</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>290</y>
+      <w>150</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Level
+--
+_id_
+flavor
+plane_life_span
+max_today_write
+max_today_reply
+required_likes
+next_level_likes
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>500</y>
+      <w>150</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Plane
+--
+_id_
+author
+content
+photo
+plane_flavor
+expiration_date
+location
+is_replied
+is_reported
+--
+get_randomly
+get_near_me
+get_reported_plane
+replied
+report_bad_content
+delete_expired</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>620</x>
+      <y>450</y>
+      <w>150</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue
+We are planning to
+delete "Plane" objects
+that have been replied,
+so there is no foreign
+key that points to the
+"Plane" object.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>340</x>
+      <y>950</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue
+Algorithm of "is_sky"
+method is under discussion</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>830</y>
+      <w>150</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Photo
+--
+_id_
+author
+file_path
+color
+location
+is_reported
+--
+get_randomly
+get_near_me
+get_by_color
+get_by_tag
+get_reported_photo
+(is_sky)*
+set_color
+report_bad_content</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>770</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Tag
+--
+_content_
+planes
+photos
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>220</y>
+      <w>140</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Reply
+--
+_id_
+plane_author
+plane_content
+reply_author
+reply_content
+photo
+is_reported
+--
+like
+dislike
+report_bad_content</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>230</y>
+      <w>330</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;10.0;10.0;320.0;70.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>290</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>220</y>
+      <w>390</w>
+      <h>680</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>370.0;10.0;10.0;10.0;10.0;660.0;130.0;660.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>220</y>
+      <w>130</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;50.0;110.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>230</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;70.0;110.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>570</y>
+      <w>90</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;270.0;10.0;270.0;10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>500</y>
+      <w>90</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;320.0;70.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>830</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>320</y>
+      <w>370</w>
+      <h>590</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;530.0;40.0;530.0;40.0;570.0;300.0;570.0;300.0;10.0;350.0;10.0</additional_attributes>
+  </element>
+</diagram>
