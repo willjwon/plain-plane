@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -12,7 +14,11 @@ export class SignUpComponent {
   password_check: string;
   captcha_key: string;
 
-  onSignUp() {
+  constructor(private userService: UserService) { }
 
+  onSignUp() {
+    this.userService.signUp(this.username, this.password, this.password_check, this.captcha_key).then(
+      response => console.log(response)
+    );
   }
 }

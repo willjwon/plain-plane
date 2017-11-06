@@ -2,8 +2,8 @@ from django.http.response import HttpResponseNotAllowed, JsonResponse
 from django.contrib.auth import authenticate
 import django.contrib.auth.models as user_model
 from .models import User
-import urllib.parse
 import requests
+import json
 
 
 def sign_up(request):
@@ -16,7 +16,7 @@ def sign_up(request):
         # If username is already occupied, return code '5'.
         # If login succeeded, return code '0'.
 
-        request_data = dict(urllib.parse.parse_qsl(request.body.decode()))
+        request_data = json.loads(request.body.decode())
 
         # Check the username or password is empty
         username = request_data['username']
@@ -39,20 +39,22 @@ def sign_up(request):
             post_data = {'secret': '6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg',
                          'response': request_data['g-recaptcha-response']}
             response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
-            if not response.content['success']:
+            response_data = json.loads(response.content)
+            if not response_data['success']:
                 return JsonResponse({'success': False, 'error-code': 4})
 
         # Check the username is available
-        if len(user_model.User.objects.get(username=username)) != 0:
+        try:
+            user_model.User.objects.get(username=username)
             return JsonResponse({'success': False, 'error-code': 5})
+        except user_model.User.DoesNotExist:
+            # Can be signed up at this point.
+            user = user_model.User(username=username, password=password)
+            user.save()
 
-        # Can be signed up at this point.
-        user = user_model.User(username=username, password=password)
-        user.save()
-
-        # TODO: Change User Creation. Maybe Using the level, and call initializers after initializing and save?
-        User.objects.create(user=user, today_write_count=3, today_reply_count=3, total_likes=2)
-        return JsonResponse({'success': True, 'error-code': 0})
+            # TODO: Change User Creation. Maybe Using the level, and call initializers after initializing and save?
+            User.objects.create(user=user, today_write_count=3, today_reply_count=3, total_likes=2)
+            return JsonResponse({'success': True, 'error-code': 0})
 
     else:
         return HttpResponseNotAllowed(['POST'])
@@ -67,7 +69,7 @@ def sign_in(request):
         # If username and password is not matching, return code '4'.
         # If login succeeded, return code '0'.
 
-        request_data = dict(urllib.parse.parse_qsl(request.body.decode()))
+        request_data = json.loads(request.body.decode())
 
         # Check the username or password is empty
         username = request_data['username']
