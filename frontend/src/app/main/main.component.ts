@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
+  constructor() { }
+
+  username: string;
+  password: string;
+  captcha_key: string;
+
+  onSignIn() {
+    console.log(this.captcha_key);
+  }
 }

@@ -26,7 +26,6 @@ def sign_up(request):
         if len(username) == 0 or len(password) == 0 or len(password_check) == 0:
             return JsonResponse({'success': False, 'error-code': 1})
 
-
         # Check the password field is matching
         if password != password_check:
             return JsonResponse({'success': False, 'error-code': 2})
