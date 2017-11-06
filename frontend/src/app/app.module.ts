@@ -11,8 +11,10 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+
 import { MainComponent } from './main/main.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 import { UserService } from './user.service';
 
@@ -22,6 +24,7 @@ import { UserService } from './user.service';
     AppComponent,
     MainComponent,
     SignUpComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +44,6 @@ import { UserService } from './user.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// export function xsrfFactory() {
-//   return new CookieXSRFStrategy('_csrf', 'XSRF-TOKEN');
-// }
 
 export function xsrfFactory() {
   return new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
