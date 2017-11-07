@@ -10,27 +10,27 @@ import { UserService } from '../user.service';
 })
 export class SignUpComponent {
 
-  username: string;
-  password: string;
-  password_check: string;
-  captcha_key: string;
+  username = '';
+  password = '';
+  password_check = '';
+  captcha_key = '';
 
   constructor(private userService: UserService,
               private router: Router) { }
 
   onSignUp() {
-    if (this.username.length === 0) {
+    if (this.username === '') {
       alert('Please fill in username!');
       return;
     }
 
-    if (this.password.length === 0) {
+    if (this.password === '') {
       alert('Please fill in password!');
       return;
     }
 
-    if (this.password_check.length === 0) {
-      alert('Please fill in password_check!');
+    if (this.password_check === '') {
+      alert('Please fill in password again!');
       return;
     }
 
@@ -39,21 +39,21 @@ export class SignUpComponent {
       return;
     }
 
-    this.userService.signUp(this.username, this.password, this.password_check, this.captcha_key).then(
+    if (this.captcha_key === '') {
+      alert('captcha not done!');
+      return;
+    }
+
+    this.userService.postSignRequest('api/signup', this.username, this.password, this.captcha_key).then(
       response => {
         if (!response['success']) {
           switch (response['error-code']) {
             case 1: {
-              // captcha not done
-              alert('Captcha not done!');
-              break;
-            }
-            case 2: {
               // captcha failed
               alert('Captcha failed!');
               break;
             }
-            case 3: {
+            case 2: {
               // username already exists
               alert('Username already exists!');
               break;
