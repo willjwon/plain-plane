@@ -9,11 +9,9 @@ import json
 def sign_up(request):
     if request.method == 'POST':
         # request.body will have 'username', 'password', and 'g-recaptcha-response' attribute.
-        # If username or password is empty, return code '1'.
-        # If password fields are not matching, return code '2'.
-        # If reCAPTCHA is not done, return code '3'.
-        # If reCAPTCHA is done but failed, return code '4'.
-        # If username is already occupied, return code '5'.
+        # If reCAPTCHA is not done, return code '1'.
+        # If reCAPTCHA is done but failed, return code '2'.
+        # If username is already occupied, return code '3'.
         # If login succeeded, return code '0'.
 
         request_data = json.loads(request.body.decode())
@@ -23,17 +21,10 @@ def sign_up(request):
         password = request_data['password']
         password_check = request_data['password_check']
 
-        if len(username) == 0 or len(password) == 0 or len(password_check) == 0:
-            return JsonResponse({'success': False, 'error-code': 1})
-
-        # Check the password field is matching
-        if password != password_check:
-            return JsonResponse({'success': False, 'error-code': 2})
-
         # Check the reCAPTCHA status
         if 'g-recaptcha-response' not in request_data:
             # User didn't finished reCAPTCHA.
-            return JsonResponse({'success': False, 'error-code': 3})
+            return JsonResponse({'success': False, 'error-code': 1})
         else:
             # Check reCAPTCHA succeeded or not.
             post_data = {'secret': '6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg',
@@ -41,12 +32,12 @@ def sign_up(request):
             response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
             response_data = json.loads(response.content)
             if not response_data['success']:
-                return JsonResponse({'success': False, 'error-code': 4})
+                return JsonResponse({'success': False, 'error-code': 2})
 
         # Check the username is available
         try:
             user_model.User.objects.get(username=username)
-            return JsonResponse({'success': False, 'error-code': 5})
+            return JsonResponse({'success': False, 'error-code': 3})
         except user_model.User.DoesNotExist:
             # Can be signed up at this point.
             user = user_model.User(username=username, password=password)

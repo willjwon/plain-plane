@@ -3,15 +3,14 @@ h1 {
   margin: auto;
   font-size: 8em;
 }
+
 h2 {
   text-align: center;
 }
 
 .catchphrase {
-
   padding: 10em;
 }
-
 
 .plane_image {
   /* The image used */

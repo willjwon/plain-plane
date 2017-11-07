@@ -1,14 +1,43 @@
-<div>
-  <form>
-    Username: <input [(ngModel)]="username" name="username" placeholder="username"><br/>
-    Password: <input [(ngModel)]="password" name="password" placeholder="password"><br/>
-    <re-captcha #captchaRef="reCaptcha"
-                [(ngModel)]="captcha_key"
-                size="invisible"
-                (resolved)="$event && onSignIn()"
-                name="recaptcha"
-                siteKey="6LdqTDcUAAAAAMrLPuUOsWhWlozOF3V8v6ntahx8"></re-captcha>
-    <button (click)="captchaRef.execute()">Sign In</button>
+<div class="container">
+  <h1>Plain Plane</h1>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-4 control-label">Username</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" [(ngModel)]="username" name="username" placeholder="username">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-4 control-label">Password</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="password"><br/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" routerLink="/sign_up">Sign Up</button>
+      <button (click)="captchaRef.execute()" class="btn btn-success">Sign In</button>
+    </div>
+
+    <div class="form-group">
+      <re-captcha #captchaRef="reCaptcha"
+                  [(ngModel)]="captcha_key"
+                  size="invisible"
+                  (resolved)="$event && onSignIn()"
+                  name="recaptcha"
+                  siteKey="6LdqTDcUAAAAAMrLPuUOsWhWlozOF3V8v6ntahx8"></re-captcha><br/>
+    </div>
   </form>
-  <button routerLink="/sign_up">Sign Up</button>
 </div>
+
+<div>
+  <app-about-us></app-about-us>
+</div>
+
+<script>
+  $(document).ready(function () {
+    alert("Hello, world!");
+    console.log("Hello, world!");
+  });
+</script>

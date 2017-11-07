@@ -1,9 +1,39 @@
-<div>
-  <form (ngSubmit)="onSignUp()">
-    Username: <input [(ngModel)]="username" name="username" placeholder="username"><br/>
-    Password: <input [(ngModel)]="password" name="password" placeholder="password"><br/>
-    Password Again: <input [(ngModel)]="password_check" name="password_check" placeholder="password"><br/>
-    <re-captcha [(ngModel)]="captcha_key" name="recaptcha" siteKey="6Lf5TDcUAAAAANeLNdS_ilT7bgHoBg9kKPnGpNPm"></re-captcha>
-    <button>Submit</button>
-  </form>
+<div class="container">
+  <div class="signup_title">
+    <h1>Sign Up</h1>
+  </div>
+
+  <div class="signup_form">
+    <form id="signUpForm" class="form-horizontal" (ngSubmit)="onSignUp()">
+      <div class="form-group">
+        <label class="col-sm-5 control-label">Username</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" [(ngModel)]="username" name="username" placeholder="username">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label">Password</label>
+        <div class="col-sm-7">
+          <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="password">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-5 control-label">Password Again</label>
+        <div class="col-sm-7">
+          <input type="password" class="form-control" [(ngModel)]="password_check" name="password_check" placeholder="password"><br/>
+        </div>
+      </div>
+
+      <div class="form-group captcha">
+        <re-captcha [(ngModel)]="captcha_key" name="recaptcha" siteKey="6Lf5TDcUAAAAANeLNdS_ilT7bgHoBg9kKPnGpNPm"></re-captcha>
+      </div>
+
+      <div class="form-group">
+        <button type="button" routerLink="/" class="btn btn-danger">Cancel</button>
+        <button class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>
