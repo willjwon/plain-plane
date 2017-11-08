@@ -8,6 +8,12 @@ h2 {
   text-align: center;
 }
 
+img.about_us {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .catchphrase {
   padding: 10em;
 }
@@ -17,6 +23,56 @@ h2 {
   background-image: url("../../assets/image/planes.jpg");
 
   /* Full height */
+  width: 100%;
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 20em;
+}
+
+.about_us_1 {
+  /* The image used */
+  background-image: url("../../assets/image/about_us_1.png");
+
+  /* Full height */
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 20em;
+}
+
+.about_us_2 {
+  /* The image used */
+  background-image: url("../../assets/image/about_us_2.png");
+
+  /* Full height */
+  width: 100%;
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 20em;
+}
+
+.about_us_3 {
+  /* The image used */
+  background-image: url("../../assets/image/about_us_3.png");
+
+  /* Full height */
+  width: 100%;
   height: 100%;
 
   /* Center and scale the image nicely */
