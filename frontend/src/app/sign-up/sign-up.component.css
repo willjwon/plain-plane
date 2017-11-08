@@ -1,24 +1,19 @@
 h1 {
   text-align: left;
   margin-bottom: 50px;
-  font-size: 5em;
-  color: #CCCCCC;
-}
-
-.control-label {
-  color: #000000;
+  font-size: 3.5em;
 }
 
 .signup_title {
   position: absolute;
   top: 10%;
-  left: 10%;
+  left: 40%;
 }
 
 .signup_form {
   position: absolute;
   text-align: center;
-  top: 35%;
+  top: 27%;
   left: 35%;
 }
 
@@ -29,7 +24,7 @@ h1 {
 
 .container {
   /* The image used */
-  background-image: url("../../assets/image/sign_up.jpg");
+  background-image: url("../../assets/image/main_sky.jpg");
 
   position: fixed;
   overflow: hidden;

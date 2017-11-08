@@ -1,14 +1,10 @@
 h1 {
   position: absolute;
   top: 15%;
-  left: 30%;
+  left: 23%;
   font-size: 8em;
-  color: #333333;
 }
 
-.control-label {
-  color: #000000;
-}
 
 .container {
   /* The image used */
