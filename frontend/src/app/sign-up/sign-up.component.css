@@ -2,12 +2,13 @@ h1 {
   text-align: left;
   margin-bottom: 50px;
   font-size: 3.5em;
+  color: #eee;
 }
 
 .signup_title {
   position: absolute;
   top: 10%;
-  left: 40%;
+  left: 42%;
 }
 
 .signup_form {
@@ -15,6 +16,7 @@ h1 {
   text-align: center;
   top: 27%;
   left: 35%;
+  color: #fff;
 }
 
 .captcha {

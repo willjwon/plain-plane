@@ -5,10 +5,15 @@ h1 {
   font-size: 8em;
 }
 
+.forms-pos {
+  position: absolute;
+  top: 77%;
+  left: 37%
+}
 
 .container {
   /* The image used */
-  background-image: url("../../assets/image/main_sky.jpg");
+  background-image: url("../../assets/image/about_us_1.png");
 
   /* Full height */
   width: 100%;
