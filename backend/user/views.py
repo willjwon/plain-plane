@@ -39,7 +39,7 @@ def sign_up(request):
             post_data = {'secret': '6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg',
                          'response': request_data['g-recaptcha-response']}
             response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
-            response_data = json.loads(response.content)
+            response_data = json.loads(str(response.content, 'utf-8'))
             if not response_data['success']:
                 return JsonResponse({'success': False, 'error-code': 4})
 

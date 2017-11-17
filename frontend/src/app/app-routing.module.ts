@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { WriteComponent } from './write/write.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: MainComponent },
-  { path: 'sign_up', component: SignUpComponent }
+  { path: 'sign_up', component: SignUpComponent },
+  { path: 'write', component: WriteComponent },
 ];
 
 @NgModule({

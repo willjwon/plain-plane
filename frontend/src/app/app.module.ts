@@ -17,14 +17,16 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 
 import { UserService } from './user.service';
-
+import { WriteComponent } from './write/write.component';
+import { PlaneService } from './plane.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     SignUpComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    WriteComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { UserService } from './user.service';
     provide: XSRFStrategy,
     useFactory: xsrfFactory
   },
-    UserService
+    UserService,
+    PlaneService,
   ],
   bootstrap: [AppComponent]
 })

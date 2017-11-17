@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tag.apps.TagConfig',
+    'plane.apps.PlaneConfig',
     'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
