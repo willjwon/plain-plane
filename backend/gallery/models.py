@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django_enumfield import enum
 # Create your models here.
@@ -21,9 +23,14 @@ class Color(enum.Enum):
     BLACK = 7
 
 
+def unique_filename(instance, filename):
+    extension = filename.split(".")[-1]
+    return "{}.{}".format(uuid.uuid4(), extension)
+
+
 class Photo(models.Model):
     # uploaded image
-    image = models.ImageField('Image')
+    image = models.ImageField('Image', upload_to=unique_filename)
 
     # author = models.ForeignKey(User)
     is_reported = models.BooleanField()
