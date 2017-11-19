@@ -42,9 +42,9 @@ class User(models.Model):
 class Tag(models.Model):
     content = models.CharField(max_length=5)
 
-    planes = models.ForeignKey('Plane')
-    replies = models.ForeignKey('Reply')
-    photos = models.ForeignKey(Photo, related_name='photos')
+    # planes = models.ForeignKey('Plane')
+    # replies = models.ForeignKey('Reply')
+    photos = models.ForeignKey('Photo', related_name='photos')
 
 
 class Color(enum.Enum):
@@ -61,21 +61,9 @@ class Color(enum.Enum):
 class Photo(models.Model):
     image = models.ImageField(upload_to='uploads/%Y/%m/%d')
 
-    author = models.ForeignKey(User)
+    # author = models.ForeignKey(User)
     is_reported = models.BooleanField()
     color = enum.EnumField(Color)
-
-    # random order
-    def get_randomly(self):
-        return Photo.objects.all().order_by('?')[:9]
-
-    # get random 9 photos of a specific color
-    def get_by_color(self, color):
-        return Photo.objects.all().filter(lambda photo: photo.color == color).order_by('?')[:9]
-
-    # get report by user and change the flag
-    def report_bad_content(self):
-        self.is_reported = True
 
     # delete the photo
     def delete(self, *args, **kwargs):
