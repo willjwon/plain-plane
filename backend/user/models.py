@@ -1,4 +1,5 @@
 from django.db import models
+from django_enumfield import enum
 import django.contrib.auth.models as user_model
 
 
@@ -41,34 +42,36 @@ class User(models.Model):
 class Tag(models.Model):
     content = models.CharField(max_length=5)
 
-    planes = models.ManyToManyField('Plane')
-    replies = models.ManyToManyField('Reply')
-    photos = models.ManyToManyField(Photo, related_name='photos')
+    planes = models.ForeignKey('Plane')
+    replies = models.ForeignKey('Reply')
+    photos = models.ForeignKey(Photo, related_name='photos')
+
+
+class Color(enum.Enum):
+    RED = 0
+    ORANGE = 1
+    YELLOW = 2
+    GREEN = 3
+    BLUE = 4
+    INDIGO = 5
+    VIOLET = 6
+    BLACK = 7
 
 
 class Photo(models.Model):
     image = models.ImageField(upload_to='uploads/%Y/%m/%d')
 
     author = models.ForeignKey(User)
-    # TODO: Add color, location
     is_reported = models.BooleanField()
-    date = models.DateTimeField()
-
-    # descending order of date
-    def get_by_date(self):
-        return Photo.objects.all().order_by('-date')
+    color = enum.EnumField(Color)
 
     # random order
     def get_randomly(self):
-        return Photo.objects.all().order_by('?')
+        return Photo.objects.all().order_by('?')[:9]
 
-    # get all photos with specific tag
-    def get_by_tag(self, tag):
-        return list(tag.photos.all().values())
-
-    # TODO: Add get by color, location
-    # def get_by_color:
-    # def get_by_location:
+    # get random 9 photos of a specific color
+    def get_by_color(self, color):
+        return Photo.objects.all().filter(lambda photo: photo.color == color).order_by('?')[:9]
 
     # get report by user and change the flag
     def report_bad_content(self):
@@ -81,3 +84,4 @@ class Photo(models.Model):
 
         # delete the Photo instance
         super(Photo, self).delete(*args, **kwargs)
+
