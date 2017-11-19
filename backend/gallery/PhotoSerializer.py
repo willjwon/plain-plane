@@ -1,6 +1,6 @@
-from user.models import Photo
-from drf_extra_fields.fields import Base64ImageField
+from .models import Photo
 from rest_framework import serializers
+
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:

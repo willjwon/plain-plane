@@ -1,11 +1,16 @@
+from rest_framework import viewsets
 from django.forms import model_to_dict
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import Photo
 import requests
 import json
+from .PhotoSerializer import PhotoSerializer
 
 
-# Create your views here.
+class GalleryViewSet(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
 def photo_list(request):
     if request.method == 'GET':
         # get random 9 photos of a specific color

@@ -1,8 +1,10 @@
-from django.conf.urls import url
-import gallery.views as views
+from django.conf.urls import url, include
+from rest_framework import routers
+from gallery.viewsets import GalleryViewSet
+
+router = routers.DefaultRouter()
+router.register('', GalleryViewSet, 'photo')
 
 urlpatterns = [
-    url(r'^$', views.photo_list, name='photo_list'),
-    url(r'^color/(?P<color_id>[0-7])$', views.photo_list_color, name='photo_list_color'),
-    url(r'^(?P<photo_id>[0-9]+)$', views.photo_detail, name='photo_detail'),
+    url(r'^', include(router.urls)),
 ]
