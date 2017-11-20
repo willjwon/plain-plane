@@ -50,4 +50,3 @@ class UserTest(TestCase):
         response = self.client.post('/api/signin', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
         self.assertEqual(response_data, {'success': False, 'error-code': 1})
-

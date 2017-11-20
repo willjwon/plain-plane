@@ -36,3 +36,4 @@ class User(models.Model):
     # TODO: Implement methods after adding Level field
     # def set_level(self):
     #     # level-up logic
+
