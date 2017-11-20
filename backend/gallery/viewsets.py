@@ -1,68 +1,35 @@
-from rest_framework import viewsets
-from django.forms import model_to_dict
-from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponse, HttpResponseNotFound
+from rest_framework import viewsets, filters, status
+from rest_framework.decorators import list_route, detail_route
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+from .serializers import PhotoSerializer
 from .models import Photo
-import requests
-import json
-from .PhotoSerializer import PhotoSerializer
 
 
-class GalleryViewSet(viewsets.ModelViewSet):
+class PhotoListViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
-def photo_list(request):
-    if request.method == 'GET':
-        # get random 9 photos of a specific color
-        return JsonResponse(list(Photo.objects.all().values().order_by('?')[:9]), safe=False)
+    @list_route()
+    def random(self, request):
+        photos = Photo.objects.all().order_by('?')[:9]
+        serializer = self.get_serializer(photos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-    elif request.method == 'POST':
-        request_data = json.loads(request.body.decode())
+    @list_route()
+    def color(self, request, color_id):
+        photos = Photo.objects.all().filter(lambda photo: int(photo.color) == color_id).order_by('?')[:9]
+        serializer = self.get_serializer(photos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-        # image
-        # author = request.user
-        image = json.loads(request.body.decode())['image']
-        color = json.loads(request.body.decode())['color']
-        is_reported = False
-        new_photo = Photo(image=image, color=color, is_reported=is_reported)
-        new_photo.save()
-        return HttpResponse(status=201)
-
-    else:
-        return HttpResponseNotAllowed(['GET', 'POST'])
-
-
-def photo_list_color(request, color_id):
-    # get random 9 photos of a specific color
-    if request.method == 'GET':
-        return JsonResponse(list(Photo.objects.all().values()
-                                 .filter(lambda photo: photo.color == color_id)
-                                 .order_by('?')[:9])
-                            , safe=False)
-    else:
-        return HttpResponseNotAllowed(['GET'])
-
-
-def photo_detail(request, photo_id):
-    photo_id = int(photo_id)
-    try:
-        photo = Photo.objects.get(id=photo_id)
-    except Photo.DoesNotExist:
-        return HttpResponseNotFound()
-
-    if request.method == 'GET':
-        photo_dict = model_to_dict(photo)
-        return JsonResponse(photo_dict)
-    elif request.method == 'PUT':
-        is_reported = json.loads(request.body.decode())['is_report']
+    # report the photo as a bad photo
+    @detail_route(methods=['put'])
+    def report(self, request, pk=None):
+        queryset = Photo.objects.all()
+        photo = get_object_or_404(queryset, pk=pk)
         photo.is_reported = True
         photo.save()
-        return HttpResponse(status=204)   # 204: No content
-    elif request.method == 'DELETE':
-        if request.user != photo.author:
-            return HttpResponse(status=403)
+        serializer = PhotoSerializer(photo)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-        photo.delete()
-        return HttpResponse(status=204)   # 204: No content
-    else:
-        return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
+
