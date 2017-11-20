@@ -12,7 +12,7 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django==1.7 coverage coveralls djangorestframework django-enumfield Pillow
+        - pip3 install django coverage coveralls djangorestframework Pillow
       before_script:
         - cd backend
         - python3 manage.py migrate
