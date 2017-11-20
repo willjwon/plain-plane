@@ -30,6 +30,7 @@ def unique_filename(instance, filename):
 
 class Photo(models.Model):
     # uploaded image
+
     image = models.ImageField('Image', upload_to=unique_filename)
 
     # author = models.ForeignKey(User)
