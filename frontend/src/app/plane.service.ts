@@ -12,7 +12,8 @@ export class PlaneService {
 
   constructor(private http: Http) { }
 
-  getPlane(plane_id: number): Promise<Plane> {
+  // TODO: handle exception
+  getPlaneById(plane_id: number): Promise<Plane> {
     const url = `${this.planeUrl}/${plane_id}`;
     return this.http.get(url)
       .toPromise()
@@ -20,12 +21,23 @@ export class PlaneService {
       .catch(this.handleError);
   }
 
-  create(content: string, tag: string, latitude: number, longitude: number): Promise<Plane> {
+  // TODO: handle exception
+  makeNewPlane(content: string, tag_list: string, latitude: number, longitude: number): Promise<Plane> {
     return this.http
       .post(this.planeUrl, JSON.stringify({author_id: 1, content: content, 
-        tag: tag, latitude: latitude, longitude: longitude}), {headers: this.headers})
+        tag_list: tag_list, latitude: latitude, longitude: longitude}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Plane)
+      .catch(this.handleError);
+  }
+
+  // TODO: handle exception
+  // get 6 planes randomly
+  getRandomPlane(): Promise<Plane[]> {
+    const url = `${this.planeUrl}/random`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Plane[])
       .catch(this.handleError);
   }
 

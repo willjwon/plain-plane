@@ -8,6 +8,10 @@ import { HttpModule, CookieXSRFStrategy, XSRFStrategy } from '@angular/http';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
+// ng2-tag-input package
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -19,6 +23,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { UserService } from './user.service';
 import { WriteComponent } from './write/write.component';
 import { PlaneService } from './plane.service';
+import { PlaneDetailComponent } from './plane-detail/plane-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { PlaneService } from './plane.service';
     MainComponent,
     SignUpComponent,
     AboutUsComponent,
-    WriteComponent
+    WriteComponent,
+    PlaneDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,9 @@ import { PlaneService } from './plane.service';
     FormsModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TagInputModule,
+    BrowserAnimationsModule,
   ],
   providers: [{
     provide: XSRFStrategy,

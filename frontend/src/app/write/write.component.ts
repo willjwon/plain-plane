@@ -12,8 +12,8 @@ export class WriteComponent implements OnInit {
 
   constructor(private planeService: PlaneService) { }
 
-  latitude = -1;
-  longitude = -1;
+  latitude: number = -1;
+  longitude: number = -1;
 
   ngOnInit() {
     // get location from web browser
@@ -25,9 +25,10 @@ export class WriteComponent implements OnInit {
     }
   }
 
-  add(content: string, tag: string): void {
+  // TODO: tag format using ngx-chips
+  onClickFoldButton(content: string, tag: string): void {
     content = content.trim();
-    tag = tag.trim()
+    tag = tag.trim();
     if (!content) { 
       alert('You should plain...')
       return;
@@ -36,7 +37,9 @@ export class WriteComponent implements OnInit {
       alert('You should write tags!')
       return;
     }
-    this.planeService.create(content, tag, this.latitude, this.longitude);
+    this.planeService.makeNewPlane(content, tag, this.latitude, this.longitude);
   }
 
+  // TODO: onClickChangeSkyButton()
+  // show change_sky page
 }

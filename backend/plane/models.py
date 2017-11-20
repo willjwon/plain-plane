@@ -12,7 +12,7 @@ class Plane(models.Model):
 
     content = models.TextField()
     
-    expiration_date = models.IntegerField()
+    expiration_date = models.IntegerField(default=0)
 
     is_replied = models.BooleanField()
     is_reported = models.BooleanField()
@@ -27,6 +27,13 @@ class Plane(models.Model):
     longitude = models.FloatField(default = -1)
 
     # TODO: photo field as foreign key
+
+    # Serialize tag_list e.g. #tag1#tag2
+    def get_tag_list(self):
+        tag_string = ''
+        for tag in self.tag_list.all():
+            tag_string = tag_string + '#' + tag.tag
+        return tag_string
 
     # TODO: set expiration_date by level
     def set_expiration_date(self):

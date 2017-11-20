@@ -7,11 +7,10 @@ from user.models import User
 import json
 
 def writePlane(request):
+#    if not request.user.is_authenticated:
+#        return HttpResponse(status=401)
 
-    # TODO: only allow logged user
-    #if not request.user.is_authenticated:
-    #    return HttpResponse(status=401)
-
+    # TODO: define error code
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
         author_id = req_data['author_id']
@@ -19,9 +18,8 @@ def writePlane(request):
         latitude = req_data['latitude']
         longitude = req_data['longitude']
         
-        # tags are divided by #
-        # e.g. #exam#study
-        tag_string = req_data['tag'].replace(' ', '')
+        # tags are divided by #  e.g. #exam#study
+        tag_string = req_data['tag_list'].replace(' ', '')
         tag_list = tag_string[1:].split('#')
         
         try:
@@ -53,18 +51,52 @@ def planeDetail(request, plane_id):
         except Plane.DoesNotExist:
             return HttpResponseNotFound()
         
-        # Serialize tag_list
-        tag_list = plane.tag_list.all()
-        tag_string = ''
-        for tag in tag_list:
-            tag_string = tag_string + '#' + tag.tag
-        
         d = model_to_dict(plane)
         d.pop('tag_list')
-        d['tag_list'] = tag_string
+        d['tag_list'] = plane.get_tag_list() # { "tag_list": #tag1#tag2 }
         d['author_id'] = d.pop('author')
         return JsonResponse(d)
+    
+    # Set is_replied
+#    elif request.method == 'PUT':
+#        try:
+#            plane = Plane.objects.get(id=plane_id)
+#        except Plane.DoesNotExist:
+#            return HttpResponseNotFound()
+
+#        plane.set_is_replied(True)
+#        plane.save()
+#        return HttpResponse(status=200)
+
     else:
         # only GET methods are allowed for this url
         return HttpResponseNotAllowed(['GET'])
-    
+
+def getRandomPlane(request):
+#    if not request.user.is_authenticated:
+#        return HttpResponse(status=401)
+
+    if request.method == 'GET':
+        # get 6 planes randomly
+        if Plane.objects.all().count() < 6:
+            randomPlanes = Plane.objects.all()
+        else:
+            randomPlanes = Plane.objects.all().order_by('?')[:6]
+        
+        # Serialize randomPlanes
+        dictRandomPlanes = []
+        for randomPlane in randomPlanes:
+            d = model_to_dict(randomPlane)
+            d.pop('tag_list')
+            d['tag_list'] = randomPlane.get_tag_list() # { "tag_list": #tag1#tag2 } in json
+            d['author_id'] = d.pop('author')
+            dictRandomPlanes.append(d)
+
+        return JsonResponse(dictRandomPlanes, safe=False)
+
+    else:
+        # only GET methods are allowed for this url
+        return HttpResponseNotAllowed(['GET'])
+
+# TODO: getNearPlane()
+# get 6 planes by location

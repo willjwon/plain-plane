@@ -1,12 +1,10 @@
-<div>
-  <textarea class="form-control" rows="3" placeholder="Plain here" #content></textarea>
-</div>
-<div>
+<textarea class="form-control" rows="3" placeholder="Plain here" #content></textarea>
+<div>  
   <input placeholder="Write tags e.g. #exam #love" #tag />
 </div>
 <div>
-  <button (click)="add(content.value, tag.value, latitude, longitude); content.value=''; tag.value=''">
-    Add
+  <button (click)="onClickFoldButton(content.value, tag.value); content.value=''; tag.value=''">
+    Fold
   </button>
-  <button>Upload</button>
+  <button>Change sky</button>
 </div>
