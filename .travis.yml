@@ -12,7 +12,7 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django coverage coveralls rest_framework django_enumfield PIL
+        - pip3 install django coverage coveralls djangorestframework django_enumfield PIL
       before_script:
         - cd backend
         - python3 manage.py migrate
