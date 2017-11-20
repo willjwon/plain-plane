@@ -18,7 +18,6 @@ class PhotoListViewSet(viewsets.ModelViewSet):
 
     @list_route(url_path='color/(?P<color_id>[0-7])')
     def color(self, request, color_id):
-        print(color_id)
         photos = Photo.objects.all().filter(color=color_id).order_by('?')[:9]
         serializer = self.get_serializer(photos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
