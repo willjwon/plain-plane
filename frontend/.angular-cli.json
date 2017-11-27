@@ -19,9 +19,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "normalize.css",
+        "webflow.css",
+        "plain-plane.webflow.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "scripts/webfont.js",
+        "scripts/webfontload.js",
+        "scripts/windowdocument.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
