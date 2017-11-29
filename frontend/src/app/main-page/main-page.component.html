@@ -11,7 +11,7 @@
           <input [(ngModel)]="password" type="password" class="w-input" maxlength="256" name="Index-Password" data-name="Index Password" placeholder="Enter your password" id="Index-Password">
           <div class="div-block-4">
             <button (click)="captchaRef.execute()" class="button-index w-button">Sign In</button>
-            <a class="link-index-sign-up">Create an Account</a>
+            <a (click)="onClickSignUpButton()" class="link-index-sign-up">Create an Account</a>
             <a class="combo link-index-sign-up">Forgot?</a>
           </div>
           <re-captcha #captchaRef="reCaptcha"
@@ -22,12 +22,6 @@
                       siteKey="6LdqTDcUAAAAAMrLPuUOsWhWlozOF3V8v6ntahx8">
           </re-captcha>
         </form>
-        <div class="w-form-done">
-          <div>Thank you! Your submission has been received!</div>
-        </div>
-        <div class="w-form-fail">
-          <div>Oops! Something went wrong while submitting the form.</div>
-        </div>
       </div>
     </div><a href="#aboutus" class="link-block w-inline-block"><img src="assets/images/arrow.png" width="35" class="image-2"></a></div>
 </div>

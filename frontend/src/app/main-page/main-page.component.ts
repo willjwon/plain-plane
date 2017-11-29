@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -11,9 +12,13 @@ export class MainPageComponent implements OnInit {
   password: string;
   captcha_key: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onClickSignUpButton() {
+    this.router.navigate(['/sign_up']);
   }
 
   onSignIn() {
