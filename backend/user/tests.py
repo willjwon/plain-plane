@@ -32,21 +32,21 @@ class UserTest(TestCase):
 
     # test views.py
     def test_sign_up_wrong_method(self):
-        response = self.client.get('/api/signup')
+        response = self.client.get('/api/user/sign_up/')
         self.assertEqual(response.status_code, 405)
 
     def test_sign_up_captcha_not_done(self):
         data = {'username': 'testusername', 'password': 'testuserpassword', 'g-recaptcha-response': 'test'}
-        response = self.client.post('/api/signup', json.dumps(data), content_type='application/json')
+        response = self.client.post('/api/user/sign_up/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
         self.assertEqual(response_data, {'success': False, 'error-code': 1})
 
     def test_sign_in_wrong_method(self):
-        response = self.client.get('/api/signin')
+        response = self.client.get('/api/user/sign_in/')
         self.assertEqual(response.status_code, 405)
 
     def test_sign_in_captcha_not_done(self):
         data = {'username': 'testusername', 'password': 'testuserpassword', 'g-recaptcha-response': 'test'}
-        response = self.client.post('/api/signin', json.dumps(data), content_type='application/json')
+        response = self.client.post('/api/user/sign_in/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
         self.assertEqual(response_data, {'success': False, 'error-code': 1})

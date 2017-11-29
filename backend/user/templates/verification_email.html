@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+Hi, {{ username }}. This is Plain Plane team.
+You recently registered an email address to Plain Plane. If you didn't, just ignore this email.
+
+To verify your email, click the link below.
+
+http://{{ domain }}{% url 'email_verify' uidb64=uid token=token %}
+
+Your email address is only used to verify you when you forget your password.
+
+Sincerely,
+Plain Plane Team
+
+{% endautoescape %}

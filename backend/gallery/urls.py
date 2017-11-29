@@ -4,7 +4,7 @@ from .viewsets import PhotoViewSet
 
 # initiate router and register all endpoints
 router = routers.DefaultRouter()
-router.register('', PhotoViewSet, 'photo')
+router.register('', PhotoViewSet, 'user')
 
 # Wire up our API with our urls
 urlpatterns = [

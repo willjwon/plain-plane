@@ -126,3 +126,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '.', 'uploaded_images')
 MEDIA_URL = '/images/'
+
+
+# email server settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'swpp.plainplane@gmail.com'
+EMAIL_HOST_PASSWORD = '4df-2zY-b8p-foz'
+EMAIL_USE_TLS = True
