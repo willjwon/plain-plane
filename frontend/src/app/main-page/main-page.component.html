@@ -10,14 +10,14 @@
           <label for="Index-Password" class="label-index-sign-in">Password</label>
           <input [(ngModel)]="password" type="password" class="w-input" maxlength="256" name="Index-Password" data-name="Index Password" placeholder="Enter your password" id="Index-Password">
           <div class="div-block-4">
-            <button (click)="captchaRef.execute()" class="button-index w-button">Sign In</button>
+            <button (click)="onClickSignInButton()" class="button-index w-button">Sign In</button>
             <a (click)="onClickSignUpButton()" class="link-index-sign-up">Create an Account</a>
             <a class="combo link-index-sign-up">Forgot?</a>
           </div>
           <re-captcha #captchaRef="reCaptcha"
                       [(ngModel)]="captcha_key"
                       size="invisible"
-                      (resolved)="$event && onSignIn()"
+                      (resolved)="$event && doSignIn()"
                       name="recaptcha"
                       siteKey="6LdqTDcUAAAAAMrLPuUOsWhWlozOF3V8v6ntahx8">
           </re-captcha>

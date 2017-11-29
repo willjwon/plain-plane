@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,25 +9,40 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  username: string;
-  email: string;
-  password: string;
-  password_repeat: string;
-  captcha_key: string;
+  username = '';
+  email = '';
+  password = '';
+  password_repeat = '';
+  captcha_key = '';
 
-  constructor(private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  validateInput(username: string, email: string, password: string, password_repeat: string): boolean {
+  validateUsername(username: string): boolean {
     if (username === '') {
       alert('Username is empty. Please fill in username!');
       return false;
     }
 
-    if (username.indexOf('/\s') >= 0) {
-      alert('Username cannot contain whitespace. Please try again!');
+    if (!(/^[A-Za-z0-9]+$/.test(username))) {
+      alert('Username can only contain alphanumeric characters. Please try again!');
+      return false;
+    }
+
+    if (username.length < 2 || username.length > 32) {
+      alert('Username should be length 2 ~ 32. Please try again!');
+      return false;
+    }
+
+    return true;
+  }
+
+  validateInput(username: string, email: string, password: string, password_repeat: string, captcha_key: string):
+  boolean {
+    if (!this.validateUsername(username)) {
       return false;
     }
 
@@ -50,13 +66,13 @@ export class SignUpComponent implements OnInit {
       return false;
     }
 
-    if (password_repeat === '') {
-      alert('Password Again field is empty. Please fill in password again!');
+    if (password.length < 8 || password.length > 32) {
+      alert('Password should be length 8 ~ 32. Please try again!');
       return false;
     }
 
-    if (password.length < 8 || password.length > 32) {
-      alert('Password should be length 8 ~ 32. Please try again!');
+    if (password_repeat === '') {
+      alert('Password Again field is empty. Please fill in password again!');
       return false;
     }
 
@@ -65,15 +81,61 @@ export class SignUpComponent implements OnInit {
       return false;
     }
 
+    if (captcha_key === '') {
+      alert('Please do Captcha to sign up!');
+      return false;
+    }
+
     return true;
   }
 
-  onClickSignUpButton() {
-    if (!this.validateInput(this.username, this.email, this.password, this.password_repeat)) {
+  checkUsernameAvailable() {
+    if (!this.validateUsername(this.username)) {
       return;
     }
 
-    // TODO: Call UserService
+    this.userService.checkUserExists(this.username).then(response => {
+      if (response['available']) {
+        alert(`You can use username ${this.username}!`);
+      } else {
+        alert(`Username ${this.username} already exists. Please use another username!`);
+      }
+    });
   }
 
+  onClickSignUpButton() {
+    if (!this.validateInput(this.username, this.email, this.password, this.password_repeat, this.captcha_key)) {
+      return;
+    }
+
+    this.userService.signUp(this.username, this.email, this.password, this.captcha_key).then(response => {
+        if (!response['success']) {
+          switch (response['error-code']) {
+            case 1: {
+              // wrong attribute
+              alert('An Error occurred. Please try again!');
+              break;
+            }
+            case 2: {
+              // captcha failed
+              alert('Captcha failed!');
+              break;
+            }
+            case 3: {
+              // username already exists
+              alert('Username already exists!');
+              break;
+            }
+          }
+        } else {
+          let message = 'Sign-up successful!';
+          if (this.email !== '') {
+            message += '\nWe sent you a verification email. Please check your mailbox.';
+          }
+          alert(message);
+          this.router.navigate(['/']);
+        }
+      }
+    )
+  }
 }

@@ -6,24 +6,27 @@ import { CookieXSRFStrategy, HttpModule, XSRFStrategy } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
+
+import { UserService } from './user.service';
 
 import { AppComponent } from './app.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import {RecaptchaModule} from 'ng-recaptcha';
-import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
-import { SignUpComponent } from './sign-up/sign-up.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainPageComponent,
+    SignUpComponent,
     PhotoListComponent,
     PhotoDetailComponent,
-    PhotoPostComponent,
-    MainPageComponent,
-    SignUpComponent
+    PhotoPostComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     {
       provide: XSRFStrategy,
       useFactory: xsrfFactory
-    }
+    },
+    UserService
   ],
   bootstrap: [AppComponent]
 })

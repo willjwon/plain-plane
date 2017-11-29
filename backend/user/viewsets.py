@@ -2,12 +2,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 import django.contrib.auth.models as user_model
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage
 from .models import User
 from .tokens import email_verification_token
 import json
@@ -15,6 +15,13 @@ import requests
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    @list_route(url_path='(?P<username>[A-Za-z0-9]+)')
+    def get_user(self, request, username):
+        try:
+            user_model.User.objects.get(username=username)
+            return Response({'available': False})
+        except user_model.User.DoesNotExist:
+            return Response({'available': True})
 
     @list_route(url_path='sign_in', methods=['post'])
     def sign_in(self, request):
@@ -32,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
             password = request_data['password']
             captcha_key = request_data['g-recaptcha-response']
         except KeyError:
-            return Response({'success': False, 'error-code': 1}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 1})
 
         # Check reCAPTCHA succeeded or not.
         post_data = {'secret': '6LdqTDcUAAAAAMg6MerfUa0BZAnpVb7NnerIfZgE',
@@ -40,16 +47,16 @@ class UserViewSet(viewsets.ModelViewSet):
         response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
         response_data = json.loads(response.content)
         if not response_data['success']:
-            return Response({'success': False, 'error-code': 2}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 2})
 
         # Check the username and password matches.
         user = authenticate(request, username=username, password=password)
         if user is None:
             # username and password doesn't match.
-            return Response({'success': False, 'error-code': 3}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 3})
         else:
             # login succeeded.
-            return Response({'success': True, 'error-code': 0}, status=status.HTTP_202_ACCEPTED)
+            return Response({'success': True, 'error-code': 0})
 
     @list_route(url_path='sign_up', methods=['post'])
     def sign_up(self, request):
@@ -67,7 +74,7 @@ class UserViewSet(viewsets.ModelViewSet):
             password = request_data['password']
             captcha_key = request_data['g-recaptcha-response']
         except KeyError:
-            return Response({'success': False, 'error-code': 1}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 1})
 
         # Check reCAPTCHA succeeded or not.
         post_data = {'secret': '6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg',
@@ -75,12 +82,12 @@ class UserViewSet(viewsets.ModelViewSet):
         response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
         response_data = json.loads(response.content)
         if not response_data['success']:
-            return Response({'success': False, 'error-code': 2}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 2})
 
         # Check the username is available
         try:
             user_model.User.objects.get(username=username)
-            return Response({'success': False, 'error-code': 3}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'success': False, 'error-code': 3})
         except user_model.User.DoesNotExist:
             # Can be signed up at this point.
             django_user = user_model.User.objects.create_user(username=username, password=password)
@@ -107,4 +114,4 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.user.email = email
                 user.save()
 
-            return Response({'success': True, 'error-code': 0}, status=status.HTTP_201_CREATED)
+            return Response({'success': True, 'error-code': 0})

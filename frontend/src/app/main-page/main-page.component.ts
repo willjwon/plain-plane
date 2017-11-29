@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,21 +9,69 @@ import { Router } from '@angular/router';
 })
 export class MainPageComponent implements OnInit {
 
-  username: string;
-  password: string;
-  captcha_key: string;
+  username = '';
+  password = '';
+  captcha_key = '';
+  @ViewChild('captchaRef') captchaRef;
 
-  constructor(private router: Router) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  validateInput(username: string, password: string): boolean {
+    if (username === '') {
+      alert('Username is empty. Please fill in username!');
+      return false;
+    }
+
+    if (password === '') {
+      alert('Password is empty. Please fill in password!');
+      return false;
+    }
+
+    return true;
   }
 
   onClickSignUpButton() {
     this.router.navigate(['/sign_up']);
   }
 
-  onSignIn() {
-    console.log(this.captcha_key);
-    alert(this.username + '\n' + this.password);
+  onClickSignInButton() {
+    if (!this.validateInput(this.username, this.password)) {
+      return;
+    }
+
+    this.captchaRef.execute();
+  }
+
+  doSignIn() {
+    this.userService.signIn(this.username, this.password, this.captcha_key).then(response => {
+        if (!response['success']) {
+          switch (response['error-code']) {
+            case 1: {
+              // wrong attribute
+              alert('An Error occurred. Please try again!');
+              break;
+            }
+            case 2: {
+              // captcha failed
+              alert('Captcha failed!');
+              break;
+            }
+            case 3: {
+              // username already exists
+              alert('Your username or password is wrong. Please try again!');
+              break;
+            }
+          }
+          this.captchaRef.reset();
+        } else {
+          alert('Sign-in successful!');
+          // this.router.navigate(['/']);
+        }
+      }
+    )
   }
 }

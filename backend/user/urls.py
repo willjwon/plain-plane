@@ -9,5 +9,4 @@ router.register(r'', UserViewSet, 'user')
 # Wire up our API with our urls
 urlpatterns = [
     url(r'', include(router.urls)),
-
 ]
