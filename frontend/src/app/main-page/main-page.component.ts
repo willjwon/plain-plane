@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  username: string;
+  password: string;
+  captcha_key: string;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSignIn() {
+    console.log(this.captcha_key);
+    alert(this.username + '\n' + this.password);
+  }
 }

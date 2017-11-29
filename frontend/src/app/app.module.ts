@@ -12,6 +12,9 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import {RecaptchaModule} from 'ng-recaptcha';
+import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +22,14 @@ import { MainPageComponent } from './main-page/main-page.component';
     PhotoListComponent,
     PhotoDetailComponent,
     PhotoPostComponent,
-    MainPageComponent
+    MainPageComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaFormsModule,
     CommonModule,
     FormsModule,
     AppRoutingModule

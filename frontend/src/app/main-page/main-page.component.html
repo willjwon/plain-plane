@@ -4,8 +4,23 @@
       <h1 class="heading-index-title">Plain Plane</h1>
       <div class="div-block-2"></div>
       <div class="sign-form w-form">
-        <form id="email-form" name="email-form" data-name="Email Form"><label for="Index-Nickname" class="label-index-sign-in">Nickname</label><input type="text" class="w-input" maxlength="256" name="Index-Nickname" data-name="Index Nickname" placeholder="Enter your nickname" id="Index-Nickname"><label for="Index-Password" class="label-index-sign-in">Password</label><input type="password" class="w-input" maxlength="256" name="Index-Password" data-name="Index Password" placeholder="Enter your password" id="Index-Password">
-          <div class="div-block-4"><a href="planelistrandom.html" id="jim6829-naver.com" class="button-index w-button">Sign In</a><a href="signup.html" class="link-index-sign-up">Create an Account</a><a href="passwordreset.html" class="combo link-index-sign-up">Forgot?</a></div>
+        <form id="email-form" name="email-form" data-name="Email Form">
+          <label for="Index-Nickname" class="label-index-sign-in">Nickname</label>
+          <input [(ngModel)]="username" type="text" class="w-input" maxlength="256" name="Index-Nickname" data-name="Index Nickname" placeholder="Enter your nickname" id="Index-Nickname">
+          <label for="Index-Password" class="label-index-sign-in">Password</label>
+          <input [(ngModel)]="password" type="password" class="w-input" maxlength="256" name="Index-Password" data-name="Index Password" placeholder="Enter your password" id="Index-Password">
+          <div class="div-block-4">
+            <button (click)="captchaRef.execute()" class="button-index w-button">Sign In</button>
+            <a class="link-index-sign-up">Create an Account</a>
+            <a class="combo link-index-sign-up">Forgot?</a>
+          </div>
+          <re-captcha #captchaRef="reCaptcha"
+                      [(ngModel)]="captcha_key"
+                      size="invisible"
+                      (resolved)="$event && onSignIn()"
+                      name="recaptcha"
+                      siteKey="6LdqTDcUAAAAAMrLPuUOsWhWlozOF3V8v6ntahx8">
+          </re-captcha>
         </form>
         <div class="w-form-done">
           <div>Thank you! Your submission has been received!</div>
