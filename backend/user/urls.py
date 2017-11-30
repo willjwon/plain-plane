@@ -1,7 +1,12 @@
-from django.conf.urls import url
-import user.views as views
+from django.conf.urls import url, include
+from rest_framework import routers
+from .viewsets import UserViewSet
+from .views import email_verified
 
+router = routers.DefaultRouter()
+router.register(r'', UserViewSet, 'user')
+
+# Wire up our API with our urls
 urlpatterns = [
-    url(r'^signin$', views.sign_in, name='signin'),
-    url(r'^signup$', views.sign_up, name='signup'),
+    url(r'', include(router.urls)),
 ]

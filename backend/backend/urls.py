@@ -17,9 +17,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from user.views import email_verified
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('user.urls')),
+    url(r'^api/user/', include('user.urls')),
     url(r'^api/', include('plane.urls')),
-    url(r'^api/photo/', include('gallery.urls'))
+    url(r'^api/photo/', include('gallery.urls')),
+    url(r'^user/verify/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        email_verified,
+        name='email_verify')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

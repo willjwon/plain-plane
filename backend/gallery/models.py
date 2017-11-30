@@ -28,9 +28,7 @@ class Photo(models.Model):
     # YELLOW = 2
     # GREEN = 3
     # BLUE = 4
-    # INDIGO = 5
-    # VIOLET = 6
-    # BLACK = 7
+    # VIOLET = 5
     color = models.IntegerField()
 
     # delete the photo
