@@ -1,4 +1,8 @@
+from tag.models import Tag
+from user.models import User
 from .models import Photo
+
+from rest_framework.generics import get_object_or_404
 from rest_framework import serializers
 from PIL import Image
 
@@ -6,7 +10,7 @@ from PIL import Image
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('image', 'is_reported', 'color')
+        fields = ('pk', 'author', 'image', 'tag_list', 'color')
 
     def get_color(self, image):
 
@@ -48,17 +52,10 @@ class PhotoSerializer(serializers.ModelSerializer):
 
             return similarity / (distance(color) * distance(rgb))
 
-        # colors = [(255, 0, 0),  # red
-        #           (255, 127, 0),  # orange
-        #           (255, 255, 0),  # yellow
-        #           (0, 255, 0),  # green
-        #           (0, 0, 255),  # blue
-        #           (143, 0, 255),  # purple
-        #           ]
         colors = [(1, 0, 0),  # red
                   (1, 0.5, 0),  # orange
                   (1, 0.8, 0),  # yellow
-                  (0, 1, 0),  # green
+                  (0, 1, 0.5),  # green
                   (0, 0.5, 1),  # blue
                   (0.5, 0, 1),  # purple
                   ]
@@ -66,11 +63,18 @@ class PhotoSerializer(serializers.ModelSerializer):
         return cosine_similarity.index(max(cosine_similarity))
 
     def create(self, validated_data):
+        author_id = validated_data['author']
         image = validated_data['image']
         color = self.get_color(image)
 
-        photo = Photo(image=image, is_reported=False, color=color)
+        photo = Photo(author=author_id, image=image, is_reported=False, color=color)
         photo.save()
+
+        tag_list = validated_data['tag_list']
+
+        for tag in tag_list:
+            tag = Tag.objects.create(tag=tag)
+            photo.tag_list.add(tag)
 
         return photo
 
