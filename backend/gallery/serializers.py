@@ -10,7 +10,7 @@ from PIL import Image
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('pk', 'author', 'image', 'tag_list', 'color')
+        fields = ('id', 'author', 'image', 'tag_list', 'color')
 
     def get_color(self, image):
 

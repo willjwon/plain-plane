@@ -1,6 +1,7 @@
 export class Photo {
   id: number;
+  author: number;
   image: string;
-  is_reported: boolean;
+  tag_list: string[];
   color: number;
 }
