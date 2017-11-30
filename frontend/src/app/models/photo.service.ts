@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { Photo } from './photo';
 
 @Injectable()
-export class PhotoServiceService {
+export class PhotoService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
@@ -14,7 +14,7 @@ export class PhotoServiceService {
     const url = `/api/photo/random`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Photo[])
+      .then(response => response.json())
       .catch(this.handleError);
   }
 
@@ -22,15 +22,15 @@ export class PhotoServiceService {
     const url = `/api/photo/color/${color}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Photo[])
+      .then(response => response.json())
       .catch(this.handleError);
   }
 
   getPhoto(id: number): Promise<Photo> {
-    const url = `/api/photo/color/${id}`;
+    const url = `/api/photo/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Photo)
+      .then(response => response.json())
       .catch(this.handleError);
   }
 
