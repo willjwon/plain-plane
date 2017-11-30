@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
-import { UserService } from './user.service';
+import { UserService } from './models/user.service';
 
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
