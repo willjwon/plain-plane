@@ -42,7 +42,10 @@ export class PhotoListComponent implements OnInit {
   }
 
   onClickReportButton(selectedPhoto: Photo) {
-    this.photoService.report(selectedPhoto);
+    if (confirm('Do you want to report this photo?')) {
+      this.photoService.report(selectedPhoto);
+      alert('Successfully Reported');
+    }
   }
 
   onClickColorPhotoButton(color: number) {
