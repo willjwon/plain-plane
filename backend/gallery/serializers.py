@@ -63,11 +63,11 @@ class PhotoSerializer(serializers.ModelSerializer):
         return cosine_similarity.index(max(cosine_similarity))
 
     def create(self, validated_data):
-        author_id = validated_data['author']
+        author = validated_data['author']
         image = validated_data['image']
         color = self.get_color(image)
 
-        photo = Photo(author=author_id, image=image, is_reported=False, color=color)
+        photo = Photo(author=author, image=image, is_reported=False, color=color)
         photo.save()
 
         tag_list = validated_data['tag_list']
