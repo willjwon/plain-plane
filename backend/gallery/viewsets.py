@@ -23,7 +23,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # report the photo as a bad photo
-    @detail_route(methods=['put'])
+    @detail_route(url_path='/report', methods=['put'])
     def report(self, request, pk=None):
         queryset = Photo.objects.all()
         photo = get_object_or_404(queryset, pk=pk)

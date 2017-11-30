@@ -11,10 +11,10 @@
     <h1 class="page-title">Gallery</h1>
   </div>
   <div class="container-paper w-container">
-    <div class="div-block-26"><img src="assets/images/1.jpg" srcset="assets/images/1-p-500.jpeg 500w, assets/images/1-p-800.jpeg 800w, assets/images/1-p-1600.jpeg 1600w, assets/images/1.jpg 1920w" sizes="(max-width: 767px) 92vw, (max-width: 991px) 688px, 900px" class="image-15"></div>
+    <div class="div-block-26"><img src={{photo.image}} srcset={{photo.image}} sizes="(max-width: 767px) 92vw, (max-width: 991px) 688px, 900px" class="image-15"></div>
     <div class="div-block-28">
-      <div class="text-block-9">#swpp</div>
+      <div class="text-block-9" *ngFor="let tag of tagList">{{tag}}</div>
     </div>
-    <div class="div-block-27"><a href="#" class="button-photopost w-button">Report</a><a href="#" class="button-photopost w-button">Cancel</a></div>
+    <div class="div-block-27"><a (click)="onClickReportButton(photo)" class="button-photopost w-button">Report</a><a (click)="goBack()" class="button-photopost w-button">Back</a></div>
   </div>
 </div>
