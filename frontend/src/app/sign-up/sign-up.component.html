@@ -5,9 +5,9 @@
       <div class="combo sign-form w-form">
         <form id="email-form" name="email-form" data-name="Email Form" class="form-sign-up">
           <label for="SignUp-Nickname" class="label-index-sign-in">Nickname</label>
-          <div class="div-block-4">
+          <div class="div-block-signupnickname">
             <input [(ngModel)]="username" type="text" class="w-input" maxlength="256" name="SignUp-Nickname" data-name="SignUp Nickname" placeholder="Enter your nickname" id="SignUp-Nickname">
-            <button (click)="checkUsernameAvailable()" class="button-index combo w-button">Valid?</button>
+            <a (click)="checkUsernameAvailable()" class="button-signupvalid w-button">Valid?</a>
           </div>
           <label for="SignUp-Password" class="label-index-sign-in">Email (for account lost)</label>
           <input [(ngModel)]="email" type="text" class="w-input" maxlength="256" name="SignUp-Password" data-name="SignUp Password" placeholder="Enter your email (optional)" id="SignUp-Password">
