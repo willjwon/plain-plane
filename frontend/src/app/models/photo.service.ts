@@ -45,7 +45,7 @@ export class PhotoService {
   }
 
   report(photo: Photo): Promise<Photo> {
-    const url = `/api/photo/${photo.id}/report`;
+    const url = `/api/photo/${photo.id}/report/`;
     return this.http.put(url, JSON.stringify(photo), {headers: this.headers})
       .toPromise()
       .then(() => photo)
