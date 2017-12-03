@@ -9,7 +9,11 @@ export class UserService {
   constructor(private http: Http) { }
 
   checkUserExists(username: string): Promise<{'available': boolean}> {
-    return this.http.get(`/api/user/${username}`)
+    const dataToSend = {
+      'username': username,
+    };
+
+    return this.http.post('/api/user/check/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.json())
       .catch(UserService.handleError);

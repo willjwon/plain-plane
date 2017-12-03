@@ -15,9 +15,11 @@ import requests
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    @list_route(url_path='(?P<username>[A-Za-z0-9]+)')
-    def get_user(self, request, username):
+    @list_route(url_path='check', methods=['post'])
+    def get_user(self, request):
         try:
+            request_data = json.loads(request.body.decode())
+            username = request_data['username']
             user_model.User.objects.get(username=username)
             return Response({'available': False})
         except user_model.User.DoesNotExist:
