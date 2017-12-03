@@ -38,12 +38,15 @@ class ReplyViewSet(viewsets.ModelViewSet):
         user = user_model.User.objects.get(id=user_id).user
         replies = user.replies
         result = []
-        for reply in replies:
-            result.append(model_to_dict(reply))
-        return result
+        print(replies)
+        for reply in replies.values():
+            result.append(reply)
+        return Response(result)
 
-    @list_route(url_path="report/(?P<reply_id>[0-9]+)", methods=['put'])#, permission_classes=[IsAuthenticated])
-    def report_reply(self, request, reply_id):
+    @list_route(url_path="report", methods=['put'])#, permission_classes=[IsAuthenticated])
+    def report_reply(self, request):
+        req_data = request.data
+        reply_id = req_data['reply_id']
         try:
             reply = Reply.objects.get(id=reply_id)
         except Reply.DoesNotExist:
@@ -65,3 +68,4 @@ class ReplyViewSet(viewsets.ModelViewSet):
 
         reply.reply_author.increase_likes()
         reply.reply_author.save()
+        return Response(status=status.HTTP_200_OK)

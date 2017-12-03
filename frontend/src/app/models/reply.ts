@@ -1,4 +1,6 @@
 export class Reply {
+  reply_id: number;
+
   plane_author: number;
   reply_author: number;
 

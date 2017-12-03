@@ -12,6 +12,7 @@ import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { UserService } from './models/user.service';
 import { PlaneService } from './models/plane.service';
 import { PhotoService } from './models/photo.service';
+import { ReplyService } from './models/reply.service';
 
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -62,7 +63,8 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     },
     UserService,
     PlaneService,
-    PhotoService
+    PhotoService,
+    ReplyService
   ],
   bootstrap: [AppComponent]
 })

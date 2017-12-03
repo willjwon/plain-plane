@@ -3,8 +3,8 @@ from user.models import User
 
 
 class Reply(models.Model):
-    plane_author = models.OneToOneField(User, related_name='replies')
-    reply_author = models.OneToOneField(User, related_name='+')
+    plane_author = models.ForeignKey(User, related_name='replies')
+    reply_author = models.ForeignKey(User, related_name='+')
 
     original_content = models.TextField()
     original_tag = models.CharField(max_length=10)

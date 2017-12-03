@@ -4,6 +4,7 @@ import 'rxjs/add/operator/switchMap';
 import { Plane } from '../models/plane';
 import { UserService } from '../models/user.service';
 import { PlaneService } from '../models/plane.service';
+import { ReplyService } from '../models/reply.service';
 
 @Component({
   selector: 'app-reply',
@@ -17,7 +18,8 @@ export class ReplyComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private planeService: PlaneService,
-              private userService: UserService) {
+              private userService: UserService,
+              private replyService: ReplyService) {
   }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class ReplyComponent implements OnInit {
           alert('Successfully Reported.');
           this.router.navigate(['/planes']);
         } else {
-          alert('An error occured. Please try again.');
+          alert('An error occured. Please try again!');
         }
       });
     }
@@ -46,9 +48,12 @@ export class ReplyComponent implements OnInit {
   }
 
   onClickRefoldButton() {
-    alert('refold!');
-    alert(this.replyMessage);
-    alert(this.plane.plane_id);
+    this.replyService.foldNewReply(this.plane, this.replyMessage).then(response => {
+      if (response === 201) {
+        this.router.navigate(['/planes']);
+      } else {
+        alert('An error occured. Please try again!');
+      }
+    });
   }
 }
-
