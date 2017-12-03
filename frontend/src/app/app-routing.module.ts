@@ -8,11 +8,10 @@ import {PhotoDetailComponent} from './photo-detail/photo-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: MainPageComponent },
-  { path: 'sign_up', component: SignUpComponent },
-  { path: 'gallery', component: PhotoListComponent },
-  { path: 'gallery/:id', component: PhotoDetailComponent },
-
+  { path: '', component: MainPageComponent, pathMatch: 'full' },
+  { path: 'sign_up', component: SignUpComponent, pathMatch: 'full' },
+  { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
+  { path: 'gallery/:id', component: PhotoDetailComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

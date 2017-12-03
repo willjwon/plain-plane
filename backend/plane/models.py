@@ -1,13 +1,12 @@
 from django.db import models
 from user.models import User
-from tag.models import Tag
+
 
 class Plane(models.Model):
-
     author = models.ForeignKey(
         User,
-        related_name = 'planes',
-        null = False
+        related_name='planes',
+        null=False
     )
 
     content = models.TextField()
@@ -17,23 +16,13 @@ class Plane(models.Model):
     is_replied = models.BooleanField()
     is_reported = models.BooleanField()
 
-    tag_list = models.ManyToManyField(
-        Tag,
-        related_name = 'plane_list'
-    )
+    tag = models.CharField(max_length=10, null=True)
 
     # location coordinates
-    latitude = models.FloatField(default = -1)
-    longitude = models.FloatField(default = -1)
+    latitude = models.FloatField(default=-1)
+    longitude = models.FloatField(default=-1)
 
     # TODO: photo field as foreign key
-
-    # Serialize tag_list e.g. #tag1#tag2
-    def get_tag_list(self):
-        tag_string = ''
-        for tag in self.tag_list.all():
-            tag_string = tag_string + '#' + tag.tag
-        return tag_string
 
     # TODO: set expiration_date by level
     def set_expiration_date(self):

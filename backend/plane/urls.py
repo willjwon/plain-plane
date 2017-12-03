@@ -1,9 +1,12 @@
-from django.conf.urls import url
-from plane import views
+from django.conf.urls import url, include
+from rest_framework import routers
+from .viewsets import PlaneViewSet
 
+# initiate router and register all endpoints
+router = routers.DefaultRouter()
+router.register('', PlaneViewSet, 'plane')
+
+# Wire up our API with our urls
 urlpatterns = [
-    url(r'^plane$', views.writePlane, name='writePlane'),
-    url(r'^plane/(?P<plane_id>[0-9]+)$', views.planeDetail, name='planeDetail'),
-    url(r'^plane/random$', views.getRandomPlane, name='getRandomPlane'),
-#    url(r'^plane/location$', views.getNearPlane, name='getNearPlane'),
+    url(r'', include(router.urls)),
 ]

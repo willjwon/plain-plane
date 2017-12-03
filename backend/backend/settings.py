@@ -31,11 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'tag.apps.TagConfig',
-    'plane.apps.PlaneConfig',
-    'user.apps.UserConfig',
-    'level.apps.LevelConfig',
+    # 'plane.apps.PlaneConfig',
+    # 'user.apps.UserConfig',
+    # 'level.apps.LevelConfig',
     'gallery',
+    'user',
+    'plane',
+    'level',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -4,7 +4,7 @@ from level.models import Level
 
 
 class User(models.Model):
-    user = models.OneToOneField(user_model.User, on_delete=models.CASCADE)
+    user = models.OneToOneField(user_model.User, on_delete=models.CASCADE, related_name='user')
     email_verified = models.BooleanField(default=False)
     # level = models.ForeignKey(Level, related_name='users')
     today_write_count = models.IntegerField()
