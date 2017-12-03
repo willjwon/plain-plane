@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+
 # Create your models here.
 from tag.models import Tag
 from user.models import User
@@ -20,12 +21,7 @@ class Photo(models.Model):
     # RED = 0, ORANGE = 1, YELLOW = 2, GREEN = 3, BLUE = 4, VIOLET = 5
     color = models.IntegerField()
 
-    tag_list = models.ManyToManyField(
-        Tag,
-        related_name='photo_list',
-        blank=True,
-        null=True
-    )
+    tag = models.CharField(max_length=10)
 
     # delete the photo
     def delete(self, *args, **kwargs):

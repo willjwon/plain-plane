@@ -15,7 +15,7 @@ import { UserService } from '../models/user.service';
 export class PhotoDetailComponent implements OnInit {
   photo: Photo;
 
-  tagList: string[];
+  tag: string;
 
   constructor(
     private router: Router,
@@ -25,13 +25,12 @@ export class PhotoDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tagList = new Array();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.photoService.getPhoto(+params.get('id')))
       .subscribe(photo => {
         this.photo = photo;
         // this.getAuthor();
-        this.tagList = photo.tag_list;
+        this.tag = photo.tag;
       });
   }
 

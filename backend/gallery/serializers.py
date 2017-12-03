@@ -10,7 +10,7 @@ from PIL import Image
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('id', 'author', 'image', 'tag_list', 'color')
+        fields = ('id', 'author', 'image', 'tag', 'color')
 
     def get_color(self, image):
 
@@ -22,7 +22,6 @@ class PhotoSerializer(serializers.ModelSerializer):
 
         width = image.size[0]
         height = image.size[1]
-        print(width, height)
         image = image.convert('RGB')
 
         color_frequency = [0, 0, 0, 0, 0, 0]
@@ -33,7 +32,6 @@ class PhotoSerializer(serializers.ModelSerializer):
                 color_index = self.classify_color(pixel_rgb)
                 color_frequency[color_index] += 1
 
-        print(color_frequency)
         return color_frequency.index(max(color_frequency))
 
     def classify_color(self, rgb):
@@ -66,15 +64,10 @@ class PhotoSerializer(serializers.ModelSerializer):
         author = validated_data['author']
         image = validated_data['image']
         color = self.get_color(image)
+        tag = validated_data['tag']
 
-        photo = Photo(author=author, image=image, is_reported=False, color=color)
+        photo = Photo(author=author, image=image, is_reported=False, color=color, tag=tag)
         photo.save()
-
-        tag_list = validated_data['tag_list']
-
-        for tag in tag_list:
-            tag = Tag.objects.create(tag=tag)
-            photo.tag_list.add(tag)
 
         return photo
 

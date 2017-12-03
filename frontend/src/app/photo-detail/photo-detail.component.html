@@ -13,7 +13,7 @@
   <div class="container-paper w-container">
     <div class="div-block-26"><img src={{photo.image}} srcset={{photo.image}} sizes="(max-width: 767px) 92vw, (max-width: 991px) 688px, 900px" class="image-15"></div>
     <div class="div-block-28">
-      <div class="text-block-9" *ngFor="let tag of tagList">{{tag}}</div>
+      <div class="text-block-9">#{{tag}}</div>
     </div>
     <div class="div-block-27"><a (click)="onClickReportButton(photo)" class="button-photopost w-button">Report</a><a (click)="goBack()" class="button-photopost w-button">Back</a></div>
   </div>
