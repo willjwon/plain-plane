@@ -26,8 +26,7 @@ export class NavigationBarComponent {
   }
 
   onClickGalleryButton() {
-    alert('gallery!');
-    // this.router.navigate(['/']);
+    this.router.navigate(['/gallery']);
   }
 
   onClickMyPageButton() {
