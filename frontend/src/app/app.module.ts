@@ -24,6 +24,9 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { PlanesComponent } from './planes/planes.component';
 import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component';
 import { ReplyComponent } from './reply/reply.component';
+import { WriteComponent } from './write/write.component';
+import { MyPageComponent } from './my-page/my-page.component';
+import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { ReplyComponent } from './reply/reply.component';
     NavigationBarComponent,
     PlanesComponent,
     PlanesNearMeComponent,
-    ReplyComponent
+    ReplyComponent,
+    WriteComponent,
+    MyPageComponent,
+    RepliedPlaneComponent
   ],
   imports: [
     BrowserModule,

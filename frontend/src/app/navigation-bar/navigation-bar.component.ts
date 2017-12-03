@@ -18,8 +18,7 @@ export class NavigationBarComponent {
   }
 
   onClickWriteButton() {
-    alert('write!');
-    // this.router.navigate(['/']);
+    this.router.navigate(['/write']);
   }
 
   onClickGalleryButton() {
@@ -27,8 +26,7 @@ export class NavigationBarComponent {
   }
 
   onClickMyPageButton() {
-    alert('my page!');
-    // this.router.navigate(['/']);
+    this.router.navigate(['/my_page']);
   }
 
   onClickSignOutButton() {

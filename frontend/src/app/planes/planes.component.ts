@@ -37,7 +37,7 @@ export class PlanesComponent implements OnInit {
   onClickPlane(selectedPlane: Plane) {
     // TODO: Edit confirm message
     if (confirm(`Do you really want to see this plane?\n${selectedPlane.tag}`)) {
-      this.router.navigate([`/reply/${selectedPlane.plane_id}`]);
+      this.router.navigate([`/plane/${selectedPlane.plane_id}`]);
     }
   }
 }
