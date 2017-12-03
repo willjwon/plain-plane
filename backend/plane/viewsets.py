@@ -11,7 +11,7 @@ from .models import Plane
 class PlaneViewSet(viewsets.ModelViewSet):
     @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
     def write_plane(self, request):
-        req_data = json.loads(request.body.decode())
+        req_data = request.data
         content = req_data['content']
         latitude = req_data['latitude']
         longitude = req_data['longitude']

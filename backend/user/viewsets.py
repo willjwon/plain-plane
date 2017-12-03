@@ -1,13 +1,15 @@
 from django.contrib.sites.shortcuts import get_current_site
+from django.forms import model_to_dict
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 import django.contrib.auth.models as user_model
 from django.core.mail import EmailMessage
+from rest_framework.permissions import IsAuthenticated
 from .models import User
 from .tokens import email_verification_token
 import json
@@ -16,9 +18,9 @@ import requests
 
 class UserViewSet(viewsets.ModelViewSet):
     @list_route(url_path='check', methods=['post'])
-    def get_user(self, request):
+    def check_user_available(self, request):
         try:
-            request_data = json.loads(request.body.decode())
+            request_data = request.data
             username = request_data['username']
             user_model.User.objects.get(username=username)
             return Response({'available': False})
@@ -33,7 +35,7 @@ class UserViewSet(viewsets.ModelViewSet):
         # If username and password is not matching, return code '3'.
         # If login succeeded, return code '0'.
 
-        request_data = json.loads(request.body.decode())
+        request_data = request.data
 
         # Check the username or password is empty
         try:
@@ -57,7 +59,8 @@ class UserViewSet(viewsets.ModelViewSet):
             # username and password doesn't match.
             return Response({'success': False, 'error-code': 3})
         else:
-            # login succeeded.
+            # login succeeded
+            login(request, user)
             return Response({'success': True, 'error-code': 0})
 
     @list_route(url_path='sign_up', methods=['post'])
@@ -68,7 +71,7 @@ class UserViewSet(viewsets.ModelViewSet):
         # If username is already occupied, return code '3'.
         # If login succeeded, return code '0'.
 
-        request_data = json.loads(request.body.decode())
+        request_data = request.data
 
         # Check the key
         try:
@@ -117,3 +120,11 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.save()
 
             return Response({'success': True, 'error-code': 0})
+
+    @list_route(url_path='get', permission_classes=[IsAuthenticated])
+    def get_signed_in_user(self, request):
+        user = user_model.User.objects.get(id=request.user.id).user
+        user_dict = model_to_dict(user)
+        user_dict['username'] = user.user.username
+        del user_dict['id']
+        return Response(user_dict)

@@ -72,6 +72,6 @@ export class MainPageComponent implements OnInit {
           // this.router.navigate(['/']);
         }
       }
-    )
+    );
   }
 }
