@@ -16,11 +16,12 @@ class Plane(models.Model):
     is_replied = models.BooleanField()
     is_reported = models.BooleanField()
 
-    tag = models.CharField(max_length=10, null=True)
+    tag = models.CharField(max_length=10)
 
     # location coordinates
-    latitude = models.FloatField(default=-1)
-    longitude = models.FloatField(default=-1)
+    has_location = models.BooleanField(default=False)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
 
     # TODO: photo field as foreign key
 

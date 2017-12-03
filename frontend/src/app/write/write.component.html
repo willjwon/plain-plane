@@ -12,15 +12,16 @@
   </div>
   <div class="container-paper w-container">
     <div class="form-block-paper w-form">
-      <form id="email-form" name="email-form" data-name="Email Form"><label for="Write-Content" class="field-label-paper">Content</label><textarea id="Write-Content" name="Write-Content" placeholder="What happened today?" maxlength="5000" data-name="Write Content" class="textarea-paper w-input"></textarea><label for="Write-Tag" class="field-label-paper">#Tags</label><textarea id="Write-Tag" name="Write-Tag" placeholder="#hashtag" maxlength="5000" data-name="Write Tag" class="w-input"></textarea>
-        <div class="div-block-paper-button"><a href="planelistrandom.html" class="w-button write-button">Cancel</a><a href="#" class="w-button write-button">Change Sky</a><a href="#" class="w-button write-button">Fold</a></div>
+      <form id="email-form" name="email-form" data-name="Email Form">
+        <label for="Write-Content" class="field-label-paper">Content</label>
+        <textarea [(ngModel)]="content" id="Write-Content" name="Write-Content" placeholder="What happened today?" maxlength="5000" data-name="Write Content" class="textarea-paper w-input"></textarea>
+        <label for="Write-Tag" class="field-label-paper">#Tags</label>
+        <textarea [(ngModel)]="tag" id="Write-Tag" name="Write-Tag" placeholder="#hashtag" maxlength="10" data-name="Write Tag" class="w-input"></textarea>
+        <div class="div-block-paper-button">
+          <a (click)="onClickCancelButton()" class="w-button write-button">Cancel</a>
+          <a (click)="onClickChangeSkyButton()" class="w-button write-button">Change Sky</a>
+          <a (click)="onClickFoldButton()" class="w-button write-button">Fold</a></div>
       </form>
-      <div class="w-form-done">
-        <div>Thank you! Your submission has been received!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
-      </div>
     </div>
   </div>
 </div>

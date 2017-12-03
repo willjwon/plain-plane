@@ -36,4 +36,18 @@ export class PlaneService {
       .then(response => response.status)
       .catch(PlaneService.handleError);
   }
+
+  foldNewPlane(content: string, tag: string): Promise<number> {
+    // TODO: implement here with location service
+    const dataToSend = {
+      'content': content,
+      'tag': tag,
+      'has_location': false
+    };
+
+    return this.http.post('/api/plane/new/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch(PlaneService.handleError);
+  }
 }

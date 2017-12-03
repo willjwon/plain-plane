@@ -12,19 +12,26 @@ class PlaneViewSet(viewsets.ModelViewSet):
     def write_plane(self, request):
         req_data = request.data
         content = req_data['content']
-        latitude = req_data['latitude']
-        longitude = req_data['longitude']
         tag = req_data['tag']
 
         author = user_model.User.objects.get(id=request.user.id).user
 
-        new_plane = Plane(author=author, content=content,
-                          is_replied=False, is_reported=False,
-                          latitude=latitude, longitude=longitude, tag=tag)
+        if req_data['has_location']:
+            latitude = req_data['latitude']
+            longitude = req_data['longitude']
+            new_plane = Plane(author=author, content=content, tag=tag,
+                              has_location=True, latitude=latitude, longitude=longitude,
+                              is_replied=False, is_reported=False)
+        else:
+            new_plane = Plane(author=author, content=content, tag=tag,
+                              has_location=False, is_replied=False, is_reported=False)
+
         new_plane.set_expiration_date()
         new_plane.save()
+        print(new_plane.content)
 
         author.decrease_today_write()
+        author.save()
 
         return Response(status=status.HTTP_201_CREATED)
 
@@ -70,27 +77,20 @@ class PlaneViewSet(viewsets.ModelViewSet):
     def get_random_plane(self, request):
         # Serialize randomPlanes
         dict_random_planes = []
+        random_planes = Plane.objects.all().order_by('?')
+        for random_plane in random_planes:
+            if random_plane.is_reported or random_plane.is_replied or random_plane.author.user == request.user:
+                continue
+            
+            d = model_to_dict(random_plane)
+            plane = dict()
+            plane['author_id'] = d['author']
+            plane['content'] = d['content']
+            plane['tag'] = d['tag']
+            plane['plane_id'] = d['id']
+            dict_random_planes.append(plane)
 
-        while len(dict_random_planes) < 6:
-            random_planes = Plane.objects.all().order_by('?')[:6]
-
-            for random_plane in random_planes:
-                print(dict_random_planes)
-                if random_plane.is_reported or random_plane.is_replied:
-                    continue
-
-                if len(dict_random_planes) >= 6:
-                    break
-
-                d = model_to_dict(random_plane)
-                plane = dict()
-                plane['author_id'] = d['author']
-                plane['content'] = d['content']
-                plane['tag'] = d['tag']
-                plane['plane_id'] = d['id']
-                dict_random_planes.append(plane)
-
-            if len(random_planes) < 6:
+            if len(dict_random_planes) >= 6:
                 break
 
         return Response(dict_random_planes)
