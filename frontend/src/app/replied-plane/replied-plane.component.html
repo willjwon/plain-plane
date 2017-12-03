@@ -18,10 +18,11 @@
         <div class="div-block-18"></div>
         <p>{{reply.content}}</p>
         <div class="div-block-paper-button">
-          <a href="#" class="button-replydetail w-button">Report</a>
+          <a (click)="onClickReportButton()" class="button-replydetail w-button">Report</a>
           <a (click)="onClickCancelButton()" class="button-replydetail w-button">Cancel</a>
           <a (click)="onClickLikeButton()" class="button-replydetail w-button">Like it</a>
-          <a href="#" class="button-replydetail w-button">Not so much</a></div>
+          <!--<a href="#" class="button-replydetail w-button">Not so much</a>-->
+        </div>
       </form>
       <div class="w-form-done">
         <div>Thank you! Your submission has been received!</div>

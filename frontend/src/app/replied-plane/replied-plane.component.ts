@@ -43,5 +43,18 @@ export class RepliedPlaneComponent implements OnInit {
   onClickCancelButton() {
     this.router.navigate(['/my_page']);
   }
+
+  onClickReportButton() {
+    if (confirm('Do you want to report this reply?')) {
+      this.replyService.report(this.reply).then(response => {
+        if (response === 200) {
+          alert('Successfully reported.');
+          this.router.navigate(['/my_page']);
+        } else {
+          alert('An error occurred. Please try again.');
+        }
+      });
+    }
+  }
 }
 
