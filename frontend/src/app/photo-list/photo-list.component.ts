@@ -63,9 +63,9 @@ export class PhotoListComponent implements OnInit {
   //   this.router.navigate(['/sign_in']);
   // }
   //
-  // goCreate(): void {
-  //   this.router.navigate(['/articles/create']);
-  // }
+  goCreate(): void {
+    this.router.navigate(['/gallery/post']);
+  }
 
 
 }
