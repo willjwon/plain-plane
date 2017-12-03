@@ -7,13 +7,12 @@ from user.models import User
 import json
 
 def writePlane(request):
-#    if not request.user.is_authenticated:
-#        return HttpResponse(status=401)
+    if not request.user.is_authenticated:
+        return HttpResponse(status=401)
 
     # TODO: define error code
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
-        author_id = req_data['author_id']
         content = req_data['content']
         latitude = req_data['latitude']
         longitude = req_data['longitude']
@@ -21,11 +20,8 @@ def writePlane(request):
         # tags are divided by #  e.g. #exam#study
         tag_string = req_data['tag_list'].replace(' ', '')
         tag_list = tag_string[1:].split('#')
-        
-        try:
-            author = User.objects.get(id=author_id)
-        except User.DoesNotExist:
-            return HttpResponseNotFound()
+
+        author = User.objects.get(user__id = request.user.id)
         
         new_plane = Plane(author = author, content = content, 
             is_replied = False, is_reported = False,
@@ -35,6 +31,7 @@ def writePlane(request):
         for tag in tag_list:
             tag = Tag.objects.create(tag=tag)
             new_plane.tag_list.add(tag)
+        author.decrease_today_write()
         return HttpResponse(status=201)
     else:
         # only POST methods are allowed for this url
@@ -78,10 +75,7 @@ def getRandomPlane(request):
 
     if request.method == 'GET':
         # get 6 planes randomly
-        if Plane.objects.all().count() < 6:
-            randomPlanes = Plane.objects.all()
-        else:
-            randomPlanes = Plane.objects.all().order_by('?')[:6]
+        randomPlanes = Plane.objects.all().order_by('?')[:6]
         
         # Serialize randomPlanes
         dictRandomPlanes = []
@@ -100,3 +94,17 @@ def getRandomPlane(request):
 
 # TODO: getNearPlane()
 # get 6 planes by location
+"""
+def distance(lon1, lat1, lon2, lat2):
+    # Calculate the great circle distance between two points on the earth (specified in decimal degrees)
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    # Radius of earth in kilometers is 6371
+    km = 6371* c
+    return km
+"""

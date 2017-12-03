@@ -7,9 +7,9 @@ import json
 
 class PlaneTestCase(TestCase):
     def setUp(self):
-        user1 = user_model.User.objects.create(username='baryberri', password='1234')
-        user2 = user_model.User.objects.create(username='pptnz', password='1234')
-        user3 = user_model.User.objects.create(username='LeeHyunJong', password='1234')
+        user1 = user_model.User.objects.create_user(username='baryberri', password='1234')
+        user2 = user_model.User.objects.create_user(username='pptnz', password='1234')
+        user3 = user_model.User.objects.create_user(username='LeeHyunJong', password='1234')
         author1 = User.objects.create(user=user1, today_write_count=3, today_reply_count=3, total_likes=2)
         author2 = User.objects.create(user=user2, today_write_count=3, today_reply_count=3, total_likes=2)
         author3 = User.objects.create(user=user3, today_write_count=3, today_reply_count=3, total_likes=2)
@@ -43,7 +43,8 @@ class PlaneTestCase(TestCase):
         self.client = Client()
 
     def test_write_plane(self):
-        response = self.client.post('/api/plane', json.dumps({'author_id': 1, 'content': 'I hate him', 'tag_list': '#love', 
+        self.client.login(username='baryberri', password='1234')
+        response = self.client.post('/api/plane', json.dumps({'content': 'I hate him', 'tag_list': '#love', 
             'latitude': 37.0, 'longitude': 128.0}), content_type='application/json')
         self.assertEqual(response.status_code, 201)
         response = self.client.get('/api/plane/6')
@@ -53,12 +54,13 @@ class PlaneTestCase(TestCase):
         self.assertEqual(data['content'], 'I hate him')
         self.assertEqual(data['tag_list'], '#love')
 
-        response = self.client.post('/api/plane', json.dumps({'author_id': 5, 'content': 'I hate him', 'tag_list': '#love', 
-            'latitude': 37.0, 'longitude': 128.0}), content_type='application/json')
-        self.assertEqual(response.status_code, 404)
-
         response = self.client.get('/api/plane')
         self.assertEqual(response.status_code, 405)
+
+    def test_write_plane_not_authenticated(self):
+        response = self.client.post('/api/plane', json.dumps({'content': 'I hate him', 'tag_list': '#love', 
+            'latitude': 37.0, 'longitude': 128.0}), content_type='application/json')
+        self.assertEqual(response.status_code, 401)
 
     def test_plane_detail(self):
         response = self.client.get('/api/plane/1')
