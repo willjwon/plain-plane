@@ -55,5 +55,7 @@ export class ReplyComponent implements OnInit {
         alert('An error occured. Please try again!');
       }
     });
+
+    this.planeService.deletePlane(this.plane.plane_id);
   }
 }

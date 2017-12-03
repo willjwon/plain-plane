@@ -24,14 +24,17 @@ class ReplyViewSet(viewsets.ModelViewSet):
                              original_content=original_content,
                              original_tag=original_tag,
                              content=content,
-                             is_reported=False)
+                             is_reported=False,
+                             liked=False)
 
         return Response(status=status.HTTP_201_CREATED)
 
     @list_route(url_path="(?P<reply_id>[0-9]+)")#, permission_classes=[IsAuthenticated])
     def get_reply(self, request, reply_id):
         reply = Reply.objects.get(id=reply_id)
-        return Response(model_to_dict(reply))
+        result = model_to_dict(reply)
+        result['reply_id'] = result.pop('id')
+        return Response(result)
 
     @list_route(url_path="user/(?P<user_id>[0-9]+)")#, permission_classes=[IsAuthenticated])
     def get_reply_by_user(self, request, user_id):
@@ -40,6 +43,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         result = []
         print(replies)
         for reply in replies.values():
+            reply['reply_id'] = reply.pop('id')
             result.append(reply)
         return Response(result)
 
@@ -65,6 +69,12 @@ class ReplyViewSet(viewsets.ModelViewSet):
             reply = Reply.objects.get(id=reply_id)
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if reply.liked:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        reply.liked = True
+        reply.save()
 
         reply.reply_author.increase_likes()
         reply.reply_author.save()

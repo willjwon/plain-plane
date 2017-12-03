@@ -50,4 +50,15 @@ export class PlaneService {
       .then(response => response.status)
       .catch(PlaneService.handleError);
   }
+
+  deletePlane(planeId: number): Promise<number> {
+    const dataToSend = {
+      'plane_id': planeId
+    };
+
+    return this.http.put('/api/plane/delete/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch(PlaneService.handleError);
+  }
 }

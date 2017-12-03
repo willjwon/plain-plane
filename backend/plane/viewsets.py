@@ -95,3 +95,13 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         return Response(dict_random_planes)
 
+    @list_route(url_path="delete", methods=['put'])  # , permission_classes=[IsAuthenticated])
+    def delete_plane(self, request):
+        req_data = request.data
+        plane_id = req_data['plane_id']
+        try:
+            plane = Plane.objects.get(id=plane_id)
+        except Plane.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        plane.delete()
+        return Response(status=status.HTTP_200_OK)

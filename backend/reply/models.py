@@ -12,3 +12,4 @@ class Reply(models.Model):
     content = models.TextField()
 
     is_reported = models.BooleanField(default=False)
+    liked = models.BooleanField(default=False)
