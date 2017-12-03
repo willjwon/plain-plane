@@ -3,12 +3,13 @@ from django.forms.models import model_to_dict
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
-from user.models import User
+from rest_framework.permissions import IsAuthenticated
+import django.contrib.auth.models as user_model
 from .models import Plane
 
 
 class PlaneViewSet(viewsets.ModelViewSet):
-    @list_route(methods=['post'])
+    @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
     def write_plane(self, request):
         req_data = json.loads(request.body.decode())
         content = req_data['content']
@@ -16,7 +17,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
         longitude = req_data['longitude']
         tag = req_data['tag']
 
-        author = User.objects.get(user=request.user)
+        author = user_model.User.objects.get(id=request.user.id).user
 
         new_plane = Plane(author=author, content=content,
                           is_replied=False, is_reported=False,
@@ -28,7 +29,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         return Response(status=status.HTTP_201_CREATED)
 
-    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'])
+    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'], permission_classes=[IsAuthenticated])
     def plane_detail(self, request, plane_id):
         if request.method == "GET":
             plane_id = int(plane_id)
@@ -51,7 +52,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
             plane.save()
             return Response(status=status.HTTP_200_OK)
 
-    @list_route(url_path="random")
+    @list_route(url_path="random", permission_classes=[IsAuthenticated])
     def get_random_plane(self, request):
         random_planes = Plane.objects.all().order_by('?')[:6]
 

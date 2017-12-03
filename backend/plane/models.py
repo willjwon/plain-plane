@@ -16,7 +16,7 @@ class Plane(models.Model):
     is_replied = models.BooleanField()
     is_reported = models.BooleanField()
 
-    tag = models.CharField(max_length=10)
+    tag = models.CharField(max_length=10, null=True)
 
     # location coordinates
     latitude = models.FloatField(default=-1)
