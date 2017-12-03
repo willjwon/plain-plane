@@ -17,6 +17,7 @@ export class FindPasswordComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+
   }
 
   validateUsername(username: string): boolean {

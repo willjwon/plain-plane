@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { User } from './user';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserService {
@@ -95,6 +96,13 @@ export class UserService {
     return this.http.post('/api/user/find_password/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.json())
+      .catch(UserService.handleError);
+  }
+
+  signOut(): Promise<number> {
+    return this.http.get('/api/user/sign_out')
+      .toPromise()
+      .then(response => response.status)
       .catch(UserService.handleError);
   }
 }

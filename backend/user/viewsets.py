@@ -3,10 +3,10 @@ from django.forms import model_to_dict
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 import django.contrib.auth.models as user_model
 from django.core.mail import EmailMessage
 from rest_framework.permissions import IsAuthenticated
@@ -188,3 +188,15 @@ class UserViewSet(viewsets.ModelViewSet):
         user_dict['username'] = user.user.username
         del user_dict['id']
         return Response(user_dict)
+
+    @list_route(url_path='sign_out')
+    def sign_out(self, request):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)
+
+    @list_route(url_path='has_sign_in')
+    def has_sign_in(self, request):
+        if request.user.is_authenticated:
+            return Response(True)
+        else:
+            return Response(False)

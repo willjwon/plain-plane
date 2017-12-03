@@ -17,8 +17,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
-import { WriteComponent } from './write/write.component';
 import { FindPasswordComponent } from './find-password/find-password.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { PlanesComponent } from './planes/planes.component';
+import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component';
 
 
 @NgModule({
@@ -29,8 +31,10 @@ import { FindPasswordComponent } from './find-password/find-password.component';
     PhotoListComponent,
     PhotoDetailComponent,
     PhotoPostComponent,
-    WriteComponent,
-    FindPasswordComponent
+    FindPasswordComponent,
+    NavigationBarComponent,
+    PlanesComponent,
+    PlanesNearMeComponent
   ],
   imports: [
     BrowserModule,

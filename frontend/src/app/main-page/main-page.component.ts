@@ -72,8 +72,7 @@ export class MainPageComponent implements OnInit {
           }
           this.captchaRef.reset();
         } else {
-          alert('Sign-in successful!');
-          // this.router.navigate(['/']);
+          this.router.navigate(['/planes']);
         }
       }
     );

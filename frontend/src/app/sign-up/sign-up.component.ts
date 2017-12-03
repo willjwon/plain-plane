@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+
   }
 
   validateUsername(username: string): boolean {
