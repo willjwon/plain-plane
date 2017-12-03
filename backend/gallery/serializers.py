@@ -1,8 +1,4 @@
-from tag.models import Tag
-from user.models import User
 from .models import Photo
-
-from rest_framework.generics import get_object_or_404
 from rest_framework import serializers
 from PIL import Image
 

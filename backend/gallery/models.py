@@ -3,7 +3,6 @@ import uuid
 from django.db import models
 
 # Create your models here.
-from tag.models import Tag
 from user.models import User
 
 
