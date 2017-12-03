@@ -12,16 +12,23 @@
   </div>
   <div class="w-container">
     <div class="row-planelistrandom w-row">
-      <div class="column w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/noun_945767_cc.png" width="124" srcset="assets/images/noun_945767_cc-p-500.png 500w, assets/images/noun_945767_cc.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#love</div></a></div>
-      <div class="column-2 w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/plane_strawberry.png" width="124" srcset="assets/images/plane_strawberry-p-500.png 500w, assets/images/plane_strawberry.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#study</div></a></div>
-      <div class="column-3 w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/plane_mango.png" width="124" srcset="assets/images/plane_mango-p-500.png 500w, assets/images/plane_mango.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#emotion</div></a></div>
+      <div *ngIf="checkPlane(0)" class="column w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/noun_945767_cc.png" width="124" srcset="assets/images/noun_945767_cc-p-500.png 500w, assets/images/noun_945767_cc.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[0].tag}}</div></a></div>
+      <div *ngIf="checkPlane(1)" class="column-2 w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/plane_strawberry.png" width="124" srcset="assets/images/plane_strawberry-p-500.png 500w, assets/images/plane_strawberry.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[1].tag}}</div></a></div>
+      <div *ngIf="checkPlane(2)" class="column-3 w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/plane_mango.png" width="124" srcset="assets/images/plane_mango-p-500.png 500w, assets/images/plane_mango.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[2].tag}}</div></a></div>
+
+      <div *ngIf="!checkPlane(0)" class="column w-col w-col-4"></div>
+      <div *ngIf="!checkPlane(1)" class="column w-col w-col-4"></div>
+      <div *ngIf="!checkPlane(2)" class="column w-col w-col-4"></div>
     </div>
     <div class="row-planelistrandom w-row">
-      <div class="column-4 w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/plane_melon.png" width="124" srcset="assets/images/plane_melon-p-500.png 500w, assets/images/plane_melon.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#exam</div></a></div>
-      <div class="column-5 w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/plane_blueberry.png" width="124" srcset="assets/images/plane_blueberry-p-500.png 500w, assets/images/plane_blueberry.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#friend</div></a></div>
-      <div class="column-6 w-col w-col-4"><a href="reply.html" class="link-block-plane w-inline-block"><img src="assets/images/plane_jasmine.png" width="124" srcset="assets/images/plane_jasmine-p-500.png 500w, assets/images/plane_jasmine.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#swpp</div></a></div>
+      <div *ngIf="checkPlane(3)" class="column-4 w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/plane_melon.png" width="124" srcset="assets/images/plane_melon-p-500.png 500w, assets/images/plane_melon.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[3].tag}}</div></a></div>
+      <div *ngIf="checkPlane(4)" class="column-5 w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/plane_blueberry.png" width="124" srcset="assets/images/plane_blueberry-p-500.png 500w, assets/images/plane_blueberry.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[4].tag}}</div></a></div>
+      <div *ngIf="checkPlane(5)" class="column-6 w-col w-col-4"><a (click)="onClickPlane()" class="link-block-plane w-inline-block"><img src="assets/images/plane_jasmine.png" width="124" srcset="assets/images/plane_jasmine-p-500.png 500w, assets/images/plane_jasmine.png 700w" sizes="124px"><div class="div-block-7"></div><div class="text-block-planelistrandom">#{{planes[5].tag}}</div></a></div>
+
+      <div *ngIf="!checkPlane(3)" class="column w-col w-col-4"></div>
+      <div *ngIf="!checkPlane(4)" class="column w-col w-col-4"></div>
+      <div *ngIf="!checkPlane(5)" class="column w-col w-col-4"></div>
     </div>
   </div>
   <div class="container-plane-button w-container"><a href="#" class="button-planes w-button">Refresh</a><a href="planelistlocation.html" class="button-planes w-button">Near Me</a></div>
 </div>
-

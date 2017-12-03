@@ -10,6 +10,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 import { UserService } from './models/user.service';
+import { PlaneService } from './models/plane.service';
 import { PhotoService } from './models/photo.service';
 
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component
       useFactory: xsrfFactory
     },
     UserService,
+    PlaneService,
     PhotoService
   ],
   bootstrap: [AppComponent]

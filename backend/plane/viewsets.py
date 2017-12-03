@@ -51,7 +51,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
             plane.save()
             return Response(status=status.HTTP_200_OK)
 
-    @list_route(url_path="random", permission_classes=[IsAuthenticated])
+    @list_route(url_path="random")#, permission_classes=[IsAuthenticated])
     def get_random_plane(self, request):
         random_planes = Plane.objects.all().order_by('?')[:6]
 
@@ -59,7 +59,11 @@ class PlaneViewSet(viewsets.ModelViewSet):
         dict_random_planes = []
         for random_plane in random_planes:
             d = model_to_dict(random_plane)
-            dict_random_planes.append(d)
+            plane = dict()
+            plane['author_id'] = d['author']
+            plane['content'] = d['content']
+            plane['tag'] = d['tag']
+            dict_random_planes.append(plane)
 
         return Response(dict_random_planes)
 
