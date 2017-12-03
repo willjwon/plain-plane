@@ -50,6 +50,10 @@ export class MainPageComponent implements OnInit {
     this.captchaRef.execute();
   }
 
+  onClickLookAroundButton() {
+    this.router.navigate(['/gallery']);
+  }
+
   doSignIn() {
     this.userService.signIn(this.username, this.password, this.captcha_key).then(response => {
         if (!response['success']) {

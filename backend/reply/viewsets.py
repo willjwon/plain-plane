@@ -41,8 +41,9 @@ class ReplyViewSet(viewsets.ModelViewSet):
         user = user_model.User.objects.get(id=user_id).user
         replies = user.replies
         result = []
-        print(replies)
         for reply in replies.values():
+            if reply['is_reported']:
+                continue
             reply['reply_id'] = reply.pop('id')
             result.append(reply)
         return Response(result)
