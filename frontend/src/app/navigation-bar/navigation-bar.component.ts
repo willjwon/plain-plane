@@ -18,7 +18,13 @@ export class NavigationBarComponent {
   }
 
   onClickWriteButton() {
-    this.router.navigate(['/write']);
+    this.userService.getUser().then(user => {
+      if (user.today_write_count > 0) {
+        this.router.navigate(['/write']);
+      } else {
+        alert('Sorry. You ran out of today\'s write count. Please wait until tomorrow!');
+      }
+    });
   }
 
   onClickGalleryButton() {

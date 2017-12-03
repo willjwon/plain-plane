@@ -50,6 +50,11 @@ class PlaneViewSet(viewsets.ModelViewSet):
             result_plane['content'] = d['content']
             result_plane['tag'] = d['tag']
             result_plane['plane_id'] = d['id']
+
+            user = user_model.User.objects.get(id=request.user.id).user
+            user.decrease_today_reply()
+            user.save()
+
             return Response(result_plane)
 
             # Set is_replied

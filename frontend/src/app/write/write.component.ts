@@ -17,6 +17,12 @@ export class WriteComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.userService.getUser().then(user => {
+      if (user.today_write_count <= 0) {
+        alert('Sorry. You ran out of today\'s write count. Please wait until tomorrow!');
+        this.router.navigate(['/my_page']);
+      }
+    });
   }
 
   validateInput(content: string, tag: string): boolean {

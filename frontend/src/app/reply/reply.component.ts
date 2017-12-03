@@ -23,11 +23,18 @@ export class ReplyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.planeService.getPlane(+params.get('id')))
-      .subscribe(plane => {
-        this.plane = plane;
-      });
+    this.userService.getUser().then(user => {
+      if (user.today_reply_count <= 0) {
+        alert('Sorry. You ran out of today\'s reply count. Please wait until tomorrow!');
+        this.router.navigate(['/my_page']);
+      } else {
+        this.route.paramMap
+          .switchMap((params: ParamMap) => this.planeService.getPlane(+params.get('id')))
+          .subscribe(plane => {
+            this.plane = plane;
+          });
+      }
+    });
   }
 
   onClickReportButton() {

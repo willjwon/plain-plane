@@ -27,9 +27,6 @@ class ReplyViewSet(viewsets.ModelViewSet):
                              is_reported=False,
                              liked=False)
 
-        reply_author.decrease_today_reply()
-        reply_author.save()
-
         return Response(status=status.HTTP_201_CREATED)
 
     @list_route(url_path="(?P<reply_id>[0-9]+)")#, permission_classes=[IsAuthenticated])
