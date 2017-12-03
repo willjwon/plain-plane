@@ -14,9 +14,25 @@ from .models import User
 from .tokens import email_verification_token
 import json
 import requests
+import random
+import string
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    @staticmethod
+    def check_captcha(secret_key, captcha_key):
+        # Check reCAPTCHA succeeded or not.
+        post_data = {'secret': secret_key,
+                     'response': captcha_key}
+        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
+        response_data = json.loads(response.content)
+        return response_data['success']
+
+    @staticmethod
+    def random_password(password_length):
+        return "".join(
+            random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=password_length))
+
     @list_route(url_path='check', methods=['post'])
     def check_user_available(self, request):
         try:
@@ -46,11 +62,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'success': False, 'error-code': 1})
 
         # Check reCAPTCHA succeeded or not.
-        post_data = {'secret': '6LdqTDcUAAAAAMg6MerfUa0BZAnpVb7NnerIfZgE',
-                     'response': captcha_key}
-        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
-        response_data = json.loads(response.content)
-        if not response_data['success']:
+        if not self.check_captcha('6LdqTDcUAAAAAMg6MerfUa0BZAnpVb7NnerIfZgE', captcha_key):
             return Response({'success': False, 'error-code': 2})
 
         # Check the username and password matches.
@@ -82,11 +94,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'success': False, 'error-code': 1})
 
         # Check reCAPTCHA succeeded or not.
-        post_data = {'secret': '6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg',
-                     'response': captcha_key}
-        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
-        response_data = json.loads(response.content)
-        if not response_data['success']:
+        if not self.check_captcha('6Lf5TDcUAAAAAJKCf060w7eduUXl9P677tqXL1Cg', captcha_key):
             return Response({'success': False, 'error-code': 2})
 
         # Check the username is available
@@ -112,14 +120,66 @@ class UserViewSet(viewsets.ModelViewSet):
                     'token': email_verification_token.make_token(user),
                 })
                 mail_subject = 'Please Verify Your Email Address at Plain Plane'
-                to_email = email
-                email = EmailMessage(mail_subject, message, to=[to_email])
-                email.send()
+                email_to_send = EmailMessage(mail_subject, message, to=[email])
+                email_to_send.send()
 
                 user.user.email = email
-                user.save()
+                user.user.save()
 
             return Response({'success': True, 'error-code': 0})
+
+    @list_route(url_path="find_password", methods=['post'])
+    def find_password(self, request):
+        # 1. Check the given username and email
+        # 2. If key error, return {False, 1}
+        # 2. If captcha fails, return {False, 2}
+        # 3. If the username does not exists, return {False, 3}
+        # 4. If the username exists but email is not set or verified, return {False, 4}
+        # 5. If the username and email doesn't match, return {False, 5}
+        # 6. If the username exists and the email is verified, change the email and return {True, 0}
+
+        request_data = request.data
+
+        # Check the key
+        try:
+            username = request_data['username']
+            email = request_data['email']
+            captcha_key = request_data['g-recaptcha-response']
+        except KeyError:
+            return Response({'success': False, 'error-code': 1})
+
+        # Check reCAPTCHA succeeded or not.
+        if not self.check_captcha('6LfhcjsUAAAAAOWK76dOZ0TWZiJksnlZ3Miq1_85', captcha_key):
+            return Response({'success': False, 'error-code': 2})
+
+        # Check the username exists
+        try:
+            user = user_model.User.objects.get(username=username).user
+        except user_model.User.DoesNotExist:
+            return Response({'success': False, 'error-code': 3})
+
+        # check the user has verified email
+        if not user.email_verified:
+            return Response({'success': False, 'error-code': 4})
+
+        # validate the user
+        if user.user.email != email:
+            return Response({'success': False, 'error-code': 5})
+
+        # change the password and alert it to the user.
+        new_password = self.random_password(8)
+        user.user.set_password(new_password)
+        user.user.save()
+
+        email = email
+        message = render_to_string('new_password_email.html', {
+            'username': username,
+            'password': new_password
+        })
+        mail_subject = 'Your Requested Temporary Password at Plain Plane'
+        email_to_send = EmailMessage(mail_subject, message, to=[email])
+        email_to_send.send()
+        return Response({'success': True, 'error-code': 0})
 
     @list_route(url_path='get', permission_classes=[IsAuthenticated])
     def get_signed_in_user(self, request):

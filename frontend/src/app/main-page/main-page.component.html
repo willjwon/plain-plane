@@ -12,7 +12,7 @@
           <div class="div-block-4">
             <button (click)="onClickSignInButton()" class="button-index w-button">Sign In</button>
             <a (click)="onClickSignUpButton()" class="link-index-sign-up">Create an Account</a>
-            <a class="combo link-index-sign-up">Forgot?</a>
+            <a (click)="onClickFindPasswordButton()" class="combo link-index-sign-up">Forgot?</a>
           </div>
           <re-captcha #captchaRef="reCaptcha"
                       [(ngModel)]="captcha_key"

@@ -38,6 +38,10 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/sign_up']);
   }
 
+  onClickFindPasswordButton() {
+    this.router.navigate(['/find_password']);
+  }
+
   onClickSignInButton() {
     if (!this.validateInput(this.username, this.password)) {
       return;

@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import {User} from './user';
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import { User } from './user';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -79,6 +79,20 @@ export class UserService {
     };
 
     return this.http.post('/api/user/sign_up/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.json())
+      .catch(UserService.handleError);
+  }
+
+  findPassword(username: string, email: string, captcha_key: string):
+  Promise<{'success': boolean, 'error-code': number}> {
+    const dataToSend = {
+      'username': username,
+      'email': email,
+      'g-recaptcha-response': captcha_key
+    };
+
+    return this.http.post('/api/user/find_password/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.json())
       .catch(UserService.handleError);

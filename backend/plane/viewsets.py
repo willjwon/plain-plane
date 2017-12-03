@@ -1,4 +1,3 @@
-import json
 from django.forms.models import model_to_dict
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route

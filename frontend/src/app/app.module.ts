@@ -17,6 +17,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
+import { WriteComponent } from './write/write.component';
+import { FindPasswordComponent } from './find-password/find-password.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { PhotoPostComponent } from './photo-post/photo-post.component';
     SignUpComponent,
     PhotoListComponent,
     PhotoDetailComponent,
-    PhotoPostComponent
+    PhotoPostComponent,
+    WriteComponent,
+    FindPasswordComponent
   ],
   imports: [
     BrowserModule,
