@@ -6,7 +6,7 @@ from PIL import Image
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ('image', 'is_reported', 'color')
+        fields = ('id', 'author', 'image', 'tag', 'color')
 
     def get_color(self, image):
 
@@ -18,7 +18,6 @@ class PhotoSerializer(serializers.ModelSerializer):
 
         width = image.size[0]
         height = image.size[1]
-        print(width, height)
         image = image.convert('RGB')
 
         color_frequency = [0, 0, 0, 0, 0, 0]
@@ -29,7 +28,6 @@ class PhotoSerializer(serializers.ModelSerializer):
                 color_index = self.classify_color(pixel_rgb)
                 color_frequency[color_index] += 1
 
-        print(color_frequency)
         return color_frequency.index(max(color_frequency))
 
     def classify_color(self, rgb):
@@ -48,17 +46,10 @@ class PhotoSerializer(serializers.ModelSerializer):
 
             return similarity / (distance(color) * distance(rgb))
 
-        # colors = [(255, 0, 0),  # red
-        #           (255, 127, 0),  # orange
-        #           (255, 255, 0),  # yellow
-        #           (0, 255, 0),  # green
-        #           (0, 0, 255),  # blue
-        #           (143, 0, 255),  # purple
-        #           ]
         colors = [(1, 0, 0),  # red
                   (1, 0.5, 0),  # orange
                   (1, 0.8, 0),  # yellow
-                  (0, 1, 0),  # green
+                  (0, 1, 0.5),  # green
                   (0, 0.5, 1),  # blue
                   (0.5, 0, 1),  # purple
                   ]
@@ -66,10 +57,12 @@ class PhotoSerializer(serializers.ModelSerializer):
         return cosine_similarity.index(max(cosine_similarity))
 
     def create(self, validated_data):
+        author = validated_data['author']
         image = validated_data['image']
         color = self.get_color(image)
+        tag = validated_data['tag']
 
-        photo = Photo(image=image, is_reported=False, color=color)
+        photo = Photo(author=author, image=image, is_reported=False, color=color, tag=tag)
         photo.save()
 
         return photo
