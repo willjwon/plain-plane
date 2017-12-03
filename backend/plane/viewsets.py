@@ -8,7 +8,7 @@ from .models import Plane
 
 
 class PlaneViewSet(viewsets.ModelViewSet):
-    @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
+    @list_route(url_path='new', methods=['post'])#, permission_classes=[IsAuthenticated])
     def write_plane(self, request):
         req_data = request.data
         content = req_data['content']
@@ -28,7 +28,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         return Response(status=status.HTTP_201_CREATED)
 
-    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'], permission_classes=[IsAuthenticated])
+    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'])#, permission_classes=[IsAuthenticated])
     def plane_detail(self, request, plane_id):
         if request.method == "GET":
             plane_id = int(plane_id)
@@ -38,7 +38,12 @@ class PlaneViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
             d = model_to_dict(plane)
-            return Response(d)
+            result_plane = dict()
+            result_plane['author_id'] = d['author']
+            result_plane['content'] = d['content']
+            result_plane['tag'] = d['tag']
+            result_plane['plane_id'] = d['id']
+            return Response(result_plane)
 
             # Set is_replied
         elif request.method == 'PUT':
@@ -51,20 +56,42 @@ class PlaneViewSet(viewsets.ModelViewSet):
             plane.save()
             return Response(status=status.HTTP_200_OK)
 
+    @list_route(url_path="report/(?P<plane_id>[0-9]+)", methods=['put'])#, permission_classes=[IsAuthenticated])
+    def report_plane(self, request, plane_id):
+        try:
+            plane = Plane.objects.get(id=plane_id)
+        except Plane.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        plane.set_is_reported(True)
+        plane.save()
+        return Response(status=status.HTTP_200_OK)
+
     @list_route(url_path="random")#, permission_classes=[IsAuthenticated])
     def get_random_plane(self, request):
-        random_planes = Plane.objects.all().order_by('?')[:6]
-
         # Serialize randomPlanes
         dict_random_planes = []
-        for random_plane in random_planes:
-            d = model_to_dict(random_plane)
-            plane = dict()
-            plane['author_id'] = d['author']
-            plane['content'] = d['content']
-            plane['tag'] = d['tag']
-            dict_random_planes.append(plane)
+
+        while len(dict_random_planes) < 6:
+            random_planes = Plane.objects.all().order_by('?')[:6]
+
+            for random_plane in random_planes:
+                print(dict_random_planes)
+                if random_plane.is_reported or random_plane.is_replied:
+                    continue
+
+                if len(dict_random_planes) >= 6:
+                    break
+
+                d = model_to_dict(random_plane)
+                plane = dict()
+                plane['author_id'] = d['author']
+                plane['content'] = d['content']
+                plane['tag'] = d['tag']
+                plane['plane_id'] = d['id']
+                dict_random_planes.append(plane)
+
+            if len(random_planes) < 6:
+                break
 
         return Response(dict_random_planes)
 
-    # TODO: getNearPlane()

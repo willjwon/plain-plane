@@ -20,6 +20,10 @@ export class PlanesComponent implements OnInit {
     this.getRandomPlanes();
   }
 
+  onClickNearMeButton() {
+    this.router.navigate(['/planes_near_me']);
+  }
+
   getRandomPlanes() {
     this.planeService.getRandomPlanes().then(planes => {
       this.planes = planes;
@@ -30,7 +34,10 @@ export class PlanesComponent implements OnInit {
     return num < this.planes.length;
   }
 
-  onClickPlane() {
-    alert('Plane Clicked!');
+  onClickPlane(selectedPlane: Plane) {
+    // TODO: Edit confirm message
+    if (confirm(`Do you really want to see this plane?\n${selectedPlane.tag}`)) {
+      this.router.navigate([`/reply/${selectedPlane.plane_id}`]);
+    }
   }
 }

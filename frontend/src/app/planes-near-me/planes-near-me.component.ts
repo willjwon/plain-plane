@@ -14,4 +14,8 @@ export class PlanesNearMeComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  onClickEverywhereButton() {
+    this.router.navigate(['/planes']);
+  }
 }

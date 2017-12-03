@@ -6,8 +6,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FindPasswordComponent } from './find-password/find-password.component';
 import { PlanesComponent } from './planes/planes.component';
 import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component';
-import {PhotoListComponent} from './photo-list/photo-list.component';
-import {PhotoDetailComponent} from './photo-detail/photo-detail.component';
+import { ReplyComponent } from './reply/reply.component';
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'find_password', component: FindPasswordComponent, pathMatch: 'full' },
   { path: 'planes', component: PlanesComponent, pathMatch: 'full' },
   { path: 'planes_near_me', component: PlanesNearMeComponent, pathMatch: 'full' },
+  { path: 'reply/:id', component: ReplyComponent, pathMatch: 'full' },
   { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
   { path: 'gallery/:id', component: PhotoDetailComponent, pathMatch: 'full' },
 ];

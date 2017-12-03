@@ -16,9 +16,6 @@ export class NavigationBarComponent {
   onClickPlanesButton() {
     this.router.navigate(['/planes']);
   }
-  onClickPlanesNearMeButton() {
-    this.router.navigate(['/planes_near_me']);
-  }
 
   onClickWriteButton() {
     alert('write!');

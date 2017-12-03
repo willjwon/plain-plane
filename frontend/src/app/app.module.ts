@@ -23,6 +23,7 @@ import { FindPasswordComponent } from './find-password/find-password.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PlanesComponent } from './planes/planes.component';
 import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component';
+import { ReplyComponent } from './reply/reply.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component
     FindPasswordComponent,
     NavigationBarComponent,
     PlanesComponent,
-    PlanesNearMeComponent
+    PlanesNearMeComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,

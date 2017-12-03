@@ -22,4 +22,18 @@ export class PlaneService {
       .then(response => response.json() as Plane[])
       .catch(PlaneService.handleError);
   }
+
+  getPlane(planeId: number): Promise<Plane> {
+    return this.http.get(`/api/plane/${planeId}/`)
+      .toPromise()
+      .then(response => response.json() as Plane)
+      .catch(PlaneService.handleError);
+  }
+
+  report(plane: Plane): Promise<number> {
+    return this.http.put(`/api/plane/report/${plane.plane_id}/`, '', {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch(PlaneService.handleError);
+  }
 }
