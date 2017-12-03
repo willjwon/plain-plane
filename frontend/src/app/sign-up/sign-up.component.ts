@@ -57,8 +57,6 @@ export class SignUpComponent implements OnInit {
         alert('Email form is wrong. Please try again!');
         return false;
       }
-
-      // fallthrough
     }
 
     if (password === '') {
@@ -136,6 +134,6 @@ export class SignUpComponent implements OnInit {
           this.router.navigate(['/']);
         }
       }
-    )
+    );
   }
 }

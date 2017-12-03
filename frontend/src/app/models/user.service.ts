@@ -10,7 +10,7 @@ export class UserService {
 
   checkUserExists(username: string): Promise<{'available': boolean}> {
     const dataToSend = {
-      'username': username,
+      'username': username
     };
 
     return this.http.post('/api/user/check/', JSON.stringify(dataToSend), {headers: this.headers})
