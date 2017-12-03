@@ -13,8 +13,8 @@ class Plane(models.Model):
     
     expiration_date = models.IntegerField(default=0)
 
-    is_replied = models.BooleanField()
-    is_reported = models.BooleanField()
+    is_replied = models.BooleanField(default=False)
+    is_reported = models.BooleanField(default=False)
 
     tag = models.CharField(max_length=10)
 

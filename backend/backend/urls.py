@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^api/user/', include('user.urls')),
     url(r'^api/photo/', include('gallery.urls')),
     url(r'^api/plane/', include('plane.urls')),
+    url(r'^api/reply/', include('reply.urls')),
     url(r'^user/verify/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         email_verified,
         name='email_verify')
