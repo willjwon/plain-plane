@@ -28,7 +28,6 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         new_plane.set_expiration_date()
         new_plane.save()
-        print(new_plane.content)
 
         author.decrease_today_write()
         author.save()
