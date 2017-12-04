@@ -27,7 +27,14 @@ export class PlaneService {
     return this.http.get(`/api/plane/${planeId}/`)
       .toPromise()
       .then(response => response.json() as Plane)
-      .catch(PlaneService.handleError);
+      .catch(e => {
+        return Promise.resolve({
+          author_id: -1,
+          plane_id: -1,
+          content: '',
+          tag: ''
+        });
+      });
   }
 
   report(plane: Plane): Promise<number> {

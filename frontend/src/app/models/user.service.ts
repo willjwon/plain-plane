@@ -17,7 +17,7 @@ export class UserService {
   }
 
   getUser(): Promise<User> {
-    return this.http.get('/api/user/get')
+    return this.http.get('/api/user/get/')
       .toPromise()
       .then(response => {
         const responseData = response.json();

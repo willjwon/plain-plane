@@ -106,7 +106,11 @@ class UserViewSet(viewsets.ModelViewSet):
             django_user = user_model.User.objects.create_user(username=username, password=password)
 
             # TODO: Change User Creation. Maybe Using the level, and call initializers after initializing and save?
-            user = User(user=django_user, email_verified=False, today_write_count=3, today_reply_count=3, total_likes=2)
+            user = User(user=django_user,
+                        email_verified=False,
+                        today_write_count=10,
+                        today_reply_count=10,
+                        total_likes=0)
             user.save()
 
             # if email field is not empty, send the verification email.
@@ -193,10 +197,3 @@ class UserViewSet(viewsets.ModelViewSet):
     def sign_out(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)
-
-    @list_route(url_path='has_sign_in')
-    def has_sign_in(self, request):
-        if request.user.is_authenticated:
-            return Response(True)
-        else:
-            return Response(False)

@@ -8,7 +8,7 @@ from .models import Plane
 
 
 class PlaneViewSet(viewsets.ModelViewSet):
-    @list_route(url_path='new', methods=['post'])#, permission_classes=[IsAuthenticated])
+    @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
     def write_plane(self, request):
         req_data = request.data
         content = req_data['content']
@@ -35,7 +35,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         return Response(status=status.HTTP_201_CREATED)
 
-    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'])#, permission_classes=[IsAuthenticated])
+    @list_route(url_path="(?P<plane_id>[0-9]+)", methods=['get', 'put'], permission_classes=[IsAuthenticated])
     def plane_detail(self, request, plane_id):
         if request.method == "GET":
             plane_id = int(plane_id)
@@ -55,6 +55,9 @@ class PlaneViewSet(viewsets.ModelViewSet):
             user.decrease_today_reply()
             user.save()
 
+            plane.add_user_seen(request.user.id)
+            plane.save()
+
             return Response(result_plane)
 
             # Set is_replied
@@ -64,21 +67,28 @@ class PlaneViewSet(viewsets.ModelViewSet):
             except Plane.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
+            if not plane.has_user_seen(request.user.id):
+                return Response(status=status.HTTP_403_FORBIDDEN)
+
             plane.set_is_replied(True)
             plane.save()
             return Response(status=status.HTTP_200_OK)
 
-    @list_route(url_path="report/(?P<plane_id>[0-9]+)", methods=['put'])#, permission_classes=[IsAuthenticated])
+    @list_route(url_path="report/(?P<plane_id>[0-9]+)", methods=['put'], permission_classes=[IsAuthenticated])
     def report_plane(self, request, plane_id):
         try:
             plane = Plane.objects.get(id=plane_id)
         except Plane.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if not plane.has_user_seen(request.user.id):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         plane.set_is_reported(True)
         plane.save()
         return Response(status=status.HTTP_200_OK)
 
-    @list_route(url_path="random")#, permission_classes=[IsAuthenticated])
+    @list_route(url_path="random", permission_classes=[IsAuthenticated])
     def get_random_plane(self, request):
         # Serialize randomPlanes
         dict_random_planes = []
@@ -89,8 +99,8 @@ class PlaneViewSet(viewsets.ModelViewSet):
             
             d = model_to_dict(random_plane)
             plane = dict()
-            plane['author_id'] = d['author']
-            plane['content'] = d['content']
+            plane['author_id'] = ""
+            plane['content'] = ""
             plane['tag'] = d['tag']
             plane['plane_id'] = d['id']
             dict_random_planes.append(plane)
@@ -100,7 +110,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         return Response(dict_random_planes)
 
-    @list_route(url_path="delete", methods=['put'])  # , permission_classes=[IsAuthenticated])
+    @list_route(url_path="delete", methods=['put'], permission_classes=[IsAuthenticated])
     def delete_plane(self, request):
         req_data = request.data
         plane_id = req_data['plane_id']
@@ -108,5 +118,9 @@ class PlaneViewSet(viewsets.ModelViewSet):
             plane = Plane.objects.get(id=plane_id)
         except Plane.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if not plane.has_user_seen(request.user.id):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         plane.delete()
         return Response(status=status.HTTP_200_OK)

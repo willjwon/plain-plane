@@ -12,7 +12,12 @@ import { ReplyService } from '../models/reply.service';
   styleUrls: ['./reply.component.css']
 })
 export class ReplyComponent implements OnInit {
-  plane: Plane;
+  plane: Plane = {
+    author_id: -1,
+    plane_id: -1,
+    content: '',
+    tag: ''
+  };
   replyMessage = '';
 
   constructor(private router: Router,
@@ -33,6 +38,10 @@ export class ReplyComponent implements OnInit {
             .switchMap((params: ParamMap) => this.planeService.getPlane(+params.get('id')))
             .subscribe(plane => {
               this.plane = plane;
+              if (this.plane.plane_id === -1) {
+                alert('This plane doesn\'t exist!');
+                this.router.navigate(['/planes']);
+              }
             });
         } else {
           this.router.navigate(['/planes']);
@@ -46,6 +55,7 @@ export class ReplyComponent implements OnInit {
       this.planeService.report(this.plane).then(response => {
         if (response === 200) {
           alert('Successfully Reported.');
+          this.planeService.deletePlane(this.plane.plane_id);
           this.router.navigate(['/planes']);
         } else {
           alert('An error occured. Please try again!');

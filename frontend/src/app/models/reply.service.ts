@@ -21,7 +21,17 @@ export class ReplyService {
     return this.http.get(`/api/reply/${replyId}/`)
       .toPromise()
       .then(response => response.json() as Reply)
-      .catch(ReplyService.handleError);
+      .catch(e => {
+        return Promise.resolve({
+          reply_id: -1,
+          plane_author: -1,
+          reply_author: -1,
+          original_content: '',
+          original_tag: '',
+          content: '',
+          is_reported: false
+        });
+      });
   }
 
   getReplyByUser(user_id: number): Promise<Reply[]> {

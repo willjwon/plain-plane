@@ -25,7 +25,6 @@ export class RepliedPlaneComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private userService: UserService,
               private replyService: ReplyService) { }
 
   ngOnInit() {
@@ -33,6 +32,10 @@ export class RepliedPlaneComponent implements OnInit {
       .switchMap((params: ParamMap) => this.replyService.getReply(+params.get('id')))
       .subscribe(reply => {
         this.reply = reply;
+        if (this.reply.reply_id === -1) {
+          alert('This reply doesn\'t exist!');
+          this.router.navigate(['/my_page']);
+        }
       });
   }
 
@@ -59,8 +62,8 @@ export class RepliedPlaneComponent implements OnInit {
       this.replyService.report(this.reply).then(response => {
         if (response === 200) {
           alert('Successfully reported.');
-          this.router.navigate(['/my_page']);
           this.replyService.deleteReply(this.reply.reply_id);
+          this.router.navigate(['/my_page']);
         } else {
           alert('An error occurred. Please try again.');
         }

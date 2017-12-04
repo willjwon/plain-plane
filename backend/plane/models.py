@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import User
+import json
 
 
 class Plane(models.Model):
@@ -22,6 +23,17 @@ class Plane(models.Model):
     has_location = models.BooleanField(default=False)
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
+
+    seen_by = models.TextField(default=json.dumps([]))
+
+    def add_user_seen(self, user_id):
+        new_json = json.loads(self.seen_by)
+        new_json.append(user_id)
+        self.seen_by = json.dumps(new_json)
+
+    def has_user_seen(self, user_id):
+        users = json.loads(self.seen_by)
+        return user_id in users
 
     # TODO: photo field as foreign key
 

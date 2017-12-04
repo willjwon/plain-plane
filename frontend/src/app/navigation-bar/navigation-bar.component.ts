@@ -18,13 +18,7 @@ export class NavigationBarComponent {
   }
 
   onClickWriteButton() {
-    this.userService.getUser().then(user => {
-      if (user.today_write_count > 0) {
-        this.router.navigate(['/write']);
-      } else {
-        alert('Sorry. You ran out of today\'s write count. Please wait until tomorrow!');
-      }
-    });
+    this.router.navigate(['/write']);
   }
 
   onClickGalleryButton() {
@@ -38,6 +32,7 @@ export class NavigationBarComponent {
   onClickSignOutButton() {
     this.userService.signOut().then(response => {
       if (response === 200) {
+        sessionStorage.removeItem('signed_in');
         this.router.navigate(['/']);
       } else {
         alert('An error occurred. Please try again!');

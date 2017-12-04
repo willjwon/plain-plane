@@ -14,6 +14,9 @@ import { PlaneService } from './models/plane.service';
 import { PhotoService } from './models/photo.service';
 import { ReplyService } from './models/reply.service';
 
+import { AuthGuardSignedInService } from './models/auth-guard-signed-in.service';
+import { AuthGuardSignedOutService } from './models/auth-guard-signed-out.service';
+
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -64,7 +67,9 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     UserService,
     PlaneService,
     PhotoService,
-    ReplyService
+    ReplyService,
+    AuthGuardSignedInService,
+    AuthGuardSignedOutService
   ],
   bootstrap: [AppComponent]
 })

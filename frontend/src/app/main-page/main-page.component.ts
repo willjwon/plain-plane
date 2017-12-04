@@ -76,6 +76,7 @@ export class MainPageComponent implements OnInit {
           }
           this.captchaRef.reset();
         } else {
+          sessionStorage.setItem('signed_in', 'yes');
           this.router.navigate(['/planes']);
         }
       }
