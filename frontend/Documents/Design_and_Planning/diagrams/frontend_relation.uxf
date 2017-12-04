@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>540</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>inbox
+--
+replies: Plane
+--
++ ngOnInit
++ onClickReplyPlane</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>282</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>write
+--
+content: input
+tags: input
+change_sky: button
+fold: button
+--
++ ngOnInit
++ onClickChangeSkyButton
++ onClickFoldButton
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>156</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>plane_list
+--
+everywhere: button
+near_me: button
+plane: Plane
+--
++ ngOnInit
++ onClickPlane
++ onClickEverywhereButton
++ onClickNearMeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>138</y>
+      <w>126</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>reply
+--
+plane_content: text
+plane_tags: text
+reply: input
+--
++ ngOnInit
++ onClickCancelButon
++ onClickRefoldButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>414</y>
+      <w>120</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>photo_list
+--
+sort_method: button
+color_selector: radio
+tag_search_box: input
+post: button
+photo: image
+--
++ ngOnInit
++ onClickPhoto
++ onClickPostButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>450</y>
+      <w>120</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>photo_post
+--
+photo_preview: image
+photo_tags: input
+upload: button
+post: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickPostButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>360</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>photo_detail
+--
+photo_view: image
+photo_tags: text
+close_button: butto
+--
++ ngOnInit
++ onClickCloseButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>576</y>
+      <w>126</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>reply_detail
+--
+original_content: text
+reply_tags: text
+reply_content: text
+close_button: button
+--
++ ngOnInit
++ onClickCloseButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>276</y>
+      <w>108</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>sidebar
+--
+write: button
+planes: button
+gallery: button
+my_plane: button
+--
++ ngOnInit
++ onClickWriteButton
++ onClickPlanesButton
++ onClickGalleryButton
++ onClickMyPlaneButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>306</x>
+      <y>30</y>
+      <w>126</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>main
+--
+nickname: input
+password: input
+sign_in: button
+sign_up: button
+about_us: button
+--
++ ngOnInit
++ onClickSignInButton
++ onClickSignUpButton
++ onClickAboutUsButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>30</y>
+      <w>126</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>sign_up
+--
+nickname: input
+password: input
+captcha: g-captcha
+--
++ ngOnInit
++ onClickSignUpButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>426</x>
+      <y>42</y>
+      <w>138</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickSignUpButton</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>426</x>
+      <y>60</y>
+      <w>138</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickSignUpButton</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>132</y>
+      <w>102</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+OnClickSignInButton</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>318</y>
+      <w>102</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+OnClickWriteButton</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>210</y>
+      <w>144</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+OnClickPlanesButton</panel_attributes>
+    <additional_attributes>10.0;160.0;80.0;160.0;80.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>348</y>
+      <w>144</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+OnClickGalleryButton</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;160.0;150.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>378</y>
+      <w>162</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+OnClickMyPlaneButton</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;310.0;250.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>150</y>
+      <w>144</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickPlane</panel_attributes>
+    <additional_attributes>10.0;80.0;60.0;80.0;60.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>408</y>
+      <w>150</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickPhoto</panel_attributes>
+    <additional_attributes>10.0;90.0;110.0;90.0;110.0;10.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>474</y>
+      <w>150</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickPostButton</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>570</y>
+      <w>144</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickReplyPlane</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;50.0;220.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>552</x>
+      <y>240</y>
+      <w>126</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>change_sky
+--
+photo_preview: image
+upload: button
+change: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickChangeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>294</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickChangeSkyButton</panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>30</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>about_us
+--
+information: text
+--
++ ngOnInit
++ onClickBackButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>42</y>
+      <w>120</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickAboutUsButton</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>60</y>
+      <w>120</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickBackButton</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>198</y>
+      <w>144</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickCancelButton
+onClickRefoldButton</panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>372</x>
+      <y>240</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;
+onClickFoldButton</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>318</y>
+      <w>144</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickCancelButton
+onClickChangeButton</panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>786</x>
+      <y>276</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>FileSystem API</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>276</y>
+      <w>126</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+onClickUploadButton</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>372</y>
+      <w>150</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickCloseButton</panel_attributes>
+    <additional_attributes>10.0;80.0;90.0;80.0;90.0;10.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>492</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickCancelButton
+onClickPostButton</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>480</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>FileSystem API</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>480</y>
+      <w>126</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+onClickUploadButton</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>372</x>
+      <y>588</y>
+      <w>192</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+onClickCloseButton</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;300.0;50.0</additional_attributes>
+  </element>
+</diagram>

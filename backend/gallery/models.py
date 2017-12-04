@@ -1,15 +1,9 @@
 import uuid
 
 from django.db import models
+
 # Create your models here.
-
-
-class Tag(models.Model):
-    content = models.CharField(max_length=5)
-
-    # planes = models.ForeignKey('Plane')
-    # replies = models.ForeignKey('Reply')
-    photos = models.ForeignKey('Photo', related_name='photos')
+from user.models import User
 
 
 class Photo(models.Model):
@@ -20,18 +14,13 @@ class Photo(models.Model):
 
     image = models.ImageField('Image', upload_to=unique_filename)
 
-    # author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     is_reported = models.BooleanField()
 
-    # RED = 0
-    # ORANGE = 1
-    # YELLOW = 2
-    # GREEN = 3
-    # BLUE = 4
-    # INDIGO = 5
-    # VIOLET = 6
-    # BLACK = 7
+    # RED = 0, ORANGE = 1, YELLOW = 2, GREEN = 3, BLUE = 4, VIOLET = 5
     color = models.IntegerField()
+
+    tag = models.CharField(max_length=10)
 
     # delete the photo
     def delete(self, *args, **kwargs):
