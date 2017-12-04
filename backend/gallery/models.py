@@ -14,7 +14,7 @@ class Photo(models.Model):
 
     image = models.ImageField('Image', upload_to=unique_filename)
 
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     is_reported = models.BooleanField()
 
     # RED = 0, ORANGE = 1, YELLOW = 2, GREEN = 3, BLUE = 4, VIOLET = 5
