@@ -10,7 +10,12 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 import { UserService } from './models/user.service';
+import { PlaneService } from './models/plane.service';
 import { PhotoService } from './models/photo.service';
+import { ReplyService } from './models/reply.service';
+
+import { AuthGuardSignedInService } from './models/auth-guard-signed-in.service';
+import { AuthGuardSignedOutService } from './models/auth-guard-signed-out.service';
 
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -18,6 +23,14 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
+import { FindPasswordComponent } from './find-password/find-password.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { PlanesComponent } from './planes/planes.component';
+import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component';
+import { ReplyComponent } from './reply/reply.component';
+import { WriteComponent } from './write/write.component';
+import { MyPageComponent } from './my-page/my-page.component';
+import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
 
 
 @NgModule({
@@ -27,7 +40,15 @@ import { PhotoPostComponent } from './photo-post/photo-post.component';
     SignUpComponent,
     PhotoListComponent,
     PhotoDetailComponent,
-    PhotoPostComponent
+    PhotoPostComponent,
+    FindPasswordComponent,
+    NavigationBarComponent,
+    PlanesComponent,
+    PlanesNearMeComponent,
+    ReplyComponent,
+    WriteComponent,
+    MyPageComponent,
+    RepliedPlaneComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +65,11 @@ import { PhotoPostComponent } from './photo-post/photo-post.component';
       useFactory: xsrfFactory
     },
     UserService,
-    PhotoService
+    PlaneService,
+    PhotoService,
+    ReplyService,
+    AuthGuardSignedInService,
+    AuthGuardSignedOutService
   ],
   bootstrap: [AppComponent]
 })

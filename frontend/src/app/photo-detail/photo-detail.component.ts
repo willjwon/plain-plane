@@ -13,15 +13,20 @@ import { UserService } from '../models/user.service';
   styleUrls: ['./photo-detail.component.css']
 })
 export class PhotoDetailComponent implements OnInit {
-  photo: Photo;
+  photo: Photo = {
+    id: -1,
+    author: -1,
+    image: '',
+    tag: '',
+    color: -1
+  };
 
-  tag: string;
+  tag = '';
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private photoService: PhotoService,
-    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -34,21 +39,6 @@ export class PhotoDetailComponent implements OnInit {
       });
   }
 
-  // TODO: Complete after implementing getUser
-  // getAuthor(): void {
-  //   this.userService.getUser(this.photo.author)
-  //     .then(user => this.author = user);
-  // }
-
-
-  // signOut(): void {
-  //   this.userService.signOut()
-  //     .then(() => this.goToSignIn());
-  // }
-  //
-  // goToSignIn(): void {
-  //   this.router.navigate(['/sign_in']);
-  // }
   onClickReportButton(selectedPhoto: Photo) {
     if (confirm('Do you want to report this photo?')) {
       this.photoService.report(selectedPhoto);
@@ -56,10 +46,10 @@ export class PhotoDetailComponent implements OnInit {
     }
   }
 
-  delete(): void {
-    this.photoService.delete(this.photo.id);
-    this.router.navigate(['/gallery']);
-  }
+  // delete(): void {
+  //   this.photoService.delete(this.photo.id);
+  //   this.router.navigate(['/gallery']);
+  // }
 
   goBack(): void {
     this.router.navigate(['/gallery']);

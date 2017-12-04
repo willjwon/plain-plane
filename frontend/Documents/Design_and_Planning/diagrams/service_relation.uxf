@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>395</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>inbox
+--
+replies: Plane
+--
++ ngOnInit
++ onClickReplyPlane</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>385</y>
+      <w>105</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>write
+--
+content: input
+tags: input
+change_sky: button
+fold: button
+--
++ ngOnInit
++ onClickChangeSkyButton
++ onClickFoldButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>490</y>
+      <w>110</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>plane_list
+--
+everywhere: button
+near_me: button
+plane: Plane
+--
++ ngOnInit
++ onClickPlane
++ onClickEverywhereButton
++ onClickNearMeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>625</x>
+      <y>280</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>reply
+--
+plane_content: text
+plane_tags: text
+reply: input
+--
++ ngOnInit
++ onClickCancelButon
++ onClickRefoldButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>835</x>
+      <y>60</y>
+      <w>100</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>photo_list
+--
+sort_method: button
+color_selector: radio
+tag_search_box: input
+post: button
+photo: image
+--
++ ngOnInit
++ onClickPhoto
++ onClickPostButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>15</y>
+      <w>100</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>photo_post
+--
+photo_preview: image
+photo_tags: input
+upload: button
+post: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickPostButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>100</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>photo_detail
+--
+photo_view: image
+photo_tags: text
+close_button: butto
+--
++ ngOnInit
++ onClickCloseButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>435</x>
+      <y>195</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>reply_detail
+--
+original_content: text
+reply_tags: text
+reply_content: text
+close_button: button
+--
++ ngOnInit
++ onClickCloseButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>510</y>
+      <w>90</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>sidebar
+--
+write: button
+planes: button
+gallery: button
+my_plane: button
+sign_out: button
+--
++ ngOnInit
++ onClickWriteButton
++ onClickPlanesButton
++ onClickGalleryButton
++ onClickMyPlaneButton
++ onClickSignOutButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>105</x>
+      <y>510</y>
+      <w>105</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>main
+--
+nickname: input
+password: input
+sign_in: button
+sign_up: button
+about_us: button
+--
++ ngOnInit
++ onClickSignInButton
++ onClickSignUpButton
++ onClickAboutUsButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>510</y>
+      <w>105</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>sign_up
+--
+nickname: input
+password: input
+captcha: g-captcha
+--
++ ngOnInit
++ onClickSignUpButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>400</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>user_service
+--
++ sign_up
++ sign_in
++ sign_out
++ get_user_by_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>625</x>
+      <y>395</y>
+      <w>110</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>plane_service
+--
++ make_new_plane
++ get_random_plane
++ get_near_plane
++ get_plane_by_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>625</x>
+      <y>190</y>
+      <w>110</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>photo_service
+--
++ upload_new_photo
++ get_random_photo
++ get_near_photos
++ get_recent_photos
++ get_photos_by_color
++ get_photos_containing_tag
++ get_photos_by_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>295</y>
+      <w>95</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>reply_service
+--
++ make_new_reply
++ get_reply_by_id
++ get_reply_by_user_id</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>445</y>
+      <w>40</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+sign_up</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>325</x>
+      <y>430</y>
+      <w>60</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+sign_out</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0;100.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>415</y>
+      <w>80</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+sign_in</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>325</x>
+      <y>410</y>
+      <w>125</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_user_by_id</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>440</y>
+      <w>75</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_random_plane
+get_near_plane</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>475</x>
+      <y>335</y>
+      <w>85</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_reply_by_user_id</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>475</x>
+      <y>255</y>
+      <w>65</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_reply_by_id</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>310</y>
+      <w>105</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+make_new_reply</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>655</x>
+      <y>340</y>
+      <w>70</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_plane_by_id</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>410</y>
+      <w>100</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+make_new_plane</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>210</y>
+      <w>150</w>
+      <h>185</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_photos_by_id
+get_near_photos
+get_random_photo</panel_attributes>
+    <additional_attributes>10.0;20.0;280.0;20.0;280.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>535</x>
+      <y>215</y>
+      <w>100</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_photos_by_id</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>100</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+upload_new_photo</panel_attributes>
+    <additional_attributes>180.0;180.0;180.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>120</y>
+      <w>140</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_recent_photos
+get_photos_by_color
+get_photos_containig_tag</panel_attributes>
+    <additional_attributes>10.0;160.0;90.0;160.0;90.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>535</x>
+      <y>125</y>
+      <w>105</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+get_photo_by_id</panel_attributes>
+    <additional_attributes>180.0;160.0;80.0;160.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>675</x>
+      <y>15</y>
+      <w>105</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>change_sky
+--
+photo_preview: image
+upload: button
+change: button
+cancel: button
+--
++ ngOnInit
++ onClickCancelButton
++ onClickUploadButton
++ onClickChangeButton</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>100</y>
+      <w>85</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+upload_new_photo</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;70.0;150.0;70.0;150.0;10.0</additional_attributes>
+  </element>
+</diagram>

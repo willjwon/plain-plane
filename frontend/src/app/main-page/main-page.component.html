@@ -12,7 +12,7 @@
           <div class="div-block-4">
             <button (click)="onClickSignInButton()" class="button-index w-button">Sign In</button>
             <a (click)="onClickSignUpButton()" class="link-index-sign-up">Create an Account</a>
-            <a class="combo link-index-sign-up">Forgot?</a>
+            <a (click)="onClickFindPasswordButton()" class="combo link-index-sign-up">Forgot?</a>
           </div>
           <re-captcha #captchaRef="reCaptcha"
                       [(ngModel)]="captcha_key"
@@ -42,7 +42,7 @@
       </div>
       <div class="column-index-aboutus-1 w-col w-col-4"><img src="assets/images/sky.png" srcset="assets/images/sky-p-500.png 500w, assets/images/sky.png 700w" sizes="(max-width: 479px) 100vw, (max-width: 767px) 90vw, (max-width: 991px) 179.328125px, 249.984375px">
         <h1 class="heading-index-aboutus-1-title">Sky Gallery</h1>
-        <h3 class="heading-index-aboutus-1-content">View all photos or search them by color. Share universal sentiment with people regarding sky.</h3><a href="gallery.html" class="button-3 w-button">Look Around</a></div>
+        <h3 class="heading-index-aboutus-1-content">View all photos or search them by color. Share universal sentiment with people regarding sky.</h3><a (click)="onClickLookAroundButton()" class="button-3 w-button">Look Around</a></div>
     </div>
   </div>
   <div class="container-19 w-container">

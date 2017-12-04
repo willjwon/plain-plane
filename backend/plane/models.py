@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import User
+import json
 
 
 class Plane(models.Model):
@@ -13,14 +14,26 @@ class Plane(models.Model):
     
     expiration_date = models.IntegerField(default=0)
 
-    is_replied = models.BooleanField()
-    is_reported = models.BooleanField()
+    is_replied = models.BooleanField(default=False)
+    is_reported = models.BooleanField(default=False)
 
-    tag = models.CharField(max_length=10, null=True)
+    tag = models.CharField(max_length=10)
 
     # location coordinates
-    latitude = models.FloatField(default=-1)
-    longitude = models.FloatField(default=-1)
+    has_location = models.BooleanField(default=False)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+
+    seen_by = models.TextField(default=json.dumps([]))
+
+    def add_user_seen(self, user_id):
+        new_json = json.loads(self.seen_by)
+        new_json.append(user_id)
+        self.seen_by = json.dumps(new_json)
+
+    def has_user_seen(self, user_id):
+        users = json.loads(self.seen_by)
+        return user_id in users
 
     # TODO: photo field as foreign key
 

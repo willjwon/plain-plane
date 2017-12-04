@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 import django.contrib.auth.models as user_model
 from .models import User
+from .viewsets import UserViewSet
 import json
 
 
@@ -39,6 +40,18 @@ class UserTest(TestCase):
         data = {'username': 'testusername', 'password': 'testuserpassword', 'g-recaptcha-response': 'test'}
         response = self.client.post('/api/user/sign_up/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data, {'success': False, 'error-code': 2})
+
+    def test_sign_up_key_error(self):
+        data = {'username': 'testusername'}
+        response = self.client.post('/api/user/sign_up/', json.dumps(data), content_type='application/json')
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data, {'success': False, 'error-code': 1})
+
+    def test_sign_in_key_error(self):
+        data = {'username': 'testusername'}
+        response = self.client.post('/api/user/sign_in/', json.dumps(data), content_type='application/json')
+        response_data = json.loads(response.content.decode())
         self.assertEqual(response_data, {'success': False, 'error-code': 1})
 
     def test_sign_in_wrong_method(self):
@@ -49,4 +62,35 @@ class UserTest(TestCase):
         data = {'username': 'testusername', 'password': 'testuserpassword', 'g-recaptcha-response': 'test'}
         response = self.client.post('/api/user/sign_in/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data, {'success': False, 'error-code': 2})
+
+    def test_check_user_available(self):
+        data = {'username': 'hello'}
+        response = self.client.post('/api/user/check/', json.dumps(data), content_type='application/json')
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data, {'available': True})
+
+    def test_check_user_not_available(self):
+        data = {'username': 'testusername'}
+        response = self.client.post('/api/user/check/', json.dumps(data), content_type='application/json')
+        response_data = json.loads(response.content.decode())
+        self.assertEqual(response_data, {'available': False})
+
+    def test_random_password(self):
+        password = UserViewSet.random_password(8)
+        self.assertEqual(len(password), 8)
+
+    def test_find_password_key_error(self):
+        data = {'username': 'testusername', 'email': 'abc@def'}
+        response = self.client.post('/api/user/find_password/', json.dumps(data), content_type='application/json')
+        response_data = json.loads(response.content.decode())
         self.assertEqual(response_data, {'success': False, 'error-code': 1})
+
+    def test_get_signed_in_user_not_signed_in(self):
+        response = self.client.get('/api/user/get/')
+        self.assertEqual(response.status_code, 403)
+
+    def test_sign_out(self):
+        response = self.client.get('/api/user/sign_out/')
+        self.assertEqual(response.status_code, 200)
+
