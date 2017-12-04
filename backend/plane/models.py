@@ -7,7 +7,8 @@ class Plane(models.Model):
     author = models.ForeignKey(
         User,
         related_name='planes',
-        null=False
+        null=False,
+        on_delete=models.DO_NOTHING
     )
 
     content = models.TextField()
