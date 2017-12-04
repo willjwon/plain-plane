@@ -42,8 +42,6 @@ class ReplyViewSet(viewsets.ModelViewSet):
         replies = user.replies
         result = []
         for reply in replies.values():
-            if reply['is_reported']:
-                continue
             reply['reply_id'] = reply.pop('id')
             result.append(reply)
         return Response(result)
@@ -71,9 +69,6 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if request.user.id != reply.plane_author.user.id:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         if reply.liked:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -85,7 +80,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_200_OK)
 
     @list_route(url_path="delete", methods=['put'])  # , permission_classes=[IsAuthenticated])
-    def like_reply(self, request):
+    def delete_reply(self, request):
         req_data = request.data
         plane_id = req_data['reply_id']
         try:

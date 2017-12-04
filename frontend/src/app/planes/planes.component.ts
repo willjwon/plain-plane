@@ -39,10 +39,7 @@ export class PlanesComponent implements OnInit {
       if (user.today_reply_count <= 0) {
         alert('Sorry. You ran out of today\'s reply count. Please wait until tomorrow!');
       } else {
-        // TODO: Edit confirm message
-        if (confirm(`Do you really want to see this plane?\n${selectedPlane.tag}`)) {
-          this.router.navigate([`/plane/${selectedPlane.plane_id}`]);
-        }
+        this.router.navigate([`/plane/${selectedPlane.plane_id}`]);
       }
     });
   }

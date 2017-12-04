@@ -28,11 +28,15 @@ export class ReplyComponent implements OnInit {
         alert('Sorry. You ran out of today\'s reply count. Please wait until tomorrow!');
         this.router.navigate(['/my_page']);
       } else {
-        this.route.paramMap
-          .switchMap((params: ParamMap) => this.planeService.getPlane(+params.get('id')))
-          .subscribe(plane => {
-            this.plane = plane;
-          });
+        if (confirm(`Do you really want to see this plane?`)) {
+          this.route.paramMap
+            .switchMap((params: ParamMap) => this.planeService.getPlane(+params.get('id')))
+            .subscribe(plane => {
+              this.plane = plane;
+            });
+        } else {
+          this.router.navigate(['/planes']);
+        }
       }
     });
   }
