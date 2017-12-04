@@ -11,6 +11,7 @@ import { PlanesNearMeComponent } from './planes-near-me/planes-near-me.component
 import { ReplyComponent } from './reply/reply.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
+import {PhotoPostComponent} from './photo-post/photo-post.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'plane/:id', component: ReplyComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
+  { path: 'gallery/post', component: PhotoPostComponent, pathMatch: 'full' },
   { path: 'gallery/:id', component: PhotoDetailComponent, pathMatch: 'full' },
   { path: 'write', component: WriteComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'my_page', component: MyPageComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
