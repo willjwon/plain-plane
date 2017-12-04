@@ -71,6 +71,9 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        if request.user.id != reply.plane_author.user.id:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         if reply.liked:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 

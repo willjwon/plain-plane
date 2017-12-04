@@ -65,6 +65,8 @@ export class ReplyService {
     return this.http.put('/api/reply/like/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.status)
-      .catch(ReplyService.handleError);
+      .catch(e => {
+        return Promise.resolve(e.status);
+      });
   }
 }

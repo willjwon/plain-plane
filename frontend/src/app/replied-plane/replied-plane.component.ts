@@ -13,7 +13,15 @@ import { ReplyService } from '../models/reply.service';
   styleUrls: ['./replied-plane.component.css']
 })
 export class RepliedPlaneComponent implements OnInit {
-  reply: Reply;
+  reply: Reply = {
+    reply_id: -1,
+    plane_author: -1,
+    reply_author: -1,
+    original_content: '',
+    original_tag: '',
+    content: '',
+    is_reported: false
+  };
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -32,6 +40,8 @@ export class RepliedPlaneComponent implements OnInit {
     this.replyService.likeReply(this.reply.reply_id).then(response => {
       if (response === 406) {
         alert('You already liked this reply!');
+      } else if (response === 403) {
+        alert('You cannot like other\'s reply!');
       } else if (response === 200) {
         alert('Liked this reply!');
       } else {

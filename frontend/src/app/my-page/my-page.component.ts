@@ -11,8 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./my-page.component.css']
 })
 export class MyPageComponent implements OnInit {
-
-  user: User;
+  user: User = {
+    user_id: -1,
+    username: '',
+    today_write_count: 0,
+    today_reply_count: 0,
+    total_likes: 0,
+  };
   replies: Reply[] = [];
   pageIndex = 0;
 
