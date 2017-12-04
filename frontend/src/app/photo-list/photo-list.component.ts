@@ -13,7 +13,7 @@ import { PhotoService } from '../models/photo.service';
 })
 export class PhotoListComponent implements OnInit {
   title = 'Photo List';
-  photos: Photo[];
+  photos: Photo[] = [];
 
   // currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
 

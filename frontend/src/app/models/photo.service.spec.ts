@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PhotoServiceService } from './photo-service.service';
+import { PhotoService } from './photo.service';
 
-describe('PhotoServiceService', () => {
+describe('PhotoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PhotoServiceService]
+      providers: [PhotoService]
     });
   });
 
-  it('should be created', inject([PhotoServiceService], (service: PhotoServiceService) => {
+  it('should be created', inject([PhotoService], (service: PhotoService) => {
     expect(service).toBeTruthy();
   }));
 });
