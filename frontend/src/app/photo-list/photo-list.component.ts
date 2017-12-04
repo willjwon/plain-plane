@@ -13,9 +13,7 @@ import { PhotoService } from '../models/photo.service';
 })
 export class PhotoListComponent implements OnInit {
   title = 'Photo List';
-  photos: Photo[];
-
-  // currentUser: User = JSON.parse(localStorage.getItem('currentUser'));
+  photos: Photo[] = [];
 
   constructor(
     private router: Router,
@@ -53,16 +51,6 @@ export class PhotoListComponent implements OnInit {
     });
   }
 
-  //
-  // signOut(): void {
-  //   this.userService.signOut()
-  //     .then(() => this.goToSignIn());
-  // }
-  //
-  // goToSignIn(): void {
-  //   this.router.navigate(['/sign_in']);
-  // }
-  //
   goCreate(): void {
     this.router.navigate(['/gallery/post']);
   }

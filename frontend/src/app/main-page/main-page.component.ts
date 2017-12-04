@@ -38,12 +38,20 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/sign_up']);
   }
 
+  onClickFindPasswordButton() {
+    this.router.navigate(['/find_password']);
+  }
+
   onClickSignInButton() {
     if (!this.validateInput(this.username, this.password)) {
       return;
     }
 
     this.captchaRef.execute();
+  }
+
+  onClickLookAroundButton() {
+    this.router.navigate(['/gallery']);
   }
 
   doSignIn() {
@@ -68,8 +76,8 @@ export class MainPageComponent implements OnInit {
           }
           this.captchaRef.reset();
         } else {
-          alert('Sign-in successful!');
-          // this.router.navigate(['/']);
+          sessionStorage.setItem('signed_in', 'yes');
+          this.router.navigate(['/planes']);
         }
       }
     );

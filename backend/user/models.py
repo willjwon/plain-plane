@@ -18,10 +18,12 @@ class User(models.Model):
     #     self.today_reply_count = self.level.max_today_reply
 
     def decrease_today_write(self):
-        self.today_write_count -= 1
+        if self.today_write_count > 0:
+            self.today_write_count -= 1
 
     def decrease_today_reply(self):
-        self.today_reply_count -= 1
+        if self.today_reply_count > 0:
+            self.today_reply_count -= 1
 
     def increase_likes(self):
         self.total_likes += 1
@@ -32,4 +34,3 @@ class User(models.Model):
     # TODO: Implement methods after adding Level field
     # def set_level(self):
     #     # level-up logic
-

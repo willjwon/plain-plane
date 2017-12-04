@@ -59,7 +59,7 @@ class PlaneTestCase(TestCase):
         response = self.client.get('/api/plane/6/')
         data = json.loads(response.content.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data['author'], 1)
+        self.assertEqual(data['author_id'], 1)
         self.assertEqual(data['content'], 'I hate him')
         self.assertEqual(data['tag'], '#love')
 
@@ -77,7 +77,7 @@ class PlaneTestCase(TestCase):
         response = self.client.get('/api/plane/1/')
         data = json.loads(response.content.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data['author'], 1)
+        self.assertEqual(data['author_id'], 1)
         self.assertEqual(data['content'], 'I am so sad')
         self.assertEqual(data['tag'], '#exam')
 
