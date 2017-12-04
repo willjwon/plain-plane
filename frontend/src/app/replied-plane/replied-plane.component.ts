@@ -60,6 +60,7 @@ export class RepliedPlaneComponent implements OnInit {
         if (response === 200) {
           alert('Successfully reported.');
           this.router.navigate(['/my_page']);
+          this.replyService.deleteReply(this.reply.reply_id);
         } else {
           alert('An error occurred. Please try again.');
         }

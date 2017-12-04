@@ -83,3 +83,14 @@ class ReplyViewSet(viewsets.ModelViewSet):
         reply.reply_author.increase_likes()
         reply.reply_author.save()
         return Response(status=status.HTTP_200_OK)
+
+    @list_route(url_path="delete", methods=['put'])  # , permission_classes=[IsAuthenticated])
+    def like_reply(self, request):
+        req_data = request.data
+        plane_id = req_data['reply_id']
+        try:
+            reply = Reply.objects.get(id=plane_id)
+        except Reply.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        reply.delete()
+        return Response(status=status.HTTP_200_OK)

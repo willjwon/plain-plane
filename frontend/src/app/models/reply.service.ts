@@ -69,4 +69,17 @@ export class ReplyService {
         return Promise.resolve(e.status);
       });
   }
+
+  deleteReply(replyId: number): Promise<number> {
+    const dataToSend = {
+      'reply_id': replyId
+    };
+
+    return this.http.put('/api/reply/delete/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch(e => {
+        return Promise.resolve(e.status);
+      });
+  }
 }
