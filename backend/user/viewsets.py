@@ -12,6 +12,7 @@ from django.core.mail import EmailMessage
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 from .tokens import email_verification_token
+import datetime
 import json
 import requests
 import random
@@ -73,6 +74,9 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             # login succeeded
             login(request, user)
+            signed_in_user = user_model.User.objects.get(id=username).user
+            signed_in_user.last_sign_in_date = datetime.datetime.now()
+            signed_in_user.save()
             return Response({'success': True, 'error-code': 0})
 
     @list_route(url_path='sign_up', methods=['post'])
@@ -188,6 +192,10 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(url_path='get', permission_classes=[IsAuthenticated])
     def get_signed_in_user(self, request):
         user = user_model.User.objects.get(id=request.user.id).user
+        if datetime.datetime.now() > user.last_sign_in_date:
+            user.reset_today_count()
+            user.last_sign_in_date = datetime.datetime.now()
+            user.save()
         user_dict = model_to_dict(user)
         user_dict['username'] = user.user.username
         del user_dict['id']

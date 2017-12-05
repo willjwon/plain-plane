@@ -4,6 +4,7 @@ from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 import django.contrib.auth.models as user_model
+import datetime
 from .models import Plane
 
 
@@ -95,7 +96,11 @@ class PlaneViewSet(viewsets.ModelViewSet):
         for random_plane in random_planes:
             if random_plane.is_reported or random_plane.is_replied or random_plane.author.user == request.user:
                 continue
-            
+
+            if datetime.datetime.now() > random_plane.expiration_date:
+                random_plane.delete()
+                continue
+
             d = model_to_dict(random_plane)
             plane = dict()
             plane['author_id'] = ""

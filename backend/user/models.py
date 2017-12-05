@@ -1,6 +1,7 @@
 from django.db import models
 import django.contrib.auth.models as user_model
 from level.models import Level
+from datetime import date
 
 
 class User(models.Model):
@@ -10,6 +11,7 @@ class User(models.Model):
     today_write_count = models.IntegerField()
     today_reply_count = models.IntegerField()
     total_likes = models.IntegerField()
+    last_sign_in_date = models.DateField(default=date.today)
 
     # def initialize_today_write(self):
     #     self.today_write_count = self.level.max_today_write
@@ -24,6 +26,10 @@ class User(models.Model):
     def decrease_today_reply(self):
         if self.today_reply_count > 0:
             self.today_reply_count -= 1
+
+    def reset_today_count(self):
+        self.today_write_count = 0
+        self.today_reply_count = 0
 
     def increase_likes(self):
         self.total_likes += 1

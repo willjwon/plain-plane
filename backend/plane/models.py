@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import User
 import json
+import datetime
 
 
 class Plane(models.Model):
@@ -13,7 +14,7 @@ class Plane(models.Model):
 
     content = models.TextField()
     
-    expiration_date = models.IntegerField(default=0)
+    expiration_date = models.DateField(default=datetime.date.today)
 
     is_replied = models.BooleanField(default=False)
     is_reported = models.BooleanField(default=False)
@@ -40,7 +41,7 @@ class Plane(models.Model):
 
     # TODO: set expiration_date by level
     def set_expiration_date(self):
-        self.expiration_date = 10
+        self.expiration_date = datetime.datetime.now()
 
     def set_is_replied(self, is_replied):
         self.is_replied = is_replied
