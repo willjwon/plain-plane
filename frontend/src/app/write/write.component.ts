@@ -45,7 +45,7 @@ export class WriteComponent implements OnInit {
 
   onClickChangeSkyButton() {
     // TODO: Implement
-    alert('Change sky!');
+    alert('Sorry. NOT IMPLEMENTED until now!');
   }
 
   onClickFoldButton() {

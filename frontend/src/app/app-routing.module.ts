@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent, canActivate: [AuthGuardSignedOutService], pathMatch: 'full' },
   { path: 'find_password', component: FindPasswordComponent, canActivate: [AuthGuardSignedOutService], pathMatch: 'full' },
   { path: 'planes', component: PlanesComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
-  { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
+  // { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'plane/:id', component: ReplyComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
   // { path: 'gallery/post', component: PhotoPostComponent, pathMatch: 'full' },

@@ -4,6 +4,7 @@ from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 import django.contrib.auth.models as user_model
+from user.models import User
 from .models import Reply
 
 
@@ -16,7 +17,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         original_tag = req_data['original_tag']
         content = req_data['content']
 
-        plane_author = user_model.User.objects.get(id=plane_author_id).user
+        plane_author = User.objects.get(id=plane_author_id)
         reply_author = user_model.User.objects.get(id=request.user.id).user
 
         Reply.objects.create(plane_author=plane_author,
@@ -36,11 +37,12 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if reply.plane_author_id != request.user.id:
+        if reply.plane_author_id != request.user.user.id:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         result = model_to_dict(reply)
         result['reply_id'] = result.pop('id')
+        result['level'] = reply.reply_author.level.flavor
         return Response(result)
 
     @list_route(url_path="user/(?P<user_id>[0-9]+)", permission_classes=[IsAuthenticated])
@@ -49,11 +51,12 @@ class ReplyViewSet(viewsets.ModelViewSet):
             return Response([])
 
         user = user_model.User.objects.get(id=user_id).user
-
         replies = user.replies
+
         result = []
         for reply in replies.values():
             reply['reply_id'] = reply.pop('id')
+            reply['level'] = user_model.User.objects.get(id=reply['reply_author_id']).user.level.flavor
             result.append(reply)
         return Response(result)
 
@@ -66,7 +69,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if reply.plane_author_id != request.user.id:
+        if reply.plane_author_id != request.user.user.id:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         reply.is_reported = True
@@ -84,7 +87,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if reply.plane_author_id != request.user.id:
+        if reply.plane_author_id != request.user.user.id:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         if reply.liked:
@@ -106,7 +109,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         except Reply.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if reply.plane_author_id != request.user.id:
+        if reply.plane_author_id != request.user.user.id:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         reply.delete()

@@ -1,5 +1,7 @@
 from django.db import models
 from user.models import User
+from level.models import Level
+from django.utils.timezone import now
 import json
 import datetime
 
@@ -13,8 +15,7 @@ class Plane(models.Model):
     )
 
     content = models.TextField()
-    
-    expiration_date = models.DateField(default=datetime.date.today)
+    expiration_date = models.DateField(default=now)
 
     is_replied = models.BooleanField(default=False)
     is_reported = models.BooleanField(default=False)
@@ -39,9 +40,8 @@ class Plane(models.Model):
 
     # TODO: photo field as foreign key
 
-    # TODO: set expiration_date by level
     def set_expiration_date(self):
-        self.expiration_date = datetime.datetime.now()
+        self.expiration_date = datetime.datetime.now() + self.author.level.lifespan_in_date_form()
 
     def set_is_replied(self, is_replied):
         self.is_replied = is_replied

@@ -11,6 +11,7 @@ import django.contrib.auth.models as user_model
 from django.core.mail import EmailMessage
 from rest_framework.permissions import IsAuthenticated
 from .models import User
+from level.models import Level
 from .tokens import email_verification_token
 import datetime
 import json
@@ -74,7 +75,7 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             # login succeeded
             login(request, user)
-            signed_in_user = user_model.User.objects.get(id=username).user
+            signed_in_user = user_model.User.objects.get(username=username).user
             signed_in_user.last_sign_in_date = datetime.datetime.now()
             signed_in_user.save()
             return Response({'success': True, 'error-code': 0})
@@ -112,9 +113,12 @@ class UserViewSet(viewsets.ModelViewSet):
             # TODO: Change User Creation. Maybe Using the level, and call initializers after initializing and save?
             user = User(user=django_user,
                         email_verified=False,
-                        today_write_count=10,
-                        today_reply_count=10,
                         total_likes=0)
+            level = Level.objects.get(flavor="Plain")
+            user.level = level
+            user.initialize_today_write()
+            user.initialize_today_reply()
+            user.last_sign_in_date = datetime.datetime.now()
             user.save()
 
             # if email field is not empty, send the verification email.
@@ -192,12 +196,15 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(url_path='get', permission_classes=[IsAuthenticated])
     def get_signed_in_user(self, request):
         user = user_model.User.objects.get(id=request.user.id).user
-        if datetime.datetime.now() > user.last_sign_in_date:
-            user.reset_today_count()
+        level_changed = user.set_level()
+        if datetime.datetime.now().date() > user.last_sign_in_date or level_changed:
+            user.initialize_today_write()
+            user.initialize_today_reply()
             user.last_sign_in_date = datetime.datetime.now()
             user.save()
         user_dict = model_to_dict(user)
         user_dict['username'] = user.user.username
+        user_dict['level'] = user.level.flavor
         del user_dict['id']
         return Response(user_dict)
 

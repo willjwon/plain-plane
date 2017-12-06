@@ -32,7 +32,8 @@ export class PlaneService {
           author_id: -1,
           plane_id: -1,
           content: '',
-          tag: ''
+          tag: '',
+          level: ''
         });
       });
   }

@@ -50,6 +50,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
             result_plane['content'] = d['content']
             result_plane['tag'] = d['tag']
             result_plane['plane_id'] = d['id']
+            result_plane['level'] = plane.author.level.flavor
 
             user = user_model.User.objects.get(id=request.user.id).user
             user.decrease_today_reply()
@@ -97,7 +98,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
             if random_plane.is_reported or random_plane.is_replied or random_plane.author.user == request.user:
                 continue
 
-            if datetime.datetime.now() > random_plane.expiration_date:
+            if datetime.datetime.now().date() > random_plane.expiration_date:
                 random_plane.delete()
                 continue
 
@@ -107,6 +108,7 @@ class PlaneViewSet(viewsets.ModelViewSet):
             plane['content'] = ""
             plane['tag'] = d['tag']
             plane['plane_id'] = d['id']
+            plane['level'] = random_plane.author.level.flavor
             dict_random_planes.append(plane)
 
             if len(dict_random_planes) >= 6:

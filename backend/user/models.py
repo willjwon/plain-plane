@@ -1,23 +1,23 @@
 from django.db import models
 import django.contrib.auth.models as user_model
 from level.models import Level
-from datetime import date
+from django.utils.timezone import now
 
 
 class User(models.Model):
     user = models.OneToOneField(user_model.User, on_delete=models.CASCADE, related_name='user')
     email_verified = models.BooleanField(default=False)
-    # level = models.ForeignKey(Level, related_name='users')
-    today_write_count = models.IntegerField()
-    today_reply_count = models.IntegerField()
-    total_likes = models.IntegerField()
-    last_sign_in_date = models.DateField(default=date.today)
+    level = models.ForeignKey(Level, related_name='+')
+    today_write_count = models.IntegerField(default=0)
+    today_reply_count = models.IntegerField(default=0)
+    total_likes = models.IntegerField(default=0)
+    last_sign_in_date = models.DateField(default=now)
 
-    # def initialize_today_write(self):
-    #     self.today_write_count = self.level.max_today_write
-    #
-    # def initialize_today_reply(self):
-    #     self.today_reply_count = self.level.max_today_reply
+    def initialize_today_write(self):
+        self.today_write_count = self.level.max_today_write
+
+    def initialize_today_reply(self):
+        self.today_reply_count = self.level.max_today_reply
 
     def decrease_today_write(self):
         if self.today_write_count > 0:
@@ -27,16 +27,21 @@ class User(models.Model):
         if self.today_reply_count > 0:
             self.today_reply_count -= 1
 
-    def reset_today_count(self):
-        self.today_write_count = 0
-        self.today_reply_count = 0
-
     def increase_likes(self):
         self.total_likes += 1
 
     def decrease_likes(self):
         self.total_likes -= 1
 
-    # TODO: Implement methods after adding Level field
-    # def set_level(self):
-    #     # level-up logic
+    def set_level(self):
+        if self.total_likes <= -10:
+            self.level = Level.objects.get(id="SoySauce")
+            return True
+
+        level_changed = False
+        while self.total_likes >= self.level.next_level_likes:
+            self.level = Level.get_next_level(self.level)
+            level_changed = True
+
+        return level_changed
+
