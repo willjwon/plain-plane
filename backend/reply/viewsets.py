@@ -56,7 +56,7 @@ class ReplyViewSet(viewsets.ModelViewSet):
         result = []
         for reply in replies.values():
             reply['reply_id'] = reply.pop('id')
-            reply['level'] = user_model.User.objects.get(id=reply['reply_author_id']).user.level.flavor
+            reply['level'] = User.objects.get(id=reply['reply_author_id']).level.flavor
             result.append(reply)
         return Response(result)
 
