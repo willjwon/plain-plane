@@ -26,7 +26,7 @@ class PlaneTestCase(TestCase):
         plane1.save()
 
         plane2 = Plane(author=author1, content='I am tired', is_replied=False, is_reported=False,
-                       latitude=37.0, longitude=128.0, tag='#love', has_location=True)
+                       latitude=37.010706, longitude=127.879217, tag='#love', has_location=True)
         plane2.set_expiration_date()
         plane2.save()
 
@@ -36,12 +36,12 @@ class PlaneTestCase(TestCase):
         plane3.save()
 
         plane4 = Plane(author=author2, content='I miss my friend', is_replied=False, is_reported=False,
-                       tag='#diet', has_location=False)
+                       latitude=37.0, longitude=128.0, tag='#diet', has_location=True)
         plane4.set_expiration_date()
         plane4.save()
 
         plane5 = Plane(author=author3, content='Diet', is_replied=False, is_reported=False,
-                       latitude=37.0, longitude=128.0, tag='#exam', has_location=True)
+                       latitude=37.010706, longitude=127.879217, tag='#exam', has_location=True)
         plane5.set_expiration_date()
         plane5.save()
 
@@ -108,6 +108,38 @@ class PlaneTestCase(TestCase):
         self.assertEqual(len(data), 5)  # if the number of planes is more than 6
 
         response = self.client.post('/api/plane/random/',
+                                    json.dumps({'author_id': 5, 'content': 'I hate him', 'tag': '#love',
+                                                'latitude': 37.0, 'longitude': 128.0, 'has_location': True}),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 405)
+
+    def test_get_near_planes(self):
+        self.client.login(username='baryberri', password='1234')
+        response = self.client.post('/api/plane/location/5/',
+                                    json.dumps({'latitude': 36.979061, 'longitude': 127.993911}),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get('/api/plane/location/5/')
+        data = json.loads(response.content.decode())
+        self.assertEqual(len(data), 1)  # if the number of planes is less than 6
+
+        author3 = User.objects.get(id=3)
+        Plane.objects.create(author=author3, content='Diet2', is_replied=False, is_reported=False,
+                             latitude=36.979332, longitude=127.970564, tag="#hello", has_location=True)
+        Plane.objects.create(author=author3, content='Diet3', is_replied=False, is_reported=False,
+                             latitude=36.979332, longitude=127.970564, tag="#bye", has_location=True)
+
+        # post location and then get planes
+        response = self.client.post('/api/plane/location/5/',
+                                    json.dumps({'latitude': 36.979061, 'longitude': 127.993911}),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        response = self.client.get('/api/plane/location/5/')
+        data = json.loads(response.content.decode())
+        self.assertEqual(len(data), 3)  # if the number of planes is more than 6
+
+        response = self.client.put('/api/plane/location/5/',
                                     json.dumps({'author_id': 5, 'content': 'I hate him', 'tag': '#love',
                                                 'latitude': 37.0, 'longitude': 128.0, 'has_location': True}),
                                     content_type='application/json')
