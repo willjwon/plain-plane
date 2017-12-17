@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { CookieXSRFStrategy, HttpModule, XSRFStrategy } from '@angular/http';
 
@@ -31,6 +32,7 @@ import { ReplyComponent } from './reply/reply.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
+import { PlaneAnimationComponent } from './plane-animation/plane-animation.component';
 
 
 @NgModule({
@@ -48,10 +50,12 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     ReplyComponent,
     WriteComponent,
     MyPageComponent,
-    RepliedPlaneComponent
+    RepliedPlaneComponent,
+    PlaneAnimationComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,

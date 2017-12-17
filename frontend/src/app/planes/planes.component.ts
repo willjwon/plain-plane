@@ -46,10 +46,6 @@ export class PlanesComponent implements OnInit {
     return num < this.planes.length;
   }
 
-  checkLocation(lat: number, lon: number): boolean {
-    return !(lat<0 && lon<0);
-  }
-
   onClickPlane(selectedPlane: Plane) {
     this.userService.getUser().then(user => {
       if (user.today_reply_count <= 0) {

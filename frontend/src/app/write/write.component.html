@@ -10,7 +10,7 @@
   <div class="container-page-title w-container">
     <h1 class="page-title">Write</h1>
   </div>
-  <div class="container-paper w-container">
+  <div class="container-paper w-container" [@slideInOut]="paperState">
     <div class="form-block-paper w-form">
       <form id="email-form" name="email-form" data-name="Email Form">
         <label for="Write-Content" class="field-label-paper">Content</label>
@@ -23,5 +23,8 @@
           <a (click)="onClickFoldButton()" class="w-button write-button">Fold</a></div>
       </form>
     </div>
+  </div>
+  <div [@slideInOut]="planeState">
+    <img src="assets/images/plane_animation_plain.png" width="300">
   </div>
 </div>
