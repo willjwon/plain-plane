@@ -44,19 +44,6 @@ describe('ReplyComponent', () => {
     comp = fixture.componentInstance;
   }));
 
-  it('should have the plane', fakeAsync(() => {
-    // TODO: switchMap
-    const app = fixture.debugElement.componentInstance;
-    spyOn(window, 'confirm').and.callFake(function () {
-      return true;
-    });
-    app.ngOnInit();
-    tick();
-    expect(window.confirm).toHaveBeenCalled();
-    expect(fixture.debugElement.query(By.css('.paragraph-reply-content'))).not.toBeNull();
-    expect(app.plane.plane_id).toBe(0);
-  }));
-
   it('should go back to previous page', fakeAsync(() => {
     const app = fixture.debugElement.componentInstance;
     spyOn(window, 'confirm').and.callFake(function () {

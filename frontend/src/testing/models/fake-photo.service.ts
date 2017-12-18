@@ -1,5 +1,3 @@
-import {current} from "codelyzer/util/syntaxKind";
-
 export { Photo }        from '../../app/models/photo';
 export { PhotoService } from '../../app/models/photo.service';
 

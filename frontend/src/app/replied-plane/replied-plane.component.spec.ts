@@ -34,14 +34,6 @@ describe('RepliedPlaneComponent', () => {
     comp = fixture.componentInstance;
   }));
 
-  it('should have the reply', fakeAsync(() => {
-    // TODO: switchMap
-    const app = fixture.debugElement.componentInstance;
-    app.ngOnInit();
-    tick();
-    expect(app.reply.reply_id).toBe(1);
-  }));
-
   it('should alert the like', fakeAsync(() => {
     const app = fixture.debugElement.componentInstance;
     spyOn(window, 'alert');
