@@ -109,4 +109,18 @@ export class UserService {
       .then(response => response.status)
       .catch(UserService.handleError);
   }
+
+  changePassword(currentPassword: string, newPassword: string): Promise<number> {
+    const dataToSend = {
+      'current_password': currentPassword,
+      'new_password': newPassword
+    };
+
+    return this.http.post('/api/user/new_password/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch (e => {
+        return Promise.resolve(e.status);
+      });
+  }
 }
