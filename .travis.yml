@@ -12,7 +12,7 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django coverage djangorestframework Pillow requests
+        - pip3 install django coverage djangorestframework Pillow requests watson-developer-cloud==0.26.1
       before_script:
         - cd backend
         - python3 manage.py makemigrations
