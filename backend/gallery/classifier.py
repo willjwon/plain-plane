@@ -16,7 +16,7 @@ def isSky(image):
                 ad = score['score']
             else:
                 sky = score['score']
-        if ad < 0.1 and sky > 0.5:
+        if ad < 0.1 and sky > 0.4:
             return True
         else:
             return False
