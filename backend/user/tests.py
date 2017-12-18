@@ -1,7 +1,9 @@
 from django.test import TestCase, Client
 import django.contrib.auth.models as user_model
 from .models import User
+from level.models import Level
 from .viewsets import UserViewSet
+from .tokens import PasswordResetTokenGenerator
 import json
 
 
@@ -10,7 +12,10 @@ class UserTest(TestCase):
         user = user_model.User(username="testusername", password="testpassword")
         user.save()
 
-        self.user = User(user=user, today_write_count=10, today_reply_count=10, total_likes=10)
+        level = Level(flavor='flavor', max_today_reply=1, max_today_write=2, next_level_likes=3, plane_life_span=4)
+        level.save()
+
+        self.user = User(user=user, today_write_count=10, today_reply_count=10, total_likes=10, level=level)
         self.user.save()
         self.client = Client()
 
@@ -93,4 +98,11 @@ class UserTest(TestCase):
     def test_sign_out(self):
         response = self.client.get('/api/user/sign_out/')
         self.assertEqual(response.status_code, 200)
+
+    def test_token_generator(self):
+        result = PasswordResetTokenGenerator()._make_hash_value(self.user.user, 0)
+        self.assertIsNotNone(result)
+
+
+
 
