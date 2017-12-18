@@ -47,7 +47,8 @@ export class ReplyComponent implements OnInit {
               }
             });
         } else {
-          this.router.navigate(['/planes']);
+          // this.router.navigate(['/planes']);
+          this.location.back();
         }
       }
     });

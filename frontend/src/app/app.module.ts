@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { CookieXSRFStrategy, HttpModule, XSRFStrategy } from '@angular/http';
 
@@ -52,10 +53,11 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     WriteComponent,
     MyPageComponent,
     RepliedPlaneComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,

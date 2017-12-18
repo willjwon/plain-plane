@@ -4,7 +4,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { Reply } from '../models/reply';
-import { UserService } from '../models/user.service';
 import { ReplyService } from '../models/reply.service';
 
 @Component({
