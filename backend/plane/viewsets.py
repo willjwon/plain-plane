@@ -12,6 +12,7 @@ from math import radians, cos, sin, asin, sqrt
 latitude = -1.0
 longitude = -1.0
 
+
 class PlaneViewSet(viewsets.ModelViewSet):
 
     @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
@@ -138,11 +139,11 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
     @list_route(url_path="location/(?P<radius>[0-9]+)", methods=['get', 'post'], permission_classes=[IsAuthenticated])
     def plane_location(self, request, radius):
-
+        global latitude
+        global longitude
         radius = float(radius)
         if request.method == "POST":
             req_data = request.data
-            global latitude, longitude
             latitude = req_data['latitude']
             longitude = req_data['longitude']
             return Response(status=status.HTTP_200_OK)
@@ -151,7 +152,6 @@ class PlaneViewSet(viewsets.ModelViewSet):
             # Serialize randomPlanes
             dict_random_planes = []
 
-            global latitude, longitude
             ids = [plane.id for plane in Plane.objects.filter(has_location=True) if self.distance(latitude, longitude, plane.latitude, plane.longitude) <= radius]
             near_planes = Plane.objects.filter(id__in=ids).order_by('?')
             for near_plane in near_planes:
@@ -172,7 +172,6 @@ class PlaneViewSet(viewsets.ModelViewSet):
             latitude = -1.0
             longitude = -1.0
             return Response(dict_random_planes)
-
 
     # Calculate the great circle distance between two points on the earth
     def distance(self, lat1, lon1, lat2, lon2):
