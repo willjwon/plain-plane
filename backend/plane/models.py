@@ -11,7 +11,7 @@ class Plane(models.Model):
         User,
         related_name='planes',
         null=False,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
     )
 
     content = models.TextField()

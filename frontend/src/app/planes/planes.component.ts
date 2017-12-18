@@ -50,7 +50,7 @@ export class PlanesComponent implements OnInit {
     const plainName = plane.level.toLowerCase();
     return `assets/images/plane_${plainName}.png`;
   }
-  
+
   onClickPlane(selectedPlane: Plane) {
     this.userService.getUser().then(user => {
       if (user.today_reply_count <= 0) {
