@@ -108,6 +108,8 @@ export class WriteComponent implements OnInit {
           this.router.navigate(['/planes']);
         } else {
           alert('An error occured. Please try again!');
+          this.paperState = 'paperIn';
+          this.planeState = 'planeOut';
         }
       });
     }, 3500);

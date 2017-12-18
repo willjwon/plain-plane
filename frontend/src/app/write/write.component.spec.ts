@@ -79,7 +79,13 @@ describe('WriteComponent', () => {
     app.content = 'aa';
     app.tag = 'aa';
     app.onClickFoldButton();
-    tick();
+    tick(2000);
+    expect(app.planeState).toBe('planeIn');
+    expect(app.paperState).toBe('paperOut');
+    tick(2500);
+    expect(app.planeState).toBe('planeAccel');
+    tick(3000);
+    expect(router.navigate).toHaveBeenCalledTimes(2);
   }));
 });
 
