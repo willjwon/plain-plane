@@ -14,9 +14,6 @@ matrix:
       python: 3.6
       cache:
         pip3: true
-      before_install:
-        - sudo apt-get install mysql-server
-        - sudo service mysql start
       install:
         - pip3 install django coverage djangorestframework Pillow requests pymysql mysqlclient
       before_script:
