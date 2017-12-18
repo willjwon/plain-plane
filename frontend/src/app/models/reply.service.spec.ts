@@ -7,12 +7,12 @@ import { Reply } from './reply';
 import { ReplyService } from './reply.service';
 
 const user1Replies = [
-  { reply_id: 1, plane_author: 1, reply_author: 2, content: 'reply1', original_content: 'aaa', original_tag: 'aaa', is_reported: false},
-  { reply_id: 2, plane_author: 1, reply_author: 3, content: 'reply2', original_content: 'bbb', original_tag: 'bbb', is_reported: false},
+  { reply_id: 1, plane_author: 1, reply_author: 2, content: 'reply1', original_content: 'aaa', original_tag: 'aaa', is_reported: false, level: 'Plain'},
+  { reply_id: 2, plane_author: 1, reply_author: 3, content: 'reply2', original_content: 'bbb', original_tag: 'bbb', is_reported: false, level: 'Plain'},
 ] as Reply[];
 
-const replyData = { reply_id: 1, plane_author: 1, reply_author: 2, content: 'reply1', original_content: 'aaa', original_tag: 'aaa', is_reported: false} as Reply;
-const planeData = { author_id: 1, plane_id: 0, content: 'aaa', tag: 'aaa' } as Plane;
+const replyData = { reply_id: 1, plane_author: 1, reply_author: 2, content: 'reply1', original_content: 'aaa', original_tag: 'aaa', is_reported: false, level: 'Plain'} as Reply;
+const planeData = { author_id: 1, plane_id: 0, content: 'aaa', tag: 'aaa', level: 'Plain' } as Plane;
 
 describe('ReplyService (mockBackend)', () => {
 

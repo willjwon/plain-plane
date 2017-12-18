@@ -82,10 +82,12 @@ export class WriteComponent implements OnInit {
     this.router.navigate(['/planes']);
   }
 
+  /*
   onClickChangeSkyButton() {
     // TODO: Implement
     alert('Sorry. NOT IMPLEMENTED until now!');
   }
+  */
 
   onClickFoldButton() {
     // TODO: implement here

@@ -69,9 +69,9 @@ let router = {
 
 class FakePlaneService {
   static fakePlanes: Plane[] = [
-    { author_id: 1, plane_id: 0, content: 'aaa', tag: 'study'},
-    { author_id: 2, plane_id: 1, content: 'bbb', tag: 'work'},
-    { author_id: 1, plane_id: 2, content: 'ccc', tag: 'good'},
+    { author_id: 1, plane_id: 0, content: 'aaa', tag: 'study', level: 'Plain'},
+    { author_id: 2, plane_id: 1, content: 'bbb', tag: 'work', level: 'Plain'},
+    { author_id: 1, plane_id: 2, content: 'ccc', tag: 'good', level: 'Plain'},
   ];
 
   getRandomPlanes(): Promise<Plane[]> {
@@ -85,8 +85,8 @@ class FakePlaneService {
 
 class FakeUserService {
   static fakeUsers: User[] = [
-    { user_id: 1, username: 'aa', today_reply_count: 3, today_write_count: 3, total_likes: 1 },
-    { user_id: 2, username: 'bb', today_reply_count: 0, today_write_count: 3, total_likes: 1 },
+    { user_id: 1, username: 'aa', level: 'Plain', today_reply_count: 3, today_write_count: 3, total_likes: 1 },
+    { user_id: 2, username: 'bb', level: 'Plain', today_reply_count: 0, today_write_count: 3, total_likes: 1 },
   ];
 
   getUser(): Promise<User> {

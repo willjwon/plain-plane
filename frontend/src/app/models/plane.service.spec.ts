@@ -6,17 +6,17 @@ import { Plane } from './plane';
 import { PlaneService } from './plane.service';
 
 const planesData = [
-  { author_id: 1, plane_id: 0, content: 'Windstorm', tag: 'love' },
-  { author_id: 1, plane_id: 1, content: 'Bombasto', tag: 'study' },
-  { author_id: 2, plane_id: 2, content: 'Magneta', tag: 'exam' },
-  { author_id: 3, plane_id: 3, content: 'Tornado', tag: 'love' }
+  { author_id: 1, plane_id: 0, content: 'Windstorm', tag: 'love', level: 'Plain' },
+  { author_id: 1, plane_id: 1, content: 'Bombasto', tag: 'study', level: 'Plain' },
+  { author_id: 2, plane_id: 2, content: 'Magneta', tag: 'exam', level: 'Plain' },
+  { author_id: 3, plane_id: 3, content: 'Tornado', tag: 'love', level: 'Plain' }
 ] as Plane[]; // a const planes data.
 
 const dataToSend = { content: 'data', tag: 'aaa', has_location: false };
 const dataWithLocation = { content: 'data', tag: 'aaa', has_location: true, latitude: 37.0, longitude: 128.0 };
 const location = { latitude: 37.0, longitude: 128.0 };
 
-const planeData = { author_id: 1, plane_id: 0, content: 'Windstorm', tag: 'love' } as Plane; // a const plane data.
+const planeData = { author_id: 1, plane_id: 0, content: 'Windstorm', tag: 'love', level: 'Plain' } as Plane; // a const plane data.
 
 describe('PlaneService (mockBackend)', () => {
 
