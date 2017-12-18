@@ -38,8 +38,8 @@ export class PhotoPostComponent implements OnInit {
 
     if (fileBrowser.files && fileBrowser.files[0]) {
       let fileSize = fileBrowser.files[0].size;
-      let fileType = fileBrowser.files[0].name.substring(fileBrowser.files[0].name.length - 3);
-
+      let splittedFileName = fileBrowser.files[0].name.split(".")
+      let fileType = splittedFileName[splittedFileName.length - 1]
       if (this.image_extension.indexOf(fileType) == -1) {
         alert('The file is not an image');
         console.log("type limit");
