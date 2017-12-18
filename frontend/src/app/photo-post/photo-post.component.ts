@@ -10,7 +10,7 @@ import { UserService } from '../models/user.service';
 })
 export class PhotoPostComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
-  buttonStatus: string = "Upload";
+  clicked: boolean = false;
 
   constructor(
     private router: Router,
@@ -42,8 +42,7 @@ export class PhotoPostComponent implements OnInit {
   }
 
   private upload() {
-    if (this.buttonStatus == "Upload") {
-      this.buttonStatus = "Testing";
+    if (!this.clicked) {
       this.upload_observable().subscribe(
         response => {
           if (response == "201") {
@@ -51,7 +50,7 @@ export class PhotoPostComponent implements OnInit {
           }
           else {
             alert('Our detective plane says that it is not sky!');
-            this.buttonStatus = "Upload";
+            this.clicked = false;
           }
         });
     }
@@ -77,6 +76,7 @@ export class PhotoPostComponent implements OnInit {
           return;
         }
 
+        this.clicked = true;
         const formData = new FormData();
         formData.append('author_id', sessionStorage.getItem('user_id'));
         formData.append('image', fileBrowser.files[0]);
