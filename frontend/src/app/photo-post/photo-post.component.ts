@@ -18,10 +18,7 @@ export class PhotoPostComponent implements OnInit {
 
   url: string;
   tag = '';
-
-  image_extension = ['jpg', 'jpeg', 'gif', 'png', 'apng', 'svg', 'bmp',
-                     'JPG', 'JPEG', 'GIF', 'PNG', 'APNG', 'SVG', 'BMP', ];
-
+  
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -46,11 +43,6 @@ export class PhotoPostComponent implements OnInit {
       let fileSize = fileBrowser.files[0].size;
       let splittedFileName = fileBrowser.files[0].name.split(".")
       let fileType = splittedFileName[splittedFileName.length - 1]
-      if (this.image_extension.indexOf(fileType) == -1) {
-        alert('The file is not an image');
-        console.log("type limit");
-        return;
-      }
 
       if (fileSize >= 2097152) {
         alert('Image size exceeds 2MB');
