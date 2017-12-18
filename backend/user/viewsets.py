@@ -61,24 +61,25 @@ class UserViewSet(viewsets.ModelViewSet):
             password = request_data['password']
             captcha_key = request_data['g-recaptcha-response']
         except KeyError:
-            return Response({'success': False, 'error-code': 1})
+            return Response({'success': False, 'user_id': -1, 'error-code': 1})
 
         # Check reCAPTCHA succeeded or not.
         if not self.check_captcha('6LdqTDcUAAAAAMg6MerfUa0BZAnpVb7NnerIfZgE', captcha_key):
-            return Response({'success': False, 'error-code': 2})
+            return Response({'success': False, 'user_id': -1, 'error-code': 2})
 
         # Check the username and password matches.
         user = authenticate(request, username=username, password=password)
         if user is None:
             # username and password doesn't match.
-            return Response({'success': False, 'error-code': 3})
+            return Response({'success': False, 'user_id': -1, 'error-code': 3})
         else:
             # login succeeded
             login(request, user)
             signed_in_user = user_model.User.objects.get(username=username).user
             signed_in_user.last_sign_in_date = datetime.datetime.now()
             signed_in_user.save()
-            return Response({'success': True, 'error-code': 0})
+            user_id = signed_in_user.user.id
+            return Response({'success': True, 'user_id': user_id, 'error-code': 0})
 
     @list_route(url_path='sign_up', methods=['post'])
     def sign_up(self, request):
