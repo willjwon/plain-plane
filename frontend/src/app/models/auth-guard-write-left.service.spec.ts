@@ -21,13 +21,13 @@ describe('AuthGuardWriteLeftService', () => {
         store = {};
       }
     };
-    spyOn(localStorage, 'getItem')
+    spyOn(sessionStorage, 'getItem')
       .and.callFake(mockSessionStorage.getItem);
-    spyOn(localStorage, 'setItem')
+    spyOn(sessionStorage, 'setItem')
       .and.callFake(mockSessionStorage.setItem);
-    spyOn(localStorage, 'removeItem')
+    spyOn(sessionStorage, 'removeItem')
       .and.callFake(mockSessionStorage.removeItem);
-    spyOn(localStorage, 'clear')
+    spyOn(sessionStorage, 'clear')
       .and.callFake(mockSessionStorage.clear);
 
     TestBed.configureTestingModule({
@@ -38,7 +38,7 @@ describe('AuthGuardWriteLeftService', () => {
   it('checks if a user is invalid',
     // inject your guard service AND Router
     fakeAsync(inject([AuthGuardWriteLeftService, Router], (auth, router) => {
-      localStorage.setItem('today_write_count', '0');
+      sessionStorage.setItem('today_write_count', '0');
       // add a spy
       spyOn(router, 'navigate');
       tick();
@@ -46,4 +46,15 @@ describe('AuthGuardWriteLeftService', () => {
       expect(router.navigate).toHaveBeenCalled();
     })
   ));
+  it('checks if a user is valid',
+    // inject your guard service AND Router
+    fakeAsync(inject([AuthGuardWriteLeftService, Router], (auth, router) => {
+        sessionStorage.setItem('today_write_count', '4');
+        // add a spy
+        spyOn(router, 'navigate');
+        tick();
+        expect(auth.canActivate()).toBe(true);
+        expect(router.navigate).not.toHaveBeenCalled();
+      })
+    ));
 });
