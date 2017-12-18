@@ -44,7 +44,7 @@ matrix:
         - npm install coveralls
         - npm install -g @angular/cli
       script:
-        - npm test
+        - ng test --code-coverage --watch false
         - ng e2e
       after_script:
         - cd ..
