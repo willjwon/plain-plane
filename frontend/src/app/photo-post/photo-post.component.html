@@ -20,7 +20,7 @@
         <textarea [(ngModel)]="tag" id="PhotoPost-Tag" name="PhotoPost-Tag" placeholder="Explain Your Photo in <10 Characters!" maxlength="10" data-name="PhotoPost Tag" class="textarea-2 w-input"></textarea>
         <div class="div-block-16">
           <a href="gallery.html" class="button-photopost w-button">Cancel</a>
-          <a (click)="upload()" class="button-photopost w-button">Upload</a>
+          <a (click)="upload()" class="button-photopost w-button">{{ buttonStatus }}</a>
         </div>
       </form>
     </div>
