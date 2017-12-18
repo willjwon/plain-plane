@@ -5,6 +5,9 @@ branches:
   - master
   - development
 
+services:
+  - mysql
+
 matrix:
   include:
     - language: python
@@ -12,9 +15,12 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django coverage djangorestframework Pillow requests
+        - pip3 install django coverage djangorestframework Pillow requests pymysql
       before_script:
         - cd backend
+        - mysql -u root -e 'CREATE DATABASE plainplane;'
+        - mysql -u root -e "CREATE USER 'swpp'@'localhost' IDENTIFIED BY 'iluvswpp';"
+        - mysql -u root -e "GRANT ALL ON * . * TO 'swpp'@'localhost';"
         - python3 manage.py makemigrations
         - python3 manage.py migrate
       script:
