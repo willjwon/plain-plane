@@ -12,7 +12,7 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django coverage djangorestframework Pillow
+        - pip3 install django coverage djangorestframework Pillow requests
       before_script:
         - cd backend
         - python3 manage.py migrate
