@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class WriteComponent implements OnInit {
   content = '';
   tag = '';
+  latitude = -1.0;
+  longitude = -1.0;
 
   constructor(private userService: UserService,
               private planeService: PlaneService,
@@ -23,6 +25,12 @@ export class WriteComponent implements OnInit {
         this.router.navigate(['/my_page']);
       }
     });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.latitude = position.coords['latitude'];
+        this.longitude = position.coords['longitude'];
+      })
+    }
   }
 
   validateInput(content: string, tag: string): boolean {
@@ -54,7 +62,7 @@ export class WriteComponent implements OnInit {
       return;
     }
 
-    this.planeService.foldNewPlane(this.content, this.tag).then(response => {
+    this.planeService.foldNewPlane(this.content, this.tag, this.latitude, this.longitude).then(response => {
       if (response === 201) {
         this.router.navigate(['/planes']);
       } else {

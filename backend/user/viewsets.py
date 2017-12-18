@@ -27,7 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
         post_data = {'secret': secret_key,
                      'response': captcha_key}
         response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=post_data)
-        response_data = json.loads(response.content)
+        response_data = json.loads(response.content.decode('utf-8'))
         return response_data['success']
 
     @staticmethod

@@ -23,6 +23,18 @@ export class PlaneService {
       .catch(PlaneService.handleError);
   }
 
+  getNearPlanes(lat: number, lon: number, radius: number): Promise<Plane[]> {
+    return this.http.post(`/api/plane/location/${radius}/`, JSON.stringify({'latitude': lat, 'longitude': lon}), {headers: this.headers})
+      .toPromise()
+      .then(() => {
+        return this.http.get(`/api/plane/location/${radius}/`)
+          .toPromise()
+          .then(response => response.json() as Plane[])
+          .catch(PlaneService.handleError)
+      })
+      .catch(PlaneService.handleError);
+  }
+
   getPlane(planeId: number): Promise<Plane> {
     return this.http.get(`/api/plane/${planeId}/`)
       .toPromise()
@@ -45,13 +57,18 @@ export class PlaneService {
       .catch(PlaneService.handleError);
   }
 
-  foldNewPlane(content: string, tag: string): Promise<number> {
+  foldNewPlane(content: string, tag: string, latitude: number, longitude: number): Promise<number> {
     // TODO: implement here with location service
-    const dataToSend = {
+    let dataToSend = {
       'content': content,
       'tag': tag,
-      'has_location': false
+      'has_location': !(latitude<0 && longitude<0)
     };
+
+    if (dataToSend['has_location']) {
+      dataToSend['latitude'] = latitude;
+      dataToSend['longitude'] = longitude;
+    }
 
     return this.http.post('/api/plane/new/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()

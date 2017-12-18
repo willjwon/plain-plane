@@ -6,9 +6,14 @@ from rest_framework.permissions import IsAuthenticated
 import django.contrib.auth.models as user_model
 import datetime
 from .models import Plane
+from math import radians, cos, sin, asin, sqrt
 
+
+latitude = -1.0
+longitude = -1.0
 
 class PlaneViewSet(viewsets.ModelViewSet):
+
     @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
     def write_plane(self, request):
         req_data = request.data
@@ -130,3 +135,52 @@ class PlaneViewSet(viewsets.ModelViewSet):
 
         plane.delete()
         return Response(status=status.HTTP_200_OK)
+
+    @list_route(url_path="location/(?P<radius>[0-9]+)", methods=['get', 'post'], permission_classes=[IsAuthenticated])
+    def plane_location(self, request, radius):
+
+        radius = float(radius)
+        if request.method == "POST":
+            req_data = request.data
+            global latitude, longitude
+            latitude = req_data['latitude']
+            longitude = req_data['longitude']
+            return Response(status=status.HTTP_200_OK)
+
+        elif request.method == "GET":
+            # Serialize randomPlanes
+            dict_random_planes = []
+
+            global latitude, longitude
+            ids = [plane.id for plane in Plane.objects.filter(has_location=True) if self.distance(latitude, longitude, plane.latitude, plane.longitude) <= radius]
+            near_planes = Plane.objects.filter(id__in=ids).order_by('?')
+            for near_plane in near_planes:
+                if near_plane.is_reported or near_plane.is_replied or near_plane.author.user == request.user:
+                    continue
+
+                d = model_to_dict(near_plane)
+                plane = dict()
+                plane['author_id'] = ""
+                plane['content'] = ""
+                plane['tag'] = d['tag']
+                plane['plane_id'] = d['id']
+                dict_random_planes.append(plane)
+
+                if len(dict_random_planes) >= 8:
+                    break
+
+            latitude = -1.0
+            longitude = -1.0
+            return Response(dict_random_planes)
+
+
+    # Calculate the great circle distance between two points on the earth
+    def distance(self, lat1, lon1, lat2, lon2):
+        radius = 6371 # km
+        lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+        c = 2 * asin(sqrt(a))
+        d = radius * c
+        return d

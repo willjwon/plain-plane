@@ -29,6 +29,7 @@ export class ReplyService {
           original_content: '',
           original_tag: '',
           content: '',
+          level: '',
           is_reported: false
         });
       });

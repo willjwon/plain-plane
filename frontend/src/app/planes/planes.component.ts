@@ -11,18 +11,29 @@ import { PlaneService } from '../models/plane.service';
 })
 export class PlanesComponent implements OnInit {
   planes: Plane[] = [];
+  latitude = -1.0;
+  longitude = -1.0;
 
   constructor(private userService: UserService,
               private planeService: PlaneService,
               private router: Router) { }
 
   ngOnInit() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.latitude = position.coords['latitude'];
+        this.longitude = position.coords['longitude'];
+      });
+    }
     this.getRandomPlanes();
   }
 
   onClickNearMeButton() {
-    alert('Sorry. NOT IMPLEMENTED until now!');
-    // this.router.navigate(['/planes_near_me']);
+    if (this.latitude < 0 && this.longitude < 0) {
+      alert('Sorry. Please turn on Location Service');
+    } else {
+      this.router.navigate(['/planes_near_me']);
+    }
   }
 
   getRandomPlanes() {
@@ -38,6 +49,10 @@ export class PlanesComponent implements OnInit {
   getImage(plane: Plane): string {
     const plainName = plane.level.toLowerCase();
     return `assets/images/plane_${plainName}.png`;
+  }
+
+  checkLocation(lat: number, lon: number): boolean {
+    return !(lat < 0 && lon < 0);
   }
 
   onClickPlane(selectedPlane: Plane) {
