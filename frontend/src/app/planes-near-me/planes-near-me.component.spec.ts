@@ -36,14 +36,14 @@ describe('PlanesNearMeComponent', () => {
   }));
 
   it('should have near planes', fakeAsync(() => {
+    // TODO: activate navigator.geolocation
     const app = fixture.debugElement.componentInstance;
-    spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake(function() {
+    spyOn(window.navigator.geolocation, 'getCurrentPosition').and.callFake(function () {
       return {coords: {latitude: 37.0, longitude: 128.0}};
     });
     app.ngOnInit();
     tick();
     expect(fixture.debugElement.query(By.css('.planes-near-me'))).not.toBeNull();
-    console.log(fixture.debugElement.query(By.css('.planes-near-me')));
     expect(app.checkPlane(0)).toBe(true);
     expect(app.checkPlane(1)).toBe(true);
     expect(app.checkPlane(2)).toBe(true);

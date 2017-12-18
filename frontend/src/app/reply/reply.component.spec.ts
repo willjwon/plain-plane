@@ -1,7 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { AppModule } from '../app.module';
 import { ReplyComponent } from './reply.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Plane } from '../models/plane';
 import { User } from '../models/user';
@@ -9,6 +9,9 @@ import { PlaneService } from '../models/plane.service';
 import { UserService } from '../models/user.service';
 import { ReplyService } from '../models/reply.service';
 import {By} from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/switchMap';
 
 describe('ReplyComponent', () => {
   let comp: ReplyComponent;
@@ -22,13 +25,14 @@ describe('ReplyComponent', () => {
         providers: [
           PlaneService,
           UserService,
-          ReplyService
+          ReplyService,
         ]
       },
       add: {
         providers: [
           {provide: Router, useValue: router},
           {provide: Location, useValue: location},
+          {provide: ActivatedRoute, useValue: {params: Observable.of({id: 0})}},
           {provide: PlaneService, useClass: FakePlaneService},
           {provide: UserService, useClass: FakeUserService},
           {provide: ReplyService, useClass: FakeReplyService},
@@ -40,6 +44,54 @@ describe('ReplyComponent', () => {
     comp = fixture.componentInstance;
   }));
 
+  it('should have the plane', fakeAsync(() => {
+    // TODO: switchMap
+    const app = fixture.debugElement.componentInstance;
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
+    app.ngOnInit();
+    tick();
+    expect(window.confirm).toHaveBeenCalled();
+    expect(fixture.debugElement.query(By.css('.paragraph-reply-content'))).not.toBeNull();
+    expect(app.plane.plane_id).toBe(0);
+  }));
+
+  it('should go back to previous page', fakeAsync(() => {
+    const app = fixture.debugElement.componentInstance;
+    spyOn(window, 'confirm').and.callFake(function () {
+      return false;
+    });
+    app.ngOnInit();
+    tick();
+    expect(location.back).toHaveBeenCalled();
+  }));
+
+  it('should report the plane', fakeAsync(() => {
+    const app = fixture.debugElement.componentInstance;
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
+    spyOn(window, 'alert')
+    app.onClickReportButton();
+    tick();
+    expect(window.confirm).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith("Successfully Reported.");
+    expect(router.navigate).toHaveBeenCalled();
+  }));
+
+  it('should cancel', fakeAsync(() => {
+    const app = fixture.debugElement.componentInstance;
+    app.onClickCancelButton();
+    tick();
+    expect(location.back).toHaveBeenCalled();
+  }));
+
+  it('should refold the reply', fakeAsync(() => {
+    const app = fixture.debugElement.componentInstance;
+    app.onClickRefoldButton();
+    expect(location.back).toHaveBeenCalled();
+  }));
 });
 
 
@@ -58,8 +110,18 @@ class FakePlaneService {
     { author_id: 1, plane_id: 2, content: 'ccc', tag: 'good'},
   ];
 
-  getRandomPlanes(): Promise<Plane[]> {
-    return Promise.resolve<Plane[]>(FakePlaneService.fakePlanes);
+  getPlane(planeId: number) {
+    return FakePlaneService.fakePlanes[0];
+  }
+
+  report(plane: Plane): Promise<number> {
+    return Promise.resolve(200);
+  }
+
+  deletePlane(planeId: number) {}
+
+  foldNewPlane(plane: Plane, content: string): Promise<number> {
+    return Promise.resolve(201);
   }
 
   private handleError(error: any): Promise<any> {
