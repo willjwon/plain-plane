@@ -15,6 +15,7 @@ matrix:
         - pip3 install django coverage djangorestframework Pillow requests
       before_script:
         - cd backend
+        - python3 manage.py makemigrations
         - python3 manage.py migrate
       script:
         - python3 manage.py test
