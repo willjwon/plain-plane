@@ -62,24 +62,78 @@ class ReplyTest(TestCase):
         response = self.client.get('/api/reply/{}/'.format(reply_id))
         self.assertEqual(response.status_code, 200)
 
+    def test_get_reply_by_user_wrong_user(self):
+        user_id = self.reply_user.id
+        self.client.login(username='replyusername', password='replypassword')
+        response = self.client.get('/api/reply/user/123/')
+        data = json.loads(response.content.decode())
+        self.assertEqual(data, [])
 
-    # def test_decrease_today_write(self):
-    #     self.user.decrease_today_write()
-    #     self.assertEqual(self.user.today_write_count, 9)
-    #
-    # def test_decrease_today_reply(self):
-    #     self.user.decrease_today_reply()
-    #     self.assertEqual(self.user.today_reply_count, 9)
-    #
-    # def test_increase_likes(self):
-    #     self.user.increase_likes()
-    #     self.assertEqual(self.user.total_likes, 11)
-    #
-    # def test_decrease_likes(self):
-    #     self.user.decrease_likes()
-    #     self.assertEqual(self.user.total_likes, 9)
-    #
-    # # test views.py
-    # def test_sign_up_wrong_method(self):
-    #     response = self.client.get('/api/user/sign_up/')
-    #     self.assertEqual(response.status_code, 405)
+    def test_get_reply_by_user(self):
+        user_id = self.user.id
+        self.client.login(username='testusername', password='testpassword')
+        response = self.client.get('/api/reply/user/{}/'.format(user_id))
+        data = json.loads(response.content.decode())
+        self.assertEqual(data[0]['content'], 'cont')
+
+    def test_report_not_exist(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': 123}
+        response = self.client.put('/api/reply/report/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
+    def test_report_wrong_user(self):
+        self.client.login(username='replyusername', password='replypassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/report/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 403)
+
+    def test_report(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/report/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+    def test_like_not_exist(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': 123}
+        response = self.client.put('/api/reply/like/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
+    def test_like_wrong_user(self):
+        self.client.login(username='replyusername', password='replypassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/like/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 403)
+
+    def test_like(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/like/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+    def test_like_duplicated(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': self.reply.id}
+        self.reply.liked = True
+        self.reply.save()
+        response = self.client.put('/api/reply/like/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 406)
+
+    def test_delete_not_exist(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': 123}
+        response = self.client.put('/api/reply/delete/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
+    def test_delete_wrong_user(self):
+        self.client.login(username='replyusername', password='replypassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/delete/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 403)
+
+    def test_delete(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'reply_id': self.reply.id}
+        response = self.client.put('/api/reply/delete/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
