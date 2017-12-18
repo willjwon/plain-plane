@@ -15,7 +15,7 @@ matrix:
       cache:
         pip3: true
       install:
-        - pip3 install django coverage djangorestframework Pillow requests pymysql mysqlclient mysql-python
+        - pip3 install django coverage djangorestframework Pillow requests pymysql mysqlclient mysql-python django-cors-headers
       before_script:
         - cd backend
         - mysql -u root -e 'CREATE DATABASE plainplane;'
