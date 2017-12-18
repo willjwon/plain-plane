@@ -63,7 +63,7 @@ class UserTest(TestCase):
         data = {'username': 'testusername'}
         response = self.client.post('/api/user/sign_in/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
-        self.assertEqual(response_data, {'success': False, 'error-code': 1, 'user_id': -1})
+        self.assertEqual(response_data, {'success': False, 'error-code': 1, 'user_id': -1, 'today_reply_count': -1, 'today_write_count': -1})
 
     def test_sign_in_wrong_method(self):
         response = self.client.get('/api/user/sign_in/')
@@ -73,7 +73,7 @@ class UserTest(TestCase):
         data = {'username': 'testusername', 'password': 'testuserpassword', 'g-recaptcha-response': 'test'}
         response = self.client.post('/api/user/sign_in/', json.dumps(data), content_type='application/json')
         response_data = json.loads(response.content.decode())
-        self.assertEqual(response_data, {'success': False, 'error-code': 2, 'user_id': -1})
+        self.assertEqual(response_data, {'success': False, 'error-code': 2, 'user_id': -1, 'today_reply_count': -1, 'today_write_count': -1})
 
     def test_check_user_available(self):
         data = {'username': 'hello'}
@@ -128,5 +128,17 @@ class UserTest(TestCase):
         self.user.total_likes = 10
         self.user.set_level()
         self.assertEqual(self.user.level.flavor, "Strawberry")
+
+    def change_password_wrong_input(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'pw': 1234}
+        response = self.client.post('/api/user/new_password/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def change_password(self):
+        self.client.login(username='testusername', password='testpassword')
+        data = {'new_password': 12345678}
+        response = self.client.post('/api/user/new_password/', json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
 

@@ -225,6 +225,20 @@ class UserViewSet(viewsets.ModelViewSet):
         del user_dict['id']
         return Response(user_dict)
 
+    @list_route(url_path='new_password', methods='post', permission_classes=[IsAuthenticated])
+    def change_password(self, request):
+        request_data = request.data
+
+        try:
+            new_password = request_data['new_password']
+        except KeyError:
+            return Response({'success': False})
+
+        user = user_model.User.objects.get(id=request.user)
+        user.set_password(new_password)
+        user.save()
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     @list_route(url_path='sign_out')
     def sign_out(self, request):
         logout(request)
