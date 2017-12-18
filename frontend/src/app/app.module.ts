@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { CookieXSRFStrategy, HttpModule, XSRFStrategy } from '@angular/http';
 
@@ -50,10 +51,11 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     ReplyComponent,
     WriteComponent,
     MyPageComponent,
-    RepliedPlaneComponent
+    RepliedPlaneComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
