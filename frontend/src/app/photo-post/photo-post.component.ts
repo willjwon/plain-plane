@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../models/user.service';
 
 @Component({
   selector: 'app-photo-post',
@@ -11,9 +12,16 @@ export class PhotoPostComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.userService.getUser().then(user => {
+      if (user.today_write_count <= 0) {
+        alert('Sorry. You ran out of today\'s write count. Please wait until tomorrow!');
+        this.router.navigate(['/gallery']);
+      }
+    });
   }
 
   url: string;
