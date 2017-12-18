@@ -18,7 +18,7 @@ matrix:
         - sudo apt-get install mysql-server
         - sudo service mysql start
       install:
-        - pip3 install django coverage djangorestframework Pillow requests pymysql
+        - pip3 install django coverage djangorestframework Pillow requests pymysql mysqlclient
       before_script:
         - cd backend
         - mysql -u root -e 'CREATE DATABASE plainplane;'
