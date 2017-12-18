@@ -12,10 +12,10 @@
   </div>
   <div class="container-paper w-container">
     {{image}}
-    <div class="div-block-14"><img src={{url}} srcset={{url}} sizes="(max-width: 767px) 90vw, (max-width: 991px) 678px, 890px" class="image-8" id="preview"></div>
+    <div class="div-block-14"><img src={{url}} srcset={{url}} sizes="(max-width: 767px) 90vw, (max-width: 991px) 678px, 890px" class="image-8"></div>
     <div class="div-block-15"></div>
     <div class="form-block w-form">
-      <input type="file" (change)="readUrl($event)" placeholder="Upload file" #fileInput>
+      <input type="file" (change)="readUrl($event)" placeholder="Upload file" accept="image/*" #fileInput>
       <form id="email-form" name="email-form" data-name="Email Form">
         <textarea [(ngModel)]="tag" id="PhotoPost-Tag" name="PhotoPost-Tag" placeholder="tag" maxlength="5000" data-name="PhotoPost Tag" class="textarea-2 w-input"></textarea>
         <div class="div-block-16">
