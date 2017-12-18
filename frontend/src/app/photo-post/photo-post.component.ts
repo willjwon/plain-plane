@@ -34,17 +34,9 @@ export class PhotoPostComponent implements OnInit {
     }
   }
 
-  validateInput(tag: string): boolean {
-    if (tag === '') {
-      alert('Tag is empty. Please fill in tag!');
-      return false;
-    }
-
-    return true;
-  }
-
   private upload() {
-    if (!this.validateInput(this.tag)) {
+    if (this.tag === '') {
+      alert('Tag is empty. Please fill in tag!');
       return;
     }
 
@@ -74,7 +66,8 @@ export class PhotoPostComponent implements OnInit {
       xhr.open('POST', '//127.0.0.1:8000/api/photo/upload/', true);
       xhr.send(formData);
     } else {
-      alert('Image is empty. Please upload an image!');
+      alert('The image field is empty. Please upload an image!');
+      return;
     }
 
     this.router.navigate(['/gallery']);
