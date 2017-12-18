@@ -41,7 +41,7 @@ export class FindPasswordComponent implements OnInit {
 
   validateEmail(email: string): boolean {
     if (email === '') {
-      alert('Email is empty. Please fill in username!');
+      alert('Email is empty. Please fill in your email!');
       return false;
     }
 
