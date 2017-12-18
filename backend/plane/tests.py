@@ -15,36 +15,36 @@ class PlaneTestCase(TestCase):
         level = Level(flavor="Plain", plane_life_span=1, max_today_write=3, max_today_reply=3, next_level_likes=10)
         level.save()
 
-        author1 = User(user=self.user1, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
-        author1.save()
+        self.author1 = User(user=self.user1, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
+        self.author1.save()
 
-        author2 = User(user=self.user2, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
-        author2.save()
+        self.author2 = User(user=self.user2, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
+        self.author2.save()
 
-        author3 = User(user=self.user3, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
-        author3.save()
+        self.author3 = User(user=self.user3, today_write_count=3, today_reply_count=3, total_likes=2, level=level)
+        self.author3.save()
 
-        self.plane1 = Plane(author=author1, content='I am so sad', is_replied=False, is_reported=False,
+        self.plane1 = Plane(author=self.author1, content='I am so sad', is_replied=False, is_reported=False,
                             latitude=37.0, longitude=128.0, tag='#exam', has_location=True)
         self.plane1.set_expiration_date()
         self.plane1.save()
 
-        self.plane2 = Plane(author=author1, content='I am tired', is_replied=False, is_reported=False,
+        self.plane2 = Plane(author=self.author1, content='I am tired', is_replied=False, is_reported=False,
                             latitude=37.010706, longitude=127.879217, tag='#love', has_location=True)
         self.plane2.set_expiration_date()
         self.plane2.save()
 
-        self.plane3 = Plane(author=author2, content='I broke up yesterday', is_replied=False,
+        self.plane3 = Plane(author=self.author2, content='I broke up yesterday', is_replied=False,
                             is_reported=False, tag='#study', has_location=False)
         self.plane3.set_expiration_date()
         self.plane3.save()
 
-        plane4 = Plane(author=author2, content='I miss my friend', is_replied=False, is_reported=False,
+        plane4 = Plane(author=self.author2, content='I miss my friend', is_replied=False, is_reported=False,
                        latitude=37.0, longitude=128.0, tag='#diet', has_location=True)
         plane4.set_expiration_date()
         plane4.save()
 
-        plane5 = Plane(author=author3, content='Diet', is_replied=False, is_reported=False,
+        plane5 = Plane(author=self.author3, content='Diet', is_replied=False, is_reported=False,
                        latitude=37.010706, longitude=127.879217, tag='#exam', has_location=True)
         plane5.set_expiration_date()
         plane5.save()
@@ -61,12 +61,6 @@ class PlaneTestCase(TestCase):
                                                                    'has_location': True}),
                                     content_type='application/json')
         self.assertEqual(response.status_code, 201)
-        response = self.client.get('/api/plane/6/')
-        data = json.loads(response.content.decode())
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(data['author_id'], 1)
-        self.assertEqual(data['content'], 'I hate him')
-        self.assertEqual(data['tag'], '#love')
 
         response = self.client.get('/api/plane/random/')
         self.assertEqual(response.status_code, 200)
@@ -86,10 +80,10 @@ class PlaneTestCase(TestCase):
 
     def test_plane_detail(self):
         self.client.login(username='user1', password='1234')
-        response = self.client.get('/api/plane/1/')
+        response = self.client.get('/api/plane/{}/'.format(self.plane1.id))
         data = json.loads(response.content.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data['author_id'], 1)
+        self.assertEqual(data['author_id'], self.author1.id)
         self.assertEqual(data['content'], 'I am so sad')
         self.assertEqual(data['tag'], '#exam')
 
@@ -108,10 +102,9 @@ class PlaneTestCase(TestCase):
         data = json.loads(response.content.decode())
         self.assertEqual(len(data), 3)  # if the number of planes is less than 6
 
-        author3 = User.objects.get(id=3)
-        Plane.objects.create(author=author3, content='Diet2', is_replied=False, is_reported=False,
+        Plane.objects.create(author=self.author3, content='Diet2', is_replied=False, is_reported=False,
                              latitude=37.0, longitude=128.0, tag="#hello")
-        Plane.objects.create(author=author3, content='Diet3', is_replied=False, is_reported=False,
+        Plane.objects.create(author=self.author3, content='Diet3', is_replied=False, is_reported=False,
                              latitude=37.0, longitude=128.0, tag="#bye")
         response = self.client.get('/api/plane/random/')
         data = json.loads(response.content.decode())
@@ -134,10 +127,9 @@ class PlaneTestCase(TestCase):
         data = json.loads(response.content.decode())
         self.assertEqual(len(data), 1)  # if the number of planes is less than 6
 
-        author3 = User.objects.get(id=3)
-        Plane.objects.create(author=author3, content='Diet2', is_replied=False, is_reported=False,
+        Plane.objects.create(author=self.author3, content='Diet2', is_replied=False, is_reported=False,
                              latitude=36.979332, longitude=127.970564, tag="#hello", has_location=True)
-        Plane.objects.create(author=author3, content='Diet3', is_replied=False, is_reported=False,
+        Plane.objects.create(author=self.author3, content='Diet3', is_replied=False, is_reported=False,
                              latitude=36.979332, longitude=127.970564, tag="#bye", has_location=True)
 
         # post location and then get planes

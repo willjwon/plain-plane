@@ -12,6 +12,7 @@ from math import radians, cos, sin, asin, sqrt
 latitude = -1.0
 longitude = -1.0
 
+
 class PlaneViewSet(viewsets.ModelViewSet):
 
     @list_route(url_path='new', methods=['post'], permission_classes=[IsAuthenticated])
@@ -171,7 +172,6 @@ class PlaneViewSet(viewsets.ModelViewSet):
             latitude = -1.0
             longitude = -1.0
             return Response(dict_random_planes)
-
 
     # Calculate the great circle distance between two points on the earth
     def distance(self, lat1, lon1, lat2, lon2):
