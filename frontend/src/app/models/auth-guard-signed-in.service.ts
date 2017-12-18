@@ -8,6 +8,7 @@ export class AuthGuardSignedInService implements CanActivate {
 
   canActivate(): boolean {
     if (sessionStorage.getItem('signed_in') !== 'yes') {
+      alert('Please sign in!');
       this.router.navigate(['/']);
       return false;
     }

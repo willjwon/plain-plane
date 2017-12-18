@@ -65,6 +65,8 @@ export class PhotoPostComponent implements OnInit {
       const xhr = new XMLHttpRequest();
       xhr.open('POST', '//127.0.0.1:8000/api/photo/upload/', true);
       xhr.send(formData);
+
+      sessionStorage.setItem('today_write_count', String(Number(sessionStorage.getItem('today_write_count')) - 1));
     } else {
       alert('The image field is empty. Please upload an image!');
       return;

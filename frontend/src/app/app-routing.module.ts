@@ -28,7 +28,7 @@ const routes: Routes = [
   // { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'plane/:id', component: ReplyComponent, canActivate: [AuthGuardSignedInService, AuthGuardReplyLeftService], pathMatch: 'full' },
   { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
-  { path: 'gallery/post', component: PhotoPostComponent, pathMatch: 'full' },
+  { path: 'gallery/post', component: PhotoPostComponent, canActivate: [AuthGuardSignedInService, AuthGuardWriteLeftService], pathMatch: 'full' },
   { path: 'gallery/:id', component: PhotoDetailComponent, pathMatch: 'full' },
   { path: 'write', component: WriteComponent, canActivate: [AuthGuardSignedInService, AuthGuardWriteLeftService], pathMatch: 'full' },
   { path: 'my_page', component: MyPageComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
