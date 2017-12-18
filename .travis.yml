@@ -4,6 +4,7 @@ branches:
   only:
   - master
   - development
+  - travis-test
 
 matrix:
   include:
