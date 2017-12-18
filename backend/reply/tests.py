@@ -15,22 +15,53 @@ class ReplyTest(TestCase):
         user = user_model.User.objects.create_user(username='testusername', password='testpassword')
         user.save()
 
+        reply_user = user_model.User.objects.create_user(username='replyusername', password='replypassword')
+        reply_user.save()
+
         self.user = User(user=user, today_write_count=10, today_reply_count=10, total_likes=10, level=level)
         self.user.save()
+
+        self.reply_user = User(user=reply_user, today_write_count=10, today_reply_count=10, total_likes=10, level=level)
+        self.reply_user.save()
 
         self.plane = Plane(author=self.user, content='content', tag='tag')
         self.plane.save()
 
+        self.reply = Reply(plane_author=self.user,
+                           reply_author=self.reply_user,
+                           original_content='orig',
+                           original_tag='orig_tag',
+                           content='cont')
+        self.reply.save()
+
         self.client = Client()
-        self.client.login(username='testusername', password='testpassword')
 
     def test_write_plane(self):
+        self.client.login(username='testusername', password='testpassword')
         data = {'plane_author': self.user.id,
                 'original_content': self.plane.content,
                 'original_tag': self.plane.tag,
                 'content': 'reply-content'}
         response = self.client.post('/api/reply/new/', json.dumps(data), content_type='application/json')
         self.assertEqual(response.status_code, 201)
+
+    def test_get_reply_not_exist(self):
+        self.client.login(username='testusername', password='testpassword')
+        response = self.client.get('/api/reply/123/')
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_reply_wrong_user(self):
+        reply_id = self.reply.id
+        self.client.login(username='replyusername', password='replypassword')
+        response = self.client.get('/api/reply/{}/'.format(reply_id))
+        self.assertEqual(response.status_code, 403)
+
+    def test_get_reply(self):
+        reply_id = self.reply.id
+        self.client.login(username='testusername', password='testpassword')
+        response = self.client.get('/api/reply/{}/'.format(reply_id))
+        self.assertEqual(response.status_code, 200)
+
 
     # def test_decrease_today_write(self):
     #     self.user.decrease_today_write()
