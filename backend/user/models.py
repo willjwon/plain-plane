@@ -7,7 +7,7 @@ from django.utils.timezone import now
 class User(models.Model):
     user = models.OneToOneField(user_model.User, on_delete=models.CASCADE, related_name='user')
     email_verified = models.BooleanField(default=False)
-    level = models.ForeignKey(Level, related_name='+')
+    level = models.ForeignKey(Level, on_delete=models.DO_NOTHING, related_name='+')
     today_write_count = models.IntegerField(default=0)
     today_reply_count = models.IntegerField(default=0)
     total_likes = models.IntegerField(default=0)
