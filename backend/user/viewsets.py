@@ -7,6 +7,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import check_password
 import django.contrib.auth.models as user_model
 from django.core.mail import EmailMessage
 from rest_framework.permissions import IsAuthenticated
@@ -224,6 +225,25 @@ class UserViewSet(viewsets.ModelViewSet):
         user_dict['level'] = user.level.flavor
         del user_dict['id']
         return Response(user_dict)
+
+    @list_route(url_path='new_password', methods=['post'], permission_classes=[IsAuthenticated])
+    def change_password(self, request):
+        request_data = request.data
+
+        try:
+            current_password = request_data['current_password']
+            new_password = request_data['new_password']
+        except KeyError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        user = user_model.User.objects.get(id=request.user.id)
+        if check_password(current_password, user.password):
+            user.set_password(new_password)
+            user.save()
+            login(request, user)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     @list_route(url_path='sign_out')
     def sign_out(self, request):
