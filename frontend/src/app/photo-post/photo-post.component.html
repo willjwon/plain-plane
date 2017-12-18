@@ -14,8 +14,13 @@
     <div class="div-block-14"><img src="assets/images/8.jpg" srcset="assets/images/8-p-500.jpeg 500w, assets/images/8-p-800.jpeg 800w, assets/images/8-p-1600.jpeg 1600w, assets/images/8.jpg 1920w" sizes="(max-width: 767px) 90vw, (max-width: 991px) 678px, 890px" class="image-8"></div>
     <div class="div-block-15"></div>
     <div class="form-block w-form">
+
+      <input type="file" #fileInput>
       <form id="email-form" name="email-form" data-name="Email Form"><textarea id="PhotoPost-Tag" name="PhotoPost-Tag" placeholder="#hashtag" maxlength="5000" data-name="PhotoPost Tag" class="textarea-2 w-input"></textarea>
-        <div class="div-block-16"><a href="gallery.html" class="button-photopost w-button">Cancel</a><a href="#" class="button-photopost w-button">Upload</a><a href="#" class="button-photopost w-button">Post</a></div>
+        <div class="div-block-16">
+          <a href="gallery.html" class="button-photopost w-button">Cancel</a>
+          <a (click)="upload()" class="button-photopost w-button">Upload</a>
+          <a href="#" class="button-photopost w-button">Post</a></div>
       </form>
     </div>
   </div>
