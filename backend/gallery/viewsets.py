@@ -40,6 +40,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
     def upload(self, request):
         request_file = request.FILES['image']
         author_id = int(request.data['author_id'])
+        tag = request.data['tag']
 
         file_dir = 'uploaded_images/'
         file_name = "{}.jpg".format(uuid.uuid4())
@@ -55,7 +56,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
             author.save()
 
             color = PhotoSerializer.get_color(PhotoSerializer(), image=file_path)
-            photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag='oo')
+            photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag=tag)
             photo.save()
             return Response(status=status.HTTP_201_CREATED)
         else:

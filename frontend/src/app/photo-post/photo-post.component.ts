@@ -17,6 +17,7 @@ export class PhotoPostComponent implements OnInit {
   }
 
   url: string;
+  tag = '';
 
   image_extension = ['jpg', 'jpeg', 'gif', 'png', 'apng', 'svg', 'bmp',
                      'JPG', 'JPEG', 'GIF', 'PNG', 'APNG', 'SVG', 'BMP', ];
@@ -33,7 +34,20 @@ export class PhotoPostComponent implements OnInit {
     }
   }
 
+  validateInput(tag: string): boolean {
+    if (tag === '') {
+      alert('Tag is empty. Please fill in tag!');
+      return false;
+    }
+
+    return true;
+  }
+
   private upload() {
+    if (!this.validateInput(this.tag)) {
+      return;
+    }
+
     const fileBrowser = this.fileInput.nativeElement;
 
     if (fileBrowser.files && fileBrowser.files[0]) {
@@ -55,10 +69,12 @@ export class PhotoPostComponent implements OnInit {
       const formData = new FormData();
       formData.append('author_id', sessionStorage.getItem('user_id'));
       formData.append('image', fileBrowser.files[0]);
-
+      formData.append('tag', this.tag);
       const xhr = new XMLHttpRequest();
       xhr.open('POST', '//127.0.0.1:8000/api/photo/upload/', true);
       xhr.send(formData);
+    } else {
+      alert('Image is empty. Please upload an image!');
     }
 
     this.router.navigate(['/gallery']);
