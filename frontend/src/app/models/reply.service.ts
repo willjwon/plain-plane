@@ -61,6 +61,8 @@ export class ReplyService {
       'content': content
     };
 
+    sessionStorage.setItem('today_reply_count', String(Number(sessionStorage.getItem('today_reply_count')) - 1));
+
     return this.http.post('/api/reply/new/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.status)
