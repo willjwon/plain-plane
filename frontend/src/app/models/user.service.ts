@@ -23,14 +23,14 @@ export class UserService {
         const responseData = response.json();
         const user_id = responseData['user'];
         const username = responseData['username'];
-        // const level = responseData['level'];
+        const level = responseData['level'];
         const today_write_count = responseData['today_write_count'];
         const today_reply_count = responseData['today_reply_count'];
         const total_likes = responseData['total_likes'];
         const user: User = {
           user_id: user_id,
           username: username,
-          // level: level,
+          level: level,
           today_write_count: today_write_count,
           today_reply_count: today_reply_count,
           total_likes: total_likes};

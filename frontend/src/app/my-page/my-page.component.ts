@@ -14,6 +14,7 @@ export class MyPageComponent implements OnInit {
   user: User = {
     user_id: -1,
     username: '',
+    level: '',
     today_write_count: 0,
     today_reply_count: 0,
     total_likes: 0,
@@ -27,6 +28,16 @@ export class MyPageComponent implements OnInit {
 
   ngOnInit() {
     this.getSignedInUser();
+  }
+
+  getLevelImage() {
+    const levelName = this.user.level.toLowerCase();
+    return `assets/images/yogurt_${levelName}.png`;
+  }
+
+  getReplyImage(reply: Reply): string {
+    const plainName = reply.level.toLowerCase();
+    return `assets/images/plane_${plainName}.png`;
   }
 
   getSignedInUser() {

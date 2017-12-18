@@ -15,9 +15,10 @@ matrix:
         - pip3 install django coverage djangorestframework Pillow requests
       before_script:
         - cd backend
+        - python3 manage.py makemigrations
         - python3 manage.py migrate
       script:
-        - coverage run --branch --source="./plain_plane" manage.py test
+        - python3 manage.py test
       after_script:
         - cd ..
 

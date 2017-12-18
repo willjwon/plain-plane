@@ -21,7 +21,8 @@ export class PlanesComponent implements OnInit {
   }
 
   onClickNearMeButton() {
-    this.router.navigate(['/planes_near_me']);
+    alert('Sorry. NOT IMPLEMENTED until now!');
+    // this.router.navigate(['/planes_near_me']);
   }
 
   getRandomPlanes() {
@@ -32,6 +33,11 @@ export class PlanesComponent implements OnInit {
 
   checkPlane(num: number): boolean {
     return num < this.planes.length;
+  }
+
+  getImage(plane: Plane): string {
+    const plainName = plane.level.toLowerCase();
+    return `assets/images/plane_${plainName}.png`;
   }
 
   onClickPlane(selectedPlane: Plane) {
