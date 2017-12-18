@@ -35,7 +35,7 @@ class User(models.Model):
 
     def set_level(self):
         if self.total_likes <= -10:
-            self.level = Level.objects.get(id="SoySauce")
+            self.level = Level.objects.get(flavor="SoySauce")
             return True
 
         level_changed = False
