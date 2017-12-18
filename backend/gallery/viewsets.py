@@ -1,7 +1,11 @@
+import uuid
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+
+import django.contrib.auth.models as user_model
 from .serializers import PhotoSerializer
 from .models import Photo
 
@@ -30,3 +34,28 @@ class PhotoViewSet(viewsets.ModelViewSet):
         photo.is_reported = True
         photo.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @list_route(url_path='upload', methods=['post'])
+    def upload(self, request):
+        request_file = request.FILES['image']
+        author_id = int(request.data['author_id'])
+
+        photo_dir = 'uploaded_images/'
+        file_name = "{}.jpg".format(uuid.uuid4())
+
+        open(photo_dir + file_name, 'a').close()
+        with open(photo_dir + file_name, 'wb+') as dest:
+            for chunk in request_file.chunks():
+                dest.write(chunk)
+        # if isSky(result_file):
+        #     return HttpResponse(status=204)
+        # else:
+        #     remove(result_file)
+        #     return HttpResponse(status=406)
+        author = user_model.User.objects.get(id=author_id).user
+        author.decrease_today_write()
+        author.save()
+
+        photo = Photo(author=author, image=file_name, is_reported=False, color=0, tag='oo')
+        photo.save()
+        return Response(status=status.HTTP_201_CREATED)
