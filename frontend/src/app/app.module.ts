@@ -32,7 +32,6 @@ import { ReplyComponent } from './reply/reply.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
-import { PlaneAnimationComponent } from './plane-animation/plane-animation.component';
 
 
 @NgModule({
@@ -51,7 +50,6 @@ import { PlaneAnimationComponent } from './plane-animation/plane-animation.compo
     WriteComponent,
     MyPageComponent,
     RepliedPlaneComponent,
-    PlaneAnimationComponent
   ],
   imports: [
     BrowserModule,

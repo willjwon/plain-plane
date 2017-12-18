@@ -67,7 +67,6 @@ export class ReplyService {
   }
 
   likeReply(replyId: number): Promise<number> {
-    // TODO: implement here with location service
     const dataToSend = {
       'reply_id': replyId
     };
