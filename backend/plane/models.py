@@ -7,6 +7,7 @@ class Plane(models.Model):
     author = models.ForeignKey(
         User,
         related_name='planes',
+        on_delete=models.CASCADE,
         null=False
     )
 
