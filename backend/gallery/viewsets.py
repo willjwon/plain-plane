@@ -4,7 +4,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from os import remove
+import os
 
 import django.contrib.auth.models as user_model
 from .serializers import PhotoSerializer
@@ -43,6 +43,9 @@ class PhotoViewSet(viewsets.ModelViewSet):
         tag = request.data['tag']
 
         file_dir = 'uploaded_images/'
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+
         file_name = "{}.jpg".format(uuid.uuid4())
         file_path = file_dir + file_name
 
@@ -60,5 +63,5 @@ class PhotoViewSet(viewsets.ModelViewSet):
             photo.save()
             return Response(status=status.HTTP_201_CREATED)
         else:
-            remove(file_path)
+            os.remove(file_path)
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
