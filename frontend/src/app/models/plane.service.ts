@@ -70,6 +70,8 @@ export class PlaneService {
       dataToSend['longitude'] = longitude;
     }
 
+    sessionStorage.setItem('today_write_count', String(Number(sessionStorage.getItem('today_write_count')) - 1));
+
     return this.http.post('/api/plane/new/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.status)
