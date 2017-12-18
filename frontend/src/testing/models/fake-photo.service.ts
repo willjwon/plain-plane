@@ -16,24 +16,24 @@ export class FakePhotoService {
   photos = PHOTOS;
 
   getRandomPhotos(): Promise<Photo[]> {
-    return Promise.resolve<Photo[]>(FakePhotoService.photos);
+    return Promise.resolve<Photo[]>(this.photos);
   }
 
   getColorPhotos(color: number): Promise<Photo[]> {
-    return Promise.resolve(FakePhotoService.photos.filter(photo => photo.color === color));
+    return Promise.resolve(this.photos.filter(photo => photo.color === color));
   }
 
   getPhoto(id: number): Promise<Photo> {
-    return Promise.resolve(FakePhotoService.photos[id]);
+    return Promise.resolve(this.photos[id]);
   }
 
   delete(id: number): Promise<void> {
-    delete FakePhotoService.photos[id];
+    delete this.photos[id];
     return Promise.resolve();
   }
 
   report(photo: Photo): Promise<Photo> {
-    delete FakePhotoService.photos[photo.id];
+    delete this.photos[photo.id];
     return Promise.resolve(photo);
   }
 
