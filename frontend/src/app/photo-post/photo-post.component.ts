@@ -11,6 +11,8 @@ import { UserService } from '../models/user.service';
 export class PhotoPostComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   clicked: boolean = false;
+  url: string;
+  tag = '';
 
   constructor(
     private router: Router,
@@ -25,15 +27,12 @@ export class PhotoPostComponent implements OnInit {
       }
     });
   }
-
-  url: string;
-  tag = '';
   
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
-      reader.onload = (event:any) => {
+      reader.onload = (event: any) => {
         this.url = event.target.result;
       }
 
@@ -45,7 +44,7 @@ export class PhotoPostComponent implements OnInit {
     if (!this.clicked) {
       this.upload_observable().subscribe(
         response => {
-          if (response == "201") {
+          if (response === 201) {
             this.router.navigate(['/gallery']);
           }
           else {
@@ -56,7 +55,7 @@ export class PhotoPostComponent implements OnInit {
     }
   }
 
-  private upload_observable(): Observable<string> {
+  private upload_observable(): Observable<number> {
     return new Observable(observer => {
       if (this.tag === '') {
         alert('Tag is empty. Please fill in tag!');
@@ -67,12 +66,10 @@ export class PhotoPostComponent implements OnInit {
 
       if (fileBrowser.files && fileBrowser.files[0]) {
         let fileSize = fileBrowser.files[0].size;
-        let splittedFileName = fileBrowser.files[0].name.split(".")
-        let fileType = splittedFileName[splittedFileName.length - 1]
 
         if (fileSize >= 2097152) {
           alert('Image size exceeds 2MB');
-          console.log("size limit");
+          console.log('size limit');
           return;
         }
 
@@ -93,7 +90,7 @@ export class PhotoPostComponent implements OnInit {
 
         sessionStorage.setItem('today_write_count', String(Number(sessionStorage.getItem('today_write_count')) - 1));
       } else {
-        alert('The image field is empty. Please upload an image!');
+          alert('The image field is empty. Please upload an image!');
         return;
       }
     });
