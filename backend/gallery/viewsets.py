@@ -4,11 +4,12 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from os import remove
 
 import django.contrib.auth.models as user_model
 from .serializers import PhotoSerializer
 from .models import Photo
-
+from .classifier import isSky
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
@@ -48,16 +49,15 @@ class PhotoViewSet(viewsets.ModelViewSet):
         with open(file_path, 'wb+') as dest:
             for chunk in request_file.chunks():
                 dest.write(chunk)
-        # if isSky(result_file):
-        #     return HttpResponse(status=204)
-        # else:
-        #     remove(result_file)
-        #     return HttpResponse(status=406)
-        author = user_model.User.objects.get(id=author_id).user
-        author.decrease_today_write()
-        author.save()
+        if isSky(file_path):
+            author = user_model.User.objects.get(id=author_id).user
+            author.decrease_today_write()
+            author.save()
 
-        color = PhotoSerializer.get_color(PhotoSerializer(), image=file_path)
-        photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag='oo')
-        photo.save()
-        return Response(status=status.HTTP_201_CREATED)
+            color = PhotoSerializer.get_color(PhotoSerializer(), image=file_path)
+            photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag='oo')
+            photo.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            remove(file_path)
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
