@@ -2,9 +2,9 @@ import {TestBed, async, inject, fakeAsync, tick} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthGuardWriteLeftService } from './auth-guard-write-left.service';
+import { AuthGuardReplyLeftService } from './auth-guard-reply-left.service';
 
-describe('AuthGuardWriteLeftService', () => {
+describe('AuthGuardReplyLeftService', () => {
   beforeEach(() => {
     let store = {};
     const mockSessionStorage = {
@@ -31,14 +31,14 @@ describe('AuthGuardWriteLeftService', () => {
       .and.callFake(mockSessionStorage.clear);
 
     TestBed.configureTestingModule({
-      providers: [AuthGuardWriteLeftService],
+      providers: [AuthGuardReplyLeftService],
       imports: [RouterTestingModule]
     });
   });
   it('checks if a user is invalid',
     // inject your guard service AND Router
-    fakeAsync(inject([AuthGuardWriteLeftService, Router], (auth, router) => {
-      sessionStorage.setItem('today_write_count', '0');
+    fakeAsync(inject([AuthGuardReplyLeftService, Router], (auth, router) => {
+      sessionStorage.setItem('today_reply_count', '0');
       // add a spy
       spyOn(router, 'navigate');
       tick();
@@ -48,8 +48,8 @@ describe('AuthGuardWriteLeftService', () => {
   ));
   it('checks if a user is valid',
     // inject your guard service AND Router
-    fakeAsync(inject([AuthGuardWriteLeftService, Router], (auth, router) => {
-        sessionStorage.setItem('today_write_count', '4');
+    fakeAsync(inject([AuthGuardReplyLeftService, Router], (auth, router) => {
+        sessionStorage.setItem('today_reply_count', '4');
         // add a spy
         spyOn(router, 'navigate');
         tick();
