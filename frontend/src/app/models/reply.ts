@@ -10,4 +10,6 @@ export class Reply {
   content: string;
 
   is_reported: boolean;
+
+  level: string;
 }

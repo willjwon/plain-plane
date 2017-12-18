@@ -16,7 +16,8 @@ export class ReplyComponent implements OnInit {
     author_id: -1,
     plane_id: -1,
     content: '',
-    tag: ''
+    tag: '',
+    level: ''
   };
   replyMessage = '';
 
@@ -75,6 +76,8 @@ export class ReplyComponent implements OnInit {
       } else {
         alert('An error occured. Please try again!');
       }
+    }).catch(e => {
+      alert('An error occured. Please try again!');
     });
 
     this.planeService.deletePlane(this.plane.plane_id);

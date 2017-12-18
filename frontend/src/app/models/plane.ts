@@ -3,4 +3,5 @@ export class Plane {
   plane_id: number;
   content: string;
   tag: string;
+  level: string;
 }

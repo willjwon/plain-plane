@@ -20,7 +20,8 @@ export class RepliedPlaneComponent implements OnInit {
     original_content: '',
     original_tag: '',
     content: '',
-    is_reported: false
+    is_reported: false,
+    level: ''
   };
 
   constructor(private router: Router,
