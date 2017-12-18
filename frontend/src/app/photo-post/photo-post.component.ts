@@ -50,7 +50,7 @@ export class PhotoPostComponent implements OnInit {
             this.router.navigate(['/gallery']);
           }
           else {
-            alert('Our detective plane says that it is not a sky!');
+            alert('Our detective plane says that it is not sky!');
             this.buttonStatus = "Upload";
           }
         });
