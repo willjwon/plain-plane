@@ -40,11 +40,12 @@ class PhotoViewSet(viewsets.ModelViewSet):
         request_file = request.FILES['image']
         author_id = int(request.data['author_id'])
 
-        photo_dir = 'uploaded_images/'
+        file_dir = 'uploaded_images/'
         file_name = "{}.jpg".format(uuid.uuid4())
+        file_path = file_dir + file_name
 
-        open(photo_dir + file_name, 'a').close()
-        with open(photo_dir + file_name, 'wb+') as dest:
+        open(file_path, 'a').close()
+        with open(file_path, 'wb+') as dest:
             for chunk in request_file.chunks():
                 dest.write(chunk)
         # if isSky(result_file):
@@ -56,6 +57,7 @@ class PhotoViewSet(viewsets.ModelViewSet):
         author.decrease_today_write()
         author.save()
 
-        photo = Photo(author=author, image=file_name, is_reported=False, color=0, tag='oo')
+        color = PhotoSerializer.get_color(PhotoSerializer(), image=file_path)
+        photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag='oo')
         photo.save()
         return Response(status=status.HTTP_201_CREATED)
