@@ -137,8 +137,6 @@ class UserTest(TestCase):
 
     def change_password(self):
         self.client.login(username='testusername', password='testpassword')
-        data = {'new_password': 12345678}
+        data = {'current_password': 'testpassword', 'new_password': 12345678}
         response = self.client.post('/api/user/new_password/', json.dumps(data), content_type='application/json')
         self.assertEqual(response.status_code, 200)
-
-
