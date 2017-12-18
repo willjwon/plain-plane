@@ -1,6 +1,8 @@
 import io
 from django.test import TestCase, Client
 from PIL import Image
+
+from gallery.color_picker import *
 from .models import Photo
 from user.models import User
 from level.models import Level
@@ -83,3 +85,34 @@ class GalleryTestCase(TestCase):
 
         response = self.client.get('/api/photo/{}/'.format(id))
         self.assertEqual(response.status_code, 404)
+
+    def test_not_sky_image_upload(self):
+        image_file = self.generate_photo_file()
+        response = self.client.post('/api/photo/upload/',
+                                    {'author_id': 1, 'image': image_file, 'is_reported': 'False', 'color': '5',
+                                     'tag': 'study'})
+        self.assertEqual(response.status_code, 406)
+        
+
+# Test for Color Picker
+class ColorPickerTestCase(TestCase):
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
+    def test_get_color(self):
+        image = self.generate_photo_file()
+        color = get_color(image=image)
+
+        self.assertEqual(color, 0)
+
+    def test_classify_color(self):
+        red = (1, 0, 0)
+        self.assertEqual(classify_color(rgb=red), 0)
+
+        orange = (1, 0.5, 0)
+        self.assertEqual(classify_color(rgb=orange), 1)
