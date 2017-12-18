@@ -17,6 +17,7 @@ import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { PhotoPostComponent } from './photo-post/photo-post.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent, canActivate: [AuthGuardSignedOutService], pathMatch: 'full' },
   { path: 'find_password', component: FindPasswordComponent, canActivate: [AuthGuardSignedOutService], pathMatch: 'full' },
   { path: 'planes', component: PlanesComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
-  // { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
+  { path: 'planes_near_me', component: PlanesNearMeComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'plane/:id', component: ReplyComponent, canActivate: [AuthGuardSignedInService, AuthGuardReplyLeftService], pathMatch: 'full' },
   { path: 'gallery', component: PhotoListComponent, pathMatch: 'full' },
   { path: 'gallery/post', component: PhotoPostComponent, canActivate: [AuthGuardSignedInService, AuthGuardWriteLeftService], pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'write', component: WriteComponent, canActivate: [AuthGuardSignedInService, AuthGuardWriteLeftService], pathMatch: 'full' },
   { path: 'my_page', component: MyPageComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
   { path: 'reply/:id', component: RepliedPlaneComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full' },
+  { path: 'change_password', component: ChangePasswordComponent, canActivate: [AuthGuardSignedInService], pathMatch: 'full'},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

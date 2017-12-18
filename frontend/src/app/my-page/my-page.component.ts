@@ -73,4 +73,8 @@ export class MyPageComponent implements OnInit {
       this.pageIndex += 1;
     }
   }
+
+  onClickChangePasswordButton() {
+    this.router.navigate(['/change_password']);
+  }
 }

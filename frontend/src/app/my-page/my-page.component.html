@@ -13,7 +13,11 @@
       <h1 class="heading-inbox-title">{{user.username}}'s {{user.level}} Yogurt</h1>
       <h3 class="heading-inbox-planecount">Today's Remaining Planes: {{user.today_write_count}}</h3>
       <h3 class="heading-inbox-replycount">Today's Remaining Replies: {{user.today_reply_count}}</h3>
+      <div>
+        <button (click)="onClickChangePasswordButton()" class="button-index combo w-button">Change Password</button>
+      </div>
     </div>
+
   </div>
 </div>
 <div id="myreplies" class="section-13">

@@ -34,6 +34,7 @@ import { ReplyComponent } from './reply/reply.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     WriteComponent,
     MyPageComponent,
     RepliedPlaneComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
