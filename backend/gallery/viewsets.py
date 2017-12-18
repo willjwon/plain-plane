@@ -1,10 +1,15 @@
+import uuid
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from os import remove
+
+import django.contrib.auth.models as user_model
 from .serializers import PhotoSerializer
 from .models import Photo
-
+from .classifier import isSky
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
@@ -30,3 +35,30 @@ class PhotoViewSet(viewsets.ModelViewSet):
         photo.is_reported = True
         photo.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @list_route(url_path='upload', methods=['post'])
+    def upload(self, request):
+        request_file = request.FILES['image']
+        author_id = int(request.data['author_id'])
+        tag = request.data['tag']
+
+        file_dir = 'uploaded_images/'
+        file_name = "{}.jpg".format(uuid.uuid4())
+        file_path = file_dir + file_name
+
+        open(file_path, 'a').close()
+        with open(file_path, 'wb+') as dest:
+            for chunk in request_file.chunks():
+                dest.write(chunk)
+        if isSky(file_path):
+            author = user_model.User.objects.get(id=author_id).user
+            author.decrease_today_write()
+            author.save()
+
+            color = PhotoSerializer.get_color(PhotoSerializer(), image=file_path)
+            photo = Photo(author=author, image=file_name, is_reported=False, color=color, tag=tag)
+            photo.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            remove(file_path)
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)

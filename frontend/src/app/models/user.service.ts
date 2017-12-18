@@ -57,7 +57,7 @@ export class UserService {
   }
 
   signIn(username: string, password: string, captcha_key: string):
-  Promise<{'success': boolean, 'error-code': number}> {
+  Promise<{'success': boolean, 'user_id': number, 'error-code': number}> {
     const dataToSend = {
       'username': username,
       'password': password,
