@@ -77,6 +77,10 @@ export class MainPageComponent implements OnInit {
           this.captchaRef.reset();
         } else {
           sessionStorage.setItem('signed_in', 'yes');
+          sessionStorage.setItem('user_id', String(response.user_id));
+          sessionStorage.setItem('today_write_count', String(response.today_write_count));
+          sessionStorage.setItem('today_reply_count', String(response.today_reply_count));
+
           this.router.navigate(['/planes']);
         }
       }

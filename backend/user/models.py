@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 
 class User(models.Model):
-    user = models.OneToOneField(user_model.User, on_delete=models.CASCADE, related_name='user')
+    user = models.OneToOneField(user_model.User, on_delete=models.DO_NOTHING, related_name='user')
     email_verified = models.BooleanField(default=False)
     level = models.ForeignKey(Level, on_delete=models.DO_NOTHING, related_name='+')
     today_write_count = models.IntegerField(default=0)
@@ -35,7 +35,7 @@ class User(models.Model):
 
     def set_level(self):
         if self.total_likes <= -10:
-            self.level = Level.objects.get(id="SoySauce")
+            self.level = Level.objects.get(flavor="SoySauce")
             return True
 
         level_changed = False

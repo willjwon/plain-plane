@@ -11,11 +11,18 @@
     <h1 class="page-title">Photo Post</h1>
   </div>
   <div class="container-paper w-container">
-    <div class="div-block-14"><img src="assets/images/8.jpg" srcset="assets/images/8-p-500.jpeg 500w, assets/images/8-p-800.jpeg 800w, assets/images/8-p-1600.jpeg 1600w, assets/images/8.jpg 1920w" sizes="(max-width: 767px) 90vw, (max-width: 991px) 678px, 890px" class="image-8"></div>
+    {{image}}
+    <div class="div-block-14"><img src={{url}} srcset={{url}} sizes="(max-width: 767px) 90vw, (max-width: 991px) 678px, 890px" class="image-8"></div>
     <div class="div-block-15"></div>
     <div class="form-block w-form">
-      <form id="email-form" name="email-form" data-name="Email Form"><textarea id="PhotoPost-Tag" name="PhotoPost-Tag" placeholder="#hashtag" maxlength="5000" data-name="PhotoPost Tag" class="textarea-2 w-input"></textarea>
-        <div class="div-block-16"><a href="gallery.html" class="button-photopost w-button">Cancel</a><a href="#" class="button-photopost w-button">Upload</a><a href="#" class="button-photopost w-button">Post</a></div>
+      <input type="file" (change)="readUrl($event)" placeholder="Upload file" accept="image/*" #fileInput>
+      <form id="email-form" name="email-form" data-name="Email Form">
+        <textarea [(ngModel)]="tag" id="PhotoPost-Tag" name="PhotoPost-Tag" placeholder="Explain Your Photo in <10 Characters!" maxlength="10" data-name="PhotoPost Tag" class="textarea-2 w-input"></textarea>
+        <div class="div-block-16">
+          <a href="gallery.html" class="button-photopost w-button">Cancel</a>
+          <a *ngIf="!clicked" (click)="upload()" class="button-photopost w-button">Upload</a>
+          <a *ngIf="clicked" class="button-photopost-testing w-button">Testing</a>
+        </div>
       </form>
     </div>
   </div>

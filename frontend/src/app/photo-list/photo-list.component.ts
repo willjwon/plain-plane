@@ -52,8 +52,7 @@ export class PhotoListComponent implements OnInit {
   }
 
   goCreate(): void {
-    // this.router.navigate(['/gallery/post']);
-    alert('Sorry. NOT IMPLEMENTED until now!');
+    this.router.navigate(['/gallery/post']);
   }
 
 

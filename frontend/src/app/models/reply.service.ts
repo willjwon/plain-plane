@@ -29,6 +29,7 @@ export class ReplyService {
           original_content: '',
           original_tag: '',
           content: '',
+          level: '',
           is_reported: false
         });
       });
@@ -60,6 +61,8 @@ export class ReplyService {
       'content': content
     };
 
+    sessionStorage.setItem('today_reply_count', String(Number(sessionStorage.getItem('today_reply_count')) - 1));
+
     return this.http.post('/api/reply/new/', JSON.stringify(dataToSend), {headers: this.headers})
       .toPromise()
       .then(response => response.status)
@@ -67,7 +70,6 @@ export class ReplyService {
   }
 
   likeReply(replyId: number): Promise<number> {
-    // TODO: implement here with location service
     const dataToSend = {
       'reply_id': replyId
     };

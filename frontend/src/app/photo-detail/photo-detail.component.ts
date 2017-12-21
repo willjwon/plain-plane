@@ -5,7 +5,6 @@ import 'rxjs/add/operator/switchMap';
 
 import { Photo } from '../models/photo';
 import { PhotoService } from '../models/photo.service';
-import { UserService } from '../models/user.service';
 
 @Component({
   selector: 'app-photo-detail',
@@ -45,11 +44,6 @@ export class PhotoDetailComponent implements OnInit {
       alert('Successfully Reported');
     }
   }
-
-  // delete(): void {
-  //   this.photoService.delete(this.photo.id);
-  //   this.router.navigate(['/gallery']);
-  // }
 
   goBack(): void {
     this.router.navigate(['/gallery']);

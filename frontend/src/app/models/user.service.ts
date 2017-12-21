@@ -57,7 +57,11 @@ export class UserService {
   }
 
   signIn(username: string, password: string, captcha_key: string):
-  Promise<{'success': boolean, 'error-code': number}> {
+  Promise<{'success': boolean,
+           'user_id': number,
+           'error-code': number,
+           'today_write_count': number,
+           'today_reply_count': number}> {
     const dataToSend = {
       'username': username,
       'password': password,
@@ -104,5 +108,19 @@ export class UserService {
       .toPromise()
       .then(response => response.status)
       .catch(UserService.handleError);
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Promise<number> {
+    const dataToSend = {
+      'current_password': currentPassword,
+      'new_password': newPassword
+    };
+
+    return this.http.post('/api/user/new_password/', JSON.stringify(dataToSend), {headers: this.headers})
+      .toPromise()
+      .then(response => response.status)
+      .catch (e => {
+        return Promise.resolve(e.status);
+      });
   }
 }

@@ -131,6 +131,10 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
+    if (this.email !== '') {
+      alert('We\'ll send you a verification email. It may take a while. Please wait for a second please!');
+    }
+
     this.userService.signUp(this.username, this.email, this.password, this.captcha_key).then(response => {
         if (!response['success']) {
           switch (response['error-code']) {

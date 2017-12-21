@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { CookieXSRFStrategy, HttpModule, XSRFStrategy } from '@angular/http';
 
@@ -16,6 +17,8 @@ import { ReplyService } from './models/reply.service';
 
 import { AuthGuardSignedInService } from './models/auth-guard-signed-in.service';
 import { AuthGuardSignedOutService } from './models/auth-guard-signed-out.service';
+import { AuthGuardWriteLeftService } from './models/auth-guard-write-left.service';
+import { AuthGuardReplyLeftService } from './models/auth-guard-reply-left.service';
 
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -31,6 +34,7 @@ import { ReplyComponent } from './reply/reply.component';
 import { WriteComponent } from './write/write.component';
 import { MyPageComponent } from './my-page/my-page.component';
 import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -48,10 +52,12 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     ReplyComponent,
     WriteComponent,
     MyPageComponent,
-    RepliedPlaneComponent
+    RepliedPlaneComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
@@ -69,7 +75,9 @@ import { RepliedPlaneComponent } from './replied-plane/replied-plane.component';
     PhotoService,
     ReplyService,
     AuthGuardSignedInService,
-    AuthGuardSignedOutService
+    AuthGuardSignedOutService,
+    AuthGuardWriteLeftService,
+    AuthGuardReplyLeftService
   ],
   bootstrap: [AppComponent]
 })

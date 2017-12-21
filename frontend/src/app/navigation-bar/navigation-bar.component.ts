@@ -33,6 +33,7 @@ export class NavigationBarComponent {
     this.userService.signOut().then(response => {
       if (response === 200) {
         sessionStorage.removeItem('signed_in');
+        sessionStorage.removeItem('user_id');
         this.router.navigate(['/']);
       } else {
         alert('An error occurred. Please try again!');

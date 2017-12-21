@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { Plane } from '../models/plane';
 import { UserService } from '../models/user.service';
@@ -23,6 +24,7 @@ export class ReplyComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private location: Location,
               private planeService: PlaneService,
               private userService: UserService,
               private replyService: ReplyService) {
@@ -45,7 +47,8 @@ export class ReplyComponent implements OnInit {
               }
             });
         } else {
-          this.router.navigate(['/planes']);
+          // this.router.navigate(['/planes']);
+          this.location.back();
         }
       }
     });
@@ -66,13 +69,15 @@ export class ReplyComponent implements OnInit {
   }
 
   onClickCancelButton() {
-    this.router.navigate(['/planes']);
+    // this.router.navigate(['/planes']);
+    this.location.back();
   }
 
   onClickRefoldButton() {
     this.replyService.foldNewReply(this.plane, this.replyMessage).then(response => {
       if (response === 201) {
-        this.router.navigate(['/planes']);
+        // this.router.navigate(['/planes']);
+        this.location.back();
       } else {
         alert('An error occured. Please try again!');
       }
