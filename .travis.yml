@@ -5,17 +5,16 @@ branches:
   - master
   - development
 
-services:
-  - mysql
-
 matrix:
   include:
     - language: python
       python: 3.6
+      services:
+        - mysql
       cache:
         pip3: true
       install:
-        - pip3 install django coverage djangorestframework Pillow requests pymysql mysqlclient mysql-python django-cors-headers
+        - pip3 install django coverage djangorestframework Pillow requests pymysql django-cors-headers
       before_script:
         - cd backend
         - mysql -u root -e 'CREATE DATABASE plainplane;'
