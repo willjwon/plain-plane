@@ -11,32 +11,32 @@ export const PHOTOS: Photo[] = [
 ];
 
 export class FakePhotoService {
-  photos = PHOTOS;
-
-  getRandomPhotos(): Promise<Photo[]> {
-    return Promise.resolve<Photo[]>(this.photos);
-  }
-
-  getColorPhotos(color: number): Promise<Photo[]> {
-    return Promise.resolve(this.photos.filter(photo => photo.color === color));
-  }
-
-  getPhoto(id: number): Promise<Photo> {
-    return Promise.resolve(this.photos[id]);
-  }
-
-  delete(id: number): Promise<void> {
-    delete this.photos[id];
-    return Promise.resolve();
-  }
-
-  report(photo: Photo): Promise<Photo> {
-    delete this.photos[photo.id];
-    return Promise.resolve(photo);
-  }
-
-  private handleError(error: any): Promise<any> {
-    return Promise.reject(error.message || error);
-  }
+  // photos = PHOTOS;
+  //
+  // getRandomPhotos(): Promise<Photo[]> {
+  //   return Promise.resolve<Photo[]>(this.photos);
+  // }
+  //
+  // getColorPhotos(color: number): Promise<Photo[]> {
+  //   return Promise.resolve(this.photos.filter(photo => photo.color === color));
+  // }
+  //
+  // getPhoto(id: number): Promise<Photo> {
+  //   return Promise.resolve(this.photos[id]);
+  // }
+  //
+  // delete(id: number): Promise<void> {
+  //   delete this.photos[id];
+  //   return Promise.resolve();
+  // }
+  //
+  // report(photo: Photo): Promise<Photo> {
+  //   delete this.photos[photo.id];
+  //   return Promise.resolve(photo);
+  // }
+  //
+  // private handleError(error: any): Promise<any> {
+  //   return Promise.reject(error.message || error);
+  // }
 }
 

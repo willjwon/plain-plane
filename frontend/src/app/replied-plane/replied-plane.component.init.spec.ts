@@ -1,14 +1,9 @@
-import { async, fakeAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
-
-import { ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
+import { ActivatedRouteStub} from '../../testing/router-stubs';
 
 import { RepliedPlaneComponent } from './replied-plane.component';
-import { Location } from '@angular/common';
 import { ReplyService } from '../models/reply.service';
 import { Reply } from '../models/reply';
-import { PlaneService } from '../models/plane.service';
 import { Plane } from '../models/plane';
-import { UserService } from '../models/user.service';
 import { User } from '../models/user';
 
 import 'rxjs/add/operator/switchMap';
@@ -20,10 +15,7 @@ describe('RepliedPlaneComponent', () => {
   let expectedPlane: Plane;
   let expectedUser: User;
 
-  let locationSpy: any;
   let replyServiceSpy: any;
-  let planeServiceSpy: any;
-  let userServiceSpy: any;
   let router: any;
 
 
