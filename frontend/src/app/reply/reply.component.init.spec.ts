@@ -1,6 +1,4 @@
-import { async, fakeAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
-
-import { ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
+import { ActivatedRouteStub } from '../../testing/router-stubs';
 
 import { ReplyComponent } from './reply.component';
 import { Location } from '@angular/common';
@@ -10,10 +8,6 @@ import { PlaneService } from '../models/plane.service';
 import { Plane } from '../models/plane';
 import { UserService } from '../models/user.service';
 import { User } from '../models/user';
-
-import { REPLIES } from '../../testing/models/fake-reply.service';
-import { PLANES } from '../../testing/models/fake-plane.service';
-import { USERS } from '../../testing/models/fake-user.service';
 
 import 'rxjs/add/operator/switchMap';
 
