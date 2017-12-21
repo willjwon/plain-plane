@@ -24,7 +24,9 @@ matrix:
         - python3 manage.py makemigrations
         - python3 manage.py migrate
       script:
-        - python3 manage.py test
+        - coverage run --branch --source="./" manage.py test
+      after_success:
+        - coveralls
       after_script:
         - cd ..
 
@@ -52,5 +54,7 @@ matrix:
       script:
         - ng test --code-coverage --watch false
         - ng e2e
+      after_success:
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
       after_script:
         - cd ..
