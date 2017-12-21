@@ -6,6 +6,10 @@
 People plain about their feelings and thoughts on a plain paper,
 fold up a paper plane with it, fuel up with plain yogurt, and fly it to the sky.
 
+## Demo
+You can visit our website and try Plain Plane!
+http://plainplane.mooo.com
+
 ## How to Run
 - frontend: run `$ npm install` and `$ npm start`.
 - backend: run `$ python3 manage.py runserver`.
