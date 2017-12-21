@@ -43,10 +43,10 @@ describe('PhotoDetailComponent', () => {
   });
 
   it('should report the photo when report button is clicked', fakeAsync(() => {
-    comp.onClickReportButton(PHOTOS[0]);
     spyOn(window, 'confirm').and.callFake(function () {
       return true;
     });
+    comp.onClickReportButton(PHOTOS[0]);
     tick()
     expect(photoServiceSpy.report.calls.any()).toBe(true, 'PhotoService.report called');
   }));
