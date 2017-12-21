@@ -51,10 +51,15 @@ describe('RepliedPlaneComponent', () => {
 
   it('should report the reply', fakeAsync(() => {
     const app = fixture.debugElement.componentInstance;
+
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
     spyOn(window, 'alert');
     app.onClickReportButton();
     tick();
     expect(window.alert).toHaveBeenCalledWith('Successfully reported.');
+    expect(window.confirm).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
   }));
 });

@@ -70,6 +70,9 @@ describe('ReplyComponent', () => {
     replyServiceSpy.getReply.and.returnValue(Promise.resolve(expectedReply));
 
     comp = new ReplyComponent(router, <any> activatedRoute, locationSpy, planeServiceSpy, userServiceSpy, replyServiceSpy);
+    spyOn(window, 'confirm').and.callFake(function () {
+      return false;
+    });
     comp.ngOnInit();
 
     // OnInit calls HDS.getReply; wait for it to get the fake reply
