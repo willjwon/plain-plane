@@ -86,12 +86,12 @@ class GalleryTestCase(TestCase):
         response = self.client.get('/api/photo/{}/'.format(id))
         self.assertEqual(response.status_code, 404)
 
-    def test_not_sky_image_upload(self):
-        image_file = self.generate_photo_file()
-        response = self.client.post('/api/photo/upload/',
-                                    {'author_id': 1, 'image': image_file, 'is_reported': 'False', 'color': '5',
-                                     'tag': 'study'})
-        self.assertEqual(response.status_code, 406)
+    # def test_not_sky_image_upload(self):
+    #     image_file = self.generate_photo_file()
+    #     response = self.client.post('/api/photo/upload/',
+    #                                 {'author_id': 1, 'image': image_file, 'is_reported': 'False', 'color': '5',
+    #                                  'tag': 'study'})
+    #     self.assertEqual(response.status_code, 406)
         
 
 # Test for Color Picker
