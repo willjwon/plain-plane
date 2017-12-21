@@ -15,6 +15,7 @@ matrix:
         pip3: true
       install:
         - pip3 install django coverage djangorestframework Pillow requests pymysql django-cors-headers
+        - pip3 install watson-developer-cloud==0.26.1
       before_script:
         - cd backend
         - mysql -u root -e 'CREATE DATABASE plainplane;'
