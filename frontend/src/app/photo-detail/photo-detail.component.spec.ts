@@ -1,12 +1,12 @@
-import { async, fakeAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
+import { fakeAsync, ComponentFixture, tick } from '@angular/core/testing';
 
-import { ActivatedRoute, ActivatedRouteStub, click, newEvent, Router, RouterStub} from '../../testing';
+import { ActivatedRouteStub } from '../../testing/router-stubs';
 
 import { PhotoDetailComponent } from './photo-detail.component';
 import { PhotoService } from '../models/photo.service';
-import { Photo } from "../models/photo";
-import {AppModule} from "../app.module";
-import {FakePhotoService, PHOTOS} from "../../testing/models/fake-photo.service";
+import { Photo } from '../models/photo';
+import {AppModule} from '../app.module';
+import {FakePhotoService, PHOTOS} from '../../testing/models/fake-photo.service';
 
 import 'rxjs/add/operator/switchMap';
 
